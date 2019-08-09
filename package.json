@@ -1,0 +1,65 @@
+{
+  "name": "appSpm",
+  "version": "1.0.0",
+  "private": true,
+  "author": "fengguoqu",
+  "description": "",
+  "keywords": [
+    "spring",
+    "springMVC",
+    "hibernate",
+    "seaJs",
+    "组件化"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "bugs": {
+    "url": "http://path/to/bug",
+    "email": "273394694@qq.com"
+  },
+  "contributors": [
+    {
+      "name": "fengguoqu",
+      "email": "273394694@qq.com"
+    }
+  ],
+  "dependencies": {
+    "browser-sync": "^2.9.11",
+    "gulp": "^3.9.1",
+    "gulp-alias-combo": "^0.3.3",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-cache": "^0.4.5",
+    "gulp-clean": "^0.3.2",
+    "gulp-cmd": "^0.4.6",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.3.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-replace-task": "^0.11.0",
+    "gulp-seajs-combine": "^0.3.3",
+    "gulp-seajs-concat": "^1.0.5",
+    "gulp-seajs-transport": "^0.3.1",
+    "gulp-sourcemaps": "^2.4.0",
+    "gulp-uglify": "^1.5.3",
+    "merge-stream": "^1.0.0",
+    "through-gulp": "^0.5.0",
+    "yargs": "^4.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-sequence": "^0.4.6",
+    "jshint": "^2.9.4"
+  }
+}

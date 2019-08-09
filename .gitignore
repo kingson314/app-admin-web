@@ -1,0 +1,41 @@
+#mac
+*.DS_Store
+*/.DS_Store
+
+#tomcat
+#
+target/
+nginx/app/
+.settings/
+
+#nodejs
+node_modules/
+yarn*
+
+#other
+app.iml
+/run-weixin.ssh
+org.eclipse.m2e.core.prefs
+
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
