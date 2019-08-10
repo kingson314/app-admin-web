@@ -10,18 +10,18 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			items: [[{
 				id: "type",
 				label: "类型",
-				type: "dic",
-				params:{
-					app:"system",
-					type:"newsType"
-				},
-				isNull:false,
-				
-				change:function(){
-					if (_formQuery.check()) {
-						_grid.reload(_formQuery.val());
-					}
-				}
+				type: "textfield",
+//				params:{
+//					app:"system",
+//					type:"newsType"
+//				},
+//				isNull:false,
+//				
+//				change:function(){
+//					if (_formQuery.check()) {
+//						_grid.reload(_formQuery.val());
+//					}
+//				}
 			},{
 				type: "buttongroup",
 				items: [{
@@ -45,11 +45,11 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "type",
 			label: "类型",
 			isNull:false,
-			type: "dic",
-			params:{
-				app:"system",
-				type:"newsType"
-			}
+			type: "textfield",
+//			params:{
+//				app:"system",
+//				type:"newsType"
+//			}
 		},{
 			id: "subType",
 			label: "子类型",
@@ -163,24 +163,14 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 					icon: "glyphicon glyphicon-fire",
 					value: "发布",
 					click: function() {
-						var selected =_grid.getSelected();
-						var params={
-							id: selected
-						};
-						if($("#formQuery #type").val()=="0"){//横琴论坛
-							params.url="http://hengqin.7ipr.com/";
-							params.type="forum";
-						}else if($("#formQuery #type").val()=="1"){//知识产权联盟
-							params.url="http://cipea.7ipr.com/";
-							params.type="alliance";
-						}else if($("#formQuery #type").val()=="2"){//空调联盟
-							params.url="http://ktipr.7ipr.com/";
-							params.type="aircondition";
-						}
-						Ajax.post(_baseUrl+"publish",params,function(rs) {
-							Dialog.alert(rs.msg);
-							_grid.reload(_formQuery.val());
-						});
+//						var selected =_grid.getSelected();
+//						var params={
+//							id: selected
+//						};
+//						Ajax.post(_baseUrl+"publish",params,function(rs) {
+//							Dialog.alert(rs.msg);
+//							_grid.reload(_formQuery.val());
+//						});
 					}
 				}],
 				onAdd: function(record, selected) {

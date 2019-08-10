@@ -1,7 +1,5 @@
 package com.baidu.ueditor;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +11,6 @@ import com.baidu.ueditor.define.State;
 import com.baidu.ueditor.hunter.FileManager;
 import com.baidu.ueditor.hunter.ImageHunter;
 import com.baidu.ueditor.upload.Uploader;
-import com.basis.util.UtilFile;
-import com.basis.util.UtilJSON;
-import com.basis.util.UtilString;
-
-import net.sf.json.JSONObject;
 public class ActionEnter {
 	private HttpServletRequest request = null;
 	private String rootPath = null;
@@ -75,25 +68,24 @@ public class ActionEnter {
 				state = new FileManager( conf ).listFile( start );
 				break;
 		}
-		JSONObject json= JSONObject.fromObject(state.toJSONString());
-//		System.out.println(json.toString());
-		String url=UtilJSON.get(json, "url");
-		if(UtilString.isBlank(url)) {
-			try {
-				@SuppressWarnings("unchecked")
-				List<Map<String, String>> list=(List<Map<String, String>>) json.get("list");
-				url=list.get(0).get("url");
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-//		String _url=RedisPool.getCacheCfgRuntime("system", "nginx").getValue()+this.contextPath.replaceAll("/", "")+"/"+url;
-		String _url=this.contextPath.replaceAll("/", "")+"/"+url;
-		try {
-			UtilFile.copyFileUx(this.rootPath+url, _url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		JSONObject json= JSONObject.fromObject(state.toJSONString());
+////		System.out.println(json.toString());
+//		String url=UtilJSON.get(json, "url");
+//		if(UtilString.isBlank(url)) {
+//			try {
+//				@SuppressWarnings("unchecked")
+//				List<Map<String, String>> list=(List<Map<String, String>>) json.get("list");
+//				url=list.get(0).get("url");
+//			}catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		String _url= UtilRedis.getCfgRuntime("system", "nginx").getValue()+this.contextPath.replaceAll("/", "")+url;
+//		try {
+//			UtilFile.copyFileUx(this.rootPath+url, _url);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		return state.toJSONString();
 	}
 	public int getStartIndex () {

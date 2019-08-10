@@ -125,9 +125,16 @@ gulp.task('clean', function() {
 });
 //拷贝
 gulp.task('copy', ['clean'], function() {
-  gulp.src([src + '**/*.jsp',src + '**/*.vm', src + 'css/**/*.woff', src + 'css/**/*.woff2', src + 'css/**/*.eot', src + 'css/**/*.svg', src + 'css/**/*.ttf'], {
+  console.log(src);
+  gulp.src([src + '**/*.jsp',src + '**/*.vm', src + 'css/**/*.woff', src + 'css/**/*.woff2', 
+	  src + 'css/**/*.eot', src + 'css/**/*.svg',
+	  src + 'css/**/*.ttf'], {
     base: src
   }).pipe(gulp.dest(dist));
+  
+  gulp.src(src + 'ueditor/**/*.*',)
+  .pipe(gulp.dest(dist+'ueditor/'))
+  
 });
 //图片压缩
 gulp.task('image', function() {
@@ -191,7 +198,7 @@ gulp.task('cssOther', function() {
     })).pipe(cssmin()).pipe(gulp.dest(dist));
 
   } else {
-    return gulp.src([src + 'com/**/*.less'
+    return gulp.src([ src + 'com/**/*.less'
     ], {
       base: src
     }).pipe(gulp.dest(dist));
@@ -199,7 +206,7 @@ gulp.task('cssOther', function() {
 });
 gulp.task('css', ['cssOther'], function() {
   if (yargs.p) {
-    return gulp.src([src + '/css/base.css',  src + '/core/**/*.css',
+    return gulp.src([src + '/css/base.css',  src + '/core/jquery/**/*.css',
         src + '/**/*.less'
       ], {
         base: src
@@ -212,7 +219,7 @@ gulp.task('css', ['cssOther'], function() {
       .pipe(cssmin())
       .pipe(gulp.dest(dist + "css/"));
   } else {
-    return gulp.src([src + 'css/base.css',  src + 'core/**/*.css',
+    return gulp.src([src + 'css/base.css',  src + 'core/**/*.css', 
       src + '**/*.less'
     ], {
       base: src
