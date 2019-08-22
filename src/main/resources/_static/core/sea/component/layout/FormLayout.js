@@ -78,7 +78,7 @@ define(function(require, exports, module) {
 		// 初始化
 		init: function(me) {
 			// 控件封装
-			me.formLayout = $("<form autocomplete='off' ></form>").addClass(ClassName);
+			me.layout=me.formLayout = $("<form autocomplete='off' ></form>").addClass(ClassName);
 			if (me.configs.parent) {
 				if ($.type(me.configs.parent) == "string") {
 					me.parent = $(me.configs.parent);

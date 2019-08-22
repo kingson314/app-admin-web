@@ -55,7 +55,7 @@ define(function(require, exports, module) {
 		// 初始化
 		init: function(me) {
 			// 控件封装
-		   me.accordionLayout=$("<div></div>").addClass(ClassName);
+			me.layout=me.accordionLayout=$("<div></div>").addClass(ClassName);
 		  	//控件类名设置
 		    Component.addClass(me.accordionLayout,me.configs);
 		    //控件样式设置

@@ -34,12 +34,6 @@ protected:
    double            m_take_level;     // level of placing of the "take profit" order relatively to the open price
    int               m_expiration;     // time of expiration of a pending order in bars
    double            m_direction;      // weighted direction
-   // - new attribute added by Jegan Chen
-   double            m_price_level_ratio;
-   double            m_limit_max;
-   double            m_limit_min;
-   double            m_takeprofit_mult;
-   double            m_stoploss_mult;
 
 public:
                      CExpertSignal(void);
@@ -59,14 +53,6 @@ public:
    void              StopLevel(double value)   { m_stop_level=value;      }
    void              TakeLevel(double value)   { m_take_level=value;      }
    void              Expiration(int value)     { m_expiration=value;      }
-   // - new method for new attribute
-   
-   void              PriceLevelRatio(double value) {m_price_level_ratio=value;}
-   void              LimitMax(double value) { m_limit_max = value;}
-   void              LimitMin(double value) {m_limit_min = value;}
-   void              TakeProfitMult(double value){m_takeprofit_mult=value;}
-   void              StopLossMult(double value){m_stoploss_mult=value;}
-   
    //--- method of initialization of the object
    void              Magic(ulong value);
    //--- method of verification of settings

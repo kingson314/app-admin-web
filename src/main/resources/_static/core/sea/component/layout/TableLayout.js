@@ -73,7 +73,7 @@ define(function(require, exports, module) {
 	/** * 模块私有方法 ** */
 	var self = {
 		init: function(me) {
-			me.tableLayout = $("<table></table>").addClass(ClassName);
+			me.layout=me.tableLayout = $("<table></table>").addClass(ClassName);
 			if (me.configs.parent) {
 				if ($.type(me.configs.parent) == "string") {
 					me.parent = $(me.configs.parent);

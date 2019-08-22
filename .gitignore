@@ -39,3 +39,9 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+
+*.mqh
+*.ex5
+*.mqproj
+*.mq5

@@ -30,7 +30,7 @@ define(function(require, exports, module) {
 	/** * 模块私有方法 ** */
 	var self = {
 		init : function(me) {
-			me.tabLayout=$("<div></div>").addClass(me._className);
+			me.layout=$("<div></div>").addClass(me._className);
 			// 初始化
 			if (me.configs.parent) {
 				if ($.type(me.configs.parent) == "string") {
@@ -38,18 +38,18 @@ define(function(require, exports, module) {
 				} else {
 					me.parent = me.configs.parent;
 				}
-				me.parent.append(me.tabLayout);
+				me.parent.append(me.layout);
 			}
 			// 控件类名设置
-			Component.addClass(me.tabLayout, me.configs);
+			Component.addClass(me.layout, me.configs);
 			// 控件样式设置
-			Component.css(me.tabLayout, me.configs);
+			Component.css(me.layout, me.configs);
 			// 控件的属性设置
-			Component.attr(me.tabLayout, me.configs);
+			Component.attr(me.layout, me.configs);
 //			.mouseleave(function(){
-//				me.tabLayout.hide();
+//				me.layout.hide();
 //			});
-			me.tab=$("<ul></ul>").appendTo(me.tabLayout);
+			me.tab=$("<ul></ul>").appendTo(me.layout);
 			me.title=[];
 			me.content=[];
 			$.each(me.configs.items,function(index,item){
@@ -79,7 +79,7 @@ define(function(require, exports, module) {
 				Component.attr(li.find("a"), item);
 				// 控件的事件绑定
 //				Component.bind(li.find("a"), item);
-				var content=$("<div></div>").addClass(me._className+"_content").appendTo(me.tabLayout);
+				var content=$("<div></div>").addClass(me._className+"_content").appendTo(me.layout);
 				if(index>0){
 					content.hide();
 				}
@@ -111,7 +111,7 @@ define(function(require, exports, module) {
 //			if(me.configs.position=="top"||me.configs.position=="bottom"){
 //				me.tab.append("<li style='display:inline;'><span class='" + me._className+ "_title_btn glyphicon glyphicon-remove'></span></li>");
 //				me.tab.find("." + me._className + "_title_btn").click(function() {
-//					me.tabLayout.hide();
+//					me.layout.hide();
 //				});
 //			}
 			self.resize(me);
@@ -128,18 +128,18 @@ define(function(require, exports, module) {
 			$.each(me.content,function(index,content){
 				if(me.configs.position=="top"){
 					me.tab.css({width:"100%",left:0,top:0});
-					content.css({width:"100%",height:me.tabLayout.height()-me.tab.height(),left:0,top:me.tab.height()});
+					content.css({width:"100%",height:me.layout.height()-me.tab.height(),left:0,top:me.tab.height()});
 				}else if(me.configs.position=="bottom"){
 					me.tab.css({width:"100%",left:0,bottom:0,"border-top":"1px solid #d5d5d5"});
-					content.css({width:"100%",height:me.tabLayout.height()-me.tab.height()});
+					content.css({width:"100%",height:me.layout.height()-me.tab.height()});
 				}else if(me.configs.position=="left"){
 					var ulWidth=126;//me.tab.find("a:eq(0)").outerWidth(true);
 					me.tab.css({width:ulWidth,height:"100%","border-right":"1px solid #d5d5d5"});
-					content.css({height:"100%",width:me.tabLayout.width()-ulWidth,left:ulWidth,top:0});
+					content.css({height:"100%",width:me.layout.width()-ulWidth,left:ulWidth,top:0});
 				}else if(me.configs.position=="right"){
 					var ulWidth=126;
 					me.tab.css({width:ulWidth,height:"100%","border-left":"1px solid #d5d5d5",right:0,top:0});
-					content.css({height:"100%",width:me.tabLayout.width()-ulWidth,right:ulWidth,top:0});
+					content.css({height:"100%",width:me.layout.width()-ulWidth,right:ulWidth,top:0});
 				}
 			});
 		}

@@ -46,7 +46,7 @@ define(function(require, exports, module) {
 		// 初始化
 		init: function(me) {
 			// 控件封装
-		   me.viewLayout=$("<form></form>").addClass(ClassName);
+		  me.layout=me.viewLayout=$("<form></form>").addClass(ClassName);
 		  if(me.configs.parent){
 			  if ($.type(me.configs.parent) == "string") {
 					me.parent = $(me.configs.parent);
