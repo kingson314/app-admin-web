@@ -47,10 +47,17 @@ define(function(require, exports, module) {
 			},false);
 		}else{
 			var len=this.configs.options.length;
-			for(var i=0;i<len;i++){
-				var item=this.configs.options[i];
-				this.select.append("<option value='"+item[this.configs.valueKey]+"'>"+item[this.configs.textKey]+"</option>");
-			};
+			if($.type(this.configs.options[0])=="object"){
+				for(var i=0;i<len;i++){
+					var item=this.configs.options[i];
+					this.select.append("<option value='"+item[this.configs.valueKey]+"'>"+item[this.configs.textKey]+"</option>");
+				}
+			}else{
+				for(var i=0;i<len;i++){
+					var item=this.configs.options[i];
+					this.select.append("<option value='"+item+"'>"+item+"</option>");
+				}
+			}
 		}
 		this.select.val(this.configs.value||"");
 		this.init();

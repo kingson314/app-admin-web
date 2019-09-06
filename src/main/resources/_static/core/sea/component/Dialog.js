@@ -94,12 +94,12 @@ define(function(require, exports, module) {
 //	 		}
 	 		var contentHeight=me.dialog.height();
 	 		if(me.configs.hasTitle){
-	 			contentHeight=contentHeight-35;
+	 			contentHeight=contentHeight-64;
 	 		}else{
 	 			me.content.css("top","0");
 	 		}
 	 		if(me.configs.hasButtonGroup){
-	 			contentHeight=contentHeight-50;
+	 			contentHeight=contentHeight-64;
 	 		}
 	 		me.content.height(contentHeight);
 	 		if($.type(me.configs.content)=="object"){

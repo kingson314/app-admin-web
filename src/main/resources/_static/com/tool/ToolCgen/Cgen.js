@@ -30,6 +30,11 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 			items: [[{
 				id: "javaOptions",
 				type: "checkgroup",
+				cssTr:{
+					margin:"0",
+					"padding-bottom":"0",
+					"padding-top":"0"
+				},
 				items:[{
 					label:"Controller",
 					value:"Controller",
@@ -55,6 +60,11 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 			},{}],[{
 				id: "jsOptions",
 				type: "checkgroup",
+				cssTr:{
+					margin:"0",
+					"padding-bottom":"0",
+					"padding-top":"0"
+				},
 				items:[{
 					label:"JsTable",
 					value:"JsTable",
@@ -194,9 +204,6 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				colspan:2,
 				items: [{
 					icon: "iconfont icon-shuaxin",
-					css : {
-						padding:"0.3rem 0.5rem"
-					},
 					value: "保存",
 					click: function() {
 						exec("update");
@@ -204,9 +211,6 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				},{
 					icon: "iconfont icon-edit",
 					value: "生成",
-					css : {
-						padding:"0.3rem 0.5rem"
-					},
 					click: function() {
 						exec("run");
 					}
@@ -493,9 +497,6 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 						separatorWidth:"5px",
 						items: [{
 							icon: "iconfont icon-shuaxin",
-							css : {
-								padding:"0.3rem 0.5rem"
-							},
 							value: "保存",
 							click: function() {
 								exec("update");
@@ -503,9 +504,6 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 						},{
 							icon: "iconfont icon-edit",
 							value: "生成",
-							css : {
-								padding:"0.3rem 0.5rem"
-							},
 							click: function() {
 								exec("run");
 							}

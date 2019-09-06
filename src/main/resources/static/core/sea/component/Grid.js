@@ -598,8 +598,8 @@ define(function(require, exports, module) {
 			} else {
 				me.toolbar.remove();
 				if (me.title) {
-					me.grid.find(".sea_grid_forzen").css("top", "35px");
-					me.grid.find(".sea_grid_normal").css("top", "35px");
+					me.grid.find(".sea_grid_forzen").css("top", "4rem");
+					me.grid.find(".sea_grid_normal").css("top", "4rem");
 				} else {
 					me.grid.find(".sea_grid_forzen").css("top", 0);
 					me.grid.find(".sea_grid_normal").css("top", 0);
@@ -715,17 +715,17 @@ define(function(require, exports, module) {
 		//标题
 		if (this.configs.title) {
 			this.title = this.grid.find(".sea_grid_title").html("<i class='glyphicon glyphicon-th'><i/><span style='margin-left:3px'>" + Global.getI18N(this.configs.title) + "</span>");
-			this.grid.find(".sea_grid_toolbar").css("top", "35px");
-			this.grid.find(".sea_grid_forzen").css("top", "71px");
-			this.grid.find(".sea_grid_normal").css("top", "71px");
+			this.grid.find(".sea_grid_toolbar").css("top", "4rem");
+			this.grid.find(".sea_grid_forzen").css("top", "7rem");
+			this.grid.find(".sea_grid_normal").css("top", "7rem");
 		} else {
 			this.grid.find(".sea_grid_title").remove();
 		}
 		//工具栏
 		self.toolbar(this);
 		if(this.configs.title && !this.configs.toolbar.hide){
-			this.toolbar.css("border-top","1px solid rgb(213, 213, 213)");
-			this.title.css("border-bottom","1px solid #999");
+			//this.toolbar.css("border-top","1px solid rgb(213, 213, 213)");
+			//this.title.css("border-bottom","1px solid #999");
 		}
 		//冻结表
 		this.grid_forzen_head = this.grid.find(".sea_grid_forzen>.sea_grid_head table");

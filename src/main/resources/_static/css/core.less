@@ -110,7 +110,6 @@
 .sea_button {
 	color: @clr-button;
 	background-color: @bg-button;
-	border-radius: 0.3rem;
 	padding: 0.35rem 1rem;
 	font-size: 0.9rem;
 	text-align: center;
@@ -357,8 +356,8 @@
 		top: 4rem;
 		left: 0;
 		width: 100%;
-		height: 3rem;
-		line-height: 3rem;
+		height: 2rem;
+		line-height: 2rem;
 
 		.sea_toolbar {
 			padding: 0;
@@ -639,11 +638,20 @@ input[type=submit],
 input[type=reset],
 button {
 	min-width: 3rem;
-	white-space: nowrap;
-	border: 0;
+	white-space: nowrap; 
+	color: @clr-button;
+	background-color: @bg-button;
+	padding: 0.35rem 1rem;
+	font-size: 0.9rem;
+	text-align: center;
+	display: inline-block;
 	cursor: pointer;
-	color: @clr-input;
-	background-color: transparent;
+	border: 1px solid @clr-button-border;
+
+	&:hover {
+		color: @clr-button-hover;
+	}
+
 }
 
 input[type=button]:focus,

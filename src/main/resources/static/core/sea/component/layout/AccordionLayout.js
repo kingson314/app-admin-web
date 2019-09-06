@@ -55,13 +55,13 @@ define(function(require, exports, module) {
 		// 初始化
 		init: function(me) {
 			// 控件封装
-			me.layout=me.accordionLayout=$("<div></div>").addClass(ClassName);
+		   me.layout=$("<div></div>").addClass(ClassName);
 		  	//控件类名设置
-		    Component.addClass(me.accordionLayout,me.configs);
+		    Component.addClass(me.layout,me.configs);
 		    //控件样式设置
-			Component.css(me.accordionLayout, me.configs);
+			Component.css(me.layout, me.configs);
 			// 控件属性设置
-			Component.attr(me.accordionLayout, me.configs);
+			Component.attr(me.layout, me.configs);
 			
 		  if(me.configs.parent){
 			  if ($.type(me.configs.parent) == "string") {
@@ -69,18 +69,15 @@ define(function(require, exports, module) {
 				} else {
 					me.parent = me.configs.parent;
 			   }
-			  me.parent.append(me.accordionLayout)
+			  me.parent.append(me.layout)
 		   }
-
 			if (me.configs.title) {
-				$("<div></div>").addClass(ClassName + "_title").append(Global.getI18N(me.configs.title)).appendTo(me.accordionLayout);
+				$("<div></div>").addClass(ClassName + "_title").append(Global.getI18N(me.configs.title)).appendTo(me.layout);
 			}
-			
 			for (var i = 0; i < me.configs.items.length; i++) {
 				var groupConfig = me.configs.items[i];
-				var group=$("<div></div>").addClass(ClassName + "_group")
-				.append("<div class='"+ClassName + "_groupTitle'><i class='glyphicon glyphicon-plus-sign'></i>&nbsp;"+Global.getI18N(groupConfig.label)+"</div>")
-				.appendTo(me.accordionLayout);
+				var group=$("<div></div>").addClass(ClassName + "_group").appendTo(me.layout);
+				if(groupConfig.label)group.append("<div class='"+ClassName + "_groupTitle'><i class='iconfont icon-jiahao'></i>&nbsp;"+Global.getI18N(groupConfig.label)+"</div>");
 				//控件类名设置
 			    Component.addClass(group,groupConfig);
 			    //控件样式设置
@@ -92,9 +89,9 @@ define(function(require, exports, module) {
 					if(i==0){
 						groupItem.show();
 						//group.css("border-bottom","1px solid #d5d5d5");
-						group.find("i").removeClass("glyphicon-plus-sign").addClass("glyphicon-minus-sign");
+						group.find("i").removeClass("iconfont icon-jiahao").addClass("iconfont icon-remove1");
 					}else{
-						groupItem.hide();
+						//groupItem.hide();
 					}
 					var item=groupConfig.items[j];
 					if (!item.type) {
@@ -162,6 +159,13 @@ define(function(require, exports, module) {
 						Component.css(groupItem,item);
 						Component.attr(groupItem,item);
 						break;
+					case "buttongroup":
+						_Component=require("ButtonGroup").create(item);
+						_Component.buttonGroup.addClass(ClassName + "_btn").appendTo(groupItem).removeClass("sea_drager");
+						Component.addClass(groupItem,item);
+						Component.css(groupItem,item);
+						Component.attr(groupItem,item);
+						break;
 					case "row":
 						var row=$("<div class='sea_drager sea_draglayout' style='float:none'></div>").appendTo(groupItem);
 						Component.css(row,item);
@@ -178,6 +182,9 @@ define(function(require, exports, module) {
 						+'	<div class="sea_droper " style="width:50%;border:0;border-right:1px dashed #222" title="二栏"> </div>'
 						+'	<div class="sea_droper" style="width:50%; border:0"> </div>'
 						+'</div></div>'
+//						+'<div class="sea_drag_only" style="float:none;"><div class="sea_drager sea_draglayout" style="float:none;background:#fff">'
+//							+'<div class="sea_droper" style="width:100%;border:0;padding-top:15px" title="hr"><hr></div>'
+//						+'</div>'
 						).appendTo(groupItem);
 						break;						
 					default:
@@ -185,15 +192,15 @@ define(function(require, exports, module) {
 					}
 				}
 			}
-			me.accordionLayout.find("."+ClassName + "_groupTitle").click(function(){
-				$(this).parent().siblings().find("."+ClassName + "_groupItem").slideUp(300);
-				me.accordionLayout.find("."+ClassName + "_group").css("border","0");
-				me.accordionLayout.find("."+ClassName + "_groupTitle>i").removeClass("glyphicon-plus-sign").removeClass("glyphicon-minus-sign").addClass("glyphicon-plus-sign");
-				if($(this).nextAll().css("display")=="none"){
-					$(this).nextAll().slideDown(300);
-					//$(this).parent().css("border-bottom","1px solid #d5d5d5");
-					$(this).parent().find("i").removeClass("glyphicon-plus-sign").addClass("glyphicon-minus-sign");
-				}else $(this).nextAll().slideUp(300);
+			me.layout.find("."+ClassName + "_groupTitle").click(function(){
+//				$(this).parent().siblings().find("."+ClassName + "_groupItem").slideUp(300);
+//				me.layout.find("."+ClassName + "_group").css("border","0");
+//				me.layout.find("."+ClassName + "_groupTitle>i").removeClass("iconfont icon-jiahao").removeClass("iconfont icon-remove1").addClass("iconfont icon-jiahao");
+//				if($(this).nextAll().css("display")=="none"){
+//					$(this).nextAll().slideDown(300);
+//					//$(this).parent().css("border-bottom","1px solid #d5d5d5");
+//					$(this).parent().find("i").removeClass("iconfont icon-jiahao").addClass("iconfont icon-remove1");
+//				}else $(this).nextAll().slideUp(300);
 			});
 		}
 	};
