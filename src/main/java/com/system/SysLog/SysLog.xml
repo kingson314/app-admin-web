@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.SysLog.dao.SysLogDao">
+	<resultMap id="BaseResultMap" type="com.system.SysLog.model.SysLog">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+	</resultMap>
+
+	<select id="listSysLog"  parameterType="java.util.Map" resultType="java.util.HashMap">
+		select c.name userName,a.*  from SysLog a inner join SysUser c on  a.userId=c.id 
+		<if test="app != ''">
+            and a.app = #{app}
+        </if>
+        <if test="type != ''">
+            and a.id = #{type}
+        </if>
+        <if test="userName != ''">
+            and c.name = #{userName}
+        </if>
+		order by id desc
+	</select>
+</mapper>

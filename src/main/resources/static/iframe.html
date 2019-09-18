@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-    <meta charset="UTF-8" />
-    <title>app-iframe</title>
-	<link href="http://localhost:8080/css/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
-	<link href="http://localhost:8080/css/base.css" rel="stylesheet" type="text/css"/>
-	<link href="http://at.alicdn.com/t/font_1087152_heun6tjkui.css" rel="stylesheet" type="text/css"/>
-	
-	<script src="http://localhost:8080/ueditor/ueditor.config.js"></script>
-	<script src="http://localhost:8080/ueditor/ueditor.all.js"></script>
-	<script src="http://localhost:8080/ueditor/lang/zh-cn/zh-cn.js"></script>
-	
-	<script src="http://localhost:8080/core/jquery/jquery.js"></script>
-	<script th:inline="javascript">
+<!DOCTYPE html><html lang=zh-CN xmlns:th=http://www.thymeleaf.org><head lang=en><meta charset=UTF-8><title>app-iframe</title><link href=http://localhost:8080/css/images/favicon.ico rel="shortcut icon" type=image/x-icon><link href=http://localhost:8080/css/base.css rel=stylesheet type=text/css><link href=http://at.alicdn.com/t/font_1087152_heun6tjkui.css rel=stylesheet type=text/css><script src=http://localhost:8080/ueditor/ueditor.config.js></script><script src=http://localhost:8080/ueditor/ueditor.all.js></script><script src=http://localhost:8080/ueditor/lang/zh-cn/zh-cn.js></script><script src=http://localhost:8080/core/jquery/jquery.js></script><script th:inline=javascript>
 		var Session={
 		    langue: "zh_CN", 
 		    basePath: "http://localhost:8080/",//app-* 服务访问基本路径 app-qy[9000],app-spm[8888] //172.16.0.35
@@ -31,12 +17,8 @@
 		    isChrome:true,
 		    isTest:true
 		}; 
-	</script>
-	<script src="http://localhost:8080/core/sea/sea.js"></script>
-	<script src="http://localhost:8080/core/session.js"></script>
-     <style>
-     </style>
-	<script th:inline="javascript">
+	</script><script src=http://localhost:8080/core/sea/sea.js></script><script src=http://localhost:8080/core/session.js></script><style>
+     </style><script th:inline=javascript>
 		var _parent="body";
 		$(function(){
 			seajs.use( ["Ajax"],
@@ -50,8 +32,4 @@
 				Global.loadJs(Session.staticPath+__script+".js");
 			}); 
 		});
-	</script>
-</head>
-<body>
-</body>
-</html>
+	</script></head><body></body></html>

@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>app-spm</title>
-    <!-- 公共模块 -->
-	<link href="http://localhost:8080/css/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
-	<link href="http://localhost:8080/css/base.css" rel="stylesheet" type="text/css"/>
-	<link href="http://at.alicdn.com/t/font_1087152_heun6tjkui.css" rel="stylesheet" type="text/css"/>
-
-	<script src="http://localhost:8080/core/jquery/jquery.js"></script>
-	<script>
+<!DOCTYPE html><html lang=zh-CN xmlns:th=http://www.thymeleaf.org><head lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>app-spm</title><link href=http://localhost:8080/css/images/favicon.ico rel="shortcut icon" type=image/x-icon><link href=http://localhost:8080/css/base.css rel=stylesheet type=text/css><link href=http://at.alicdn.com/t/font_1087152_heun6tjkui.css rel=stylesheet type=text/css><script src=http://localhost:8080/core/jquery/jquery.js></script><script>
 		var Session={
 			langue: "zh_CN",
 			basePath: "http://localhost:8080/",//app-* 服务访问基本路径 app-qy[9000],app-spm[8888] //172.16.0.35
@@ -30,12 +18,8 @@
 		}; 
 		var _parent="#app-iframe";
 		//alert("静态路径："+Session.basePath);
-	</script>
-	<script src="http://localhost:8080/core/sea/sea.js"></script>
-	<script src="http://localhost:8080/core/session.js"></script>
-	<style>
-     </style>	
-	<script type="text/javascript">
+	</script><script src=http://localhost:8080/core/sea/sea.js></script><script src=http://localhost:8080/core/session.js></script><style>
+     </style><script type=text/javascript>
 	seajs.use( ["Ajax"],
 		function(Ajax) {
 		var bindEvent=function(){
@@ -84,63 +68,4 @@
 			},100);
 		});
 	});
-	</script>
-</head>
-<body id="app-body">
-<nav id="app-nav" class="fixed-top">
-	<div class="container">
-		<div class="row d-flex justify-content-between" style="padding-left: 15px;">
-			<div class="">Hello SPM</div>
-			<div class="">平台部策划组 王磊</div>
-		</div>
-	</div>
-</nav>
-<div id="app-main" class="container">
-	<div class="row">
-		<div id="app-menu" class="col-sm-2 d-none d-sm-block d-md-block d-lg-block d-xl-block">
-			<ul class="list-group">
-				<li><img class="header" src="http://localhost:8080/css/images/headline.png"></li>
-				<li id="Cgen" class="active list-group-item"><a script="com/tool/ToolCgen/Cgen"href="#"><span class="iconfont icon-kehuguanli"></span>集成开发</a></li>
-				<li id="ToolCgen" class="list-group-item"><a script="com/tool/ToolCgen/ToolCgen"href="#"><span class="iconfont icon-kehuguanli"></span>集成开发管理</a></li>
-			</ul>
-		</div>
-		<div  id="app-iframe" class="col-sm-10">
-		</div>
-	</div>
-</div>
-<div id="app-footer">	
-	<div class="container">
-		<div class="footer1 row">
-			<div class="col-sm-9">
-				<div class="row">
-					<div class="col-sm-4">关于7CRM</div>
-					<div class="col-sm-4">使用帮助</div>
-					<div class="col-sm-4">开发团队</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4">联系我们</div>
-					<div class="col-sm-4">提交BUG</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="row">
-					<div class="col-sm-12">用户服务热线</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12 tel">400-8063-777</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="footer2 row">
-			<div class="col-sm-9">
-				©横琴国际知识产权交易中心，7CRM，七弦琴客户管理系统.
-			</div>
-			<div class="col-sm-3">
-				粤ICP备15074917号 7ipr.com
-			</div>
-		</div>
-	</div>
-</div>
-</body>
-</html>
+	</script></head><body id=app-body><nav id=app-nav class=fixed-top><div class=container><div class="row d-flex justify-content-between" style="padding-left: 15px;"><div>Hello SPM</div><div>平台部策划组 王磊</div></div></div></nav><div id=app-main class=container><div class=row><div id=app-menu class="col-sm-2 d-none d-sm-block d-md-block d-lg-block d-xl-block"><ul class=list-group><li><img class=header src=http://localhost:8080/css/images/headline.png></li><li id=Cgen class="active list-group-item"><a script=com/tool/ToolCgen/Cgen href=#><span class="iconfont icon-kehuguanli"></span>集成开发</a></li><li id=ToolCgen class=list-group-item><a script=com/tool/ToolCgen/ToolCgen href=#><span class="iconfont icon-kehuguanli"></span>集成开发管理</a></li></ul></div><div id=app-iframe class=col-sm-10></div></div></div><div id=app-footer><div class=container><div class="footer1 row"><div class=col-sm-9><div class=row><div class=col-sm-4>关于7CRM</div><div class=col-sm-4>使用帮助</div><div class=col-sm-4>开发团队</div></div><div class=row><div class=col-sm-4>联系我们</div><div class=col-sm-4>提交BUG</div></div></div><div class=col-sm-3><div class=row><div class=col-sm-12>用户服务热线</div></div><div class=row><div class="col-sm-12 tel">400-8063-777</div></div></div></div><div class="footer2 row"><div class=col-sm-9>©横琴国际知识产权交易中心，7CRM，七弦琴客户管理系统.</div><div class=col-sm-3>粤ICP备15074917号 7ipr.com</div></div></div></div></body></html>

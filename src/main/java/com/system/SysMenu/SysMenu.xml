@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.SysMenu.dao.SysMenuDao">
+	<resultMap id="BaseResultMap" type="com.system.SysMenu.model.SysMenu">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+	</resultMap>
+
+	<delete id="deleteSysMenu">
+		delete from SysMenu
+	</delete>
+	
+     <insert id ="insertSysMenu" parameterType="java.util.List" >
+           insert into SysMenu(parentId,id,type,name,url,ord,checked,open,modifyTime)
+           values
+            <foreach collection ="list" item="menu" index= "index" separator =",">
+                (
+                #{menu.parentId}, #{menu.id},
+                #{menu.type},
+                #{menu.name},
+                #{menu.ord}, #{menu.checked}, #{menu.open}, #{menu.modifyTime}
+                )
+            </foreach >
+     </insert >
+</mapper>

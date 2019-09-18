@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.SysUserRole.dao.SysUserRoleDao">
+	<resultMap id="BaseResultMap" type="com.system.SysUserRole.model.SysUserRole">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+	</resultMap>
+
+	<select id="listSysUserRole" parameterType="java.util.Map" resultType="java.util.HashMap">
+		<choose>
+		    <when test="userId==''">
+		        select a.*,b.roleId as _id from SysRole as a  left join SysUserRole as b on a.id=b.roleId 
+				where b.userId=#{userId} order by _id desc,a.ord
+		    </when>
+		    <otherwise>
+		        select a.*,b.roleId as _id from SysRole as a  left join SysUserRole as b on a.id=b.roleId and b.userId=#{userId}  order by _id desc,a.ord
+		    </otherwise>
+		</choose>
+	</select>
+</mapper>

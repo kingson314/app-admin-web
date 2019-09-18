@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.SysUser.dao.SysUserDao">
+	<resultMap id="BaseResultMap" type="com.system.SysUser.model.SysUser">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+		<id column="name" jdbcType="VARCHAR" property="name" />
+		<id column="state" jdbcType="INTEGER" property="state" />
+		<id column="ord" jdbcType="INTEGER" property="ord" />
+		<id column="memo" jdbcType="VARCHAR" property="memo" />
+		<id column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="modifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
+		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
+		<id column="code" jdbcType="VARCHAR" property="code" />
+		<id column="headFile" jdbcType="VARCHAR" property="headFile" />
+		<id column="type" jdbcType="INTEGER" property="type" />
+		<id column="level" jdbcType="INTEGER" property="level" />
+		<id column="company" jdbcType="VARCHAR" property="company" />
+		<id column="companyType" jdbcType="INTEGER" property="companyType" />
+		<id column="industry" jdbcType="INTEGER" property="industry" />
+		<id column="country" jdbcType="VARCHAR" property="country" />
+		<id column="province" jdbcType="VARCHAR" property="province" />
+		<id column="city" jdbcType="VARCHAR" property="city" />
+		<id column="region" jdbcType="VARCHAR" property="region" />
+		<id column="address" jdbcType="VARCHAR" property="address" />
+		<id column="scale" jdbcType="VARCHAR" property="scale" />
+		<id column="tel" jdbcType="VARCHAR" property="tel" />
+		<id column="phone" jdbcType="VARCHAR" property="phone" />
+		<id column="email" jdbcType="VARCHAR" property="email" />
+		<id column="idCard" jdbcType="VARCHAR" property="idCard" />
+		<id column="idCardFile" jdbcType="VARCHAR" property="idCardFile" />
+		<id column="fax" jdbcType="VARCHAR" property="fax" />
+		<id column="credit" jdbcType="VARCHAR" property="credit" />
+		<id column="licenseFile" jdbcType="VARCHAR" property="licenseFile" />
+		<id column="position" jdbcType="VARCHAR" property="position" />
+		<id column="technicalTitle" jdbcType="VARCHAR" property="technicalTitle" />
+		<id column="profession" jdbcType="VARCHAR" property="profession" />
+		<id column="professionalLife" jdbcType="VARCHAR" property="professionalLife" />
+		<id column="education" jdbcType="VARCHAR" property="education" />
+		<id column="school" jdbcType="VARCHAR" property="school" />
+		<id column="unionId" jdbcType="VARCHAR" property="unionId" />
+		<id column="password" jdbcType="VARCHAR" property="password" />
+		<id column="sex" jdbcType="INTEGER" property="sex" />
+		<id column="birthday" jdbcType="VARCHAR" property="birthday" />
+		<id column="departmentId" jdbcType="BIGINT" property="departmentId" />
+	</resultMap>
+	
+	<select id="exitTel" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(1) from SysUser where tel=#{tel}
+	</select>
+	
+	<select id="getRoleUser" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select c.* from SysRole a,SysUserRole b,SysUser c where
+		a.id=#{roleId} and a.id=b.roleId and b.userId=c.id
+	</select>
+	<select id="getList" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select a.*,b.name departmentName from SysUser a left join
+		SysDepartment b on a.departmentId=b.id where 1=1 
+		<if test="code != ''">
+			and a.code=#{code}
+		</if>
+		<if test="name != ''">
+			and a.name=#{name}
+		</if>
+		<if test="state != ''">
+			and a.state=#{state}
+		</if>
+		order by CAST(a.code as SIGNED)
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1)  from SysUser a where 1=1
+		<if test="code != ''">
+			and a.code=#{code}
+		</if>
+		<if test="name != ''">
+			and a.name=#{name}
+		</if>
+		<if test="state != ''">
+			and a.state=#{state}
+		</if>
+	</select>	
+	<select id="listRoleUser" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select a.*,c.userId as _id ,b.name departmentName from
+		SysUser a left join SysUserRole c on a.id=c.userId and
+		c.roleId=#{roleId} left join SysDepartment b on a.departmentId=b.id
+		where a.state=0 order by _id desc,a.departmentId, CAST(a.code as
+		SIGNED)
+	</select>
+	<select id="listDepartmentUser" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		<if test="userName !=''">
+			select a.*,b.name departmentName from SysUser a left join
+			SysDepartment b on a.departmentId=b.id
+			where a.state=0 and a.name like #{userName} 
+		</if>
+		<if test="userName ==''">
+			select a.*,b.name departmentName from(select a.*,case when b.id is null
+			then ''else a.id end AS _id from SysUser a
+			left join SysDepartment b on a.departmentId=b.id and
+			b.id=#{departmentId}) as a left join sys_department b on
+			a.departmentId=b.id
+			where a.state=0 
+		</if>
+		order by _id desc, CAST(a.code as SIGNED)
+	</select>
+	<select id="listDepartmentUserByScene"
+		parameterType="java.util.Map" resultType="java.util.HashMap">
+		select a.*,b.name departmentName from SysUser a,SysDepartment b  where a.departmentId=b.id  and a.state=0
+		<if test="departmentId !=''">
+			and a.departmentId =#{departmentId}
+		</if>
+		<if test="userName !=''">
+			and a.name like #{userName}
+		</if>
+		order by  CAST(a.code as SIGNED)
+	</select>
+
+
+</mapper>
