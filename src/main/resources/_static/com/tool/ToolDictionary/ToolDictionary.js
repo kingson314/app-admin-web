@@ -15,7 +15,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				type: "buttongroup",
 				css:{"text-align":"left","padding-left":"20px"},
 				items: [{
-					icon: "glyphicon glyphicon-search",
+					icon: "iconfont icon-search",
 					value: "查询",
 					click: function() {
 						if (_formQuery.check()) {

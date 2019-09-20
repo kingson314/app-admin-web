@@ -4,17 +4,25 @@
     <meta charset="UTF-8" />
     <title>app-base</title>
     <!-- 公共模块 -->
-	<link href="http://localhost:8080/css/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
-	<link href="http://localhost:8080/css/base.css" rel="stylesheet" type="text/css"/>
-	<link href="http://at.alicdn.com/t/font_1087152_heun6tjkui.css" rel="stylesheet" type="text/css"/>
-	
-	<script src="http://localhost:8080/core/jquery/jquery.js"></script>
+	<link href="http://at.alicdn.com/t/font_302447_64eklme158r.css" rel="stylesheet" type="text/css"/>
+	<link href="./css/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+	<link href="./css/base.css" rel="stylesheet" type="text/css"/>
+	<script src="./core/jquery/jquery.js"></script>
+	<script src="./core/util.js"></script>
 	<script th:inline="javascript">
+		var env=Ajax.getParam("env");
+		var serverPath=Ajax.getParam("serverPath");//除本地调试外必传
+		if(!String.endsWith(serverPath,"/"))serverPath=serverPath+"/";
+		if(Stirng.isBland(env) && Stirng.isBland(serverPath))Dialog.alert("非开发环境，serverPath为必传参数！");
+		var localPath="http://localhost:8888/"
+		if(env=="uat")localPath="http://app-adminuat.7ipr.com/";
+		else if(env=="prod")localPath="http://app-admin.7ipr.com/";
+		console.log("serverPath:"+serverPath);
+		console.log("localPath:"+localPath);
 		var Session={
 		    langue: "zh_CN", 
-		    basePath: "http://localhost:8080/",//app-* 服务访问基本路径 app-qy[9000],app-spm[8888] //172.16.0.35
-		    staticPath:"http://localhost:8080/",//app-web静态文件路径
-		    localPath:"http://localhost:8080/",			     //app-web 服务访问基本路径
+		    basePath: serverPath,//app-server 外部传入服务端后台访问基本路径
+		    localPath:localPath,//app-admin-web 服务访问基本路径
 		    token:"",
 		    theme:"",
 		    sysUser:{},
@@ -28,8 +36,8 @@
 		    isChrome:true
 		}; 
 	</script>
-	<script src="http://localhost:8080/core/sea/sea.js"></script>
-	<script src="http://localhost:8080/core/session.js"></script>
+	<script src="./core/sea/sea.js"></script>
+	<script src="./core/session.js"></script>
 	<style>
      </style>	
 	<script type="text/javascript">
@@ -60,7 +68,8 @@
 						"menuId":$(this).parent().attr("id"),
 						"menuName":$(this).text(),
 						"title":$(this).parent().text(),
-						"theme": Session.theme
+						"theme": Session.theme,
+						"bathPath":Session.basePath
 					}))
 				if (script) {
 					var css = $(this).attr("css");
@@ -75,7 +84,7 @@
 						"theme": Session.theme
 					}));
 				} else if (page) {
-					getIframe().attr("src", Ajax.getStatic(page, {
+					getIframe().attr("src", Ajax.getPage(page, {
 						"id":Session.sysUser.id,
 						"params":$(this).attr("params")||"",
 						"menuId":$(this).parent().attr("id"),
@@ -105,8 +114,8 @@
 <nav id="app-nav">
 	<div class="container">
 		<div class="row d-flex justify-content-between" style="padding-left: 15px;">
-			<div class="">Hello SPM</div>
-			<div class="">平台部策划组 王磊</div>
+			<div class="">Hello APP</div>
+			<div class="">平台部策划组 XXX</div>
 		</div>
 	</div>
 </nav>
@@ -114,7 +123,7 @@
 	<div class="row">
 		<div id="app-menu" class="col-sm-2 d-none d-sm-block d-md-block d-lg-block d-xl-block">
 			<ul class="list-group">
-				<li><img class="header" src="http://localhost:8080/css/images/headline.png"></li>
+				<li><img class="header" src="./css/images/headline.png"></li>
 				<li id="IssueNews" class="active list-group-item"><a script="com/issue/IssueNews/IssueNews" href="#"><span class="iconfont icon-kehuguanli"></span>新闻发布</a></li>
 				<li id="SysUser" class="list-group-item"><a href="#" script='com/system/SysUser/SysUser'><i><span class="iconfont icon-kehuguanli"></span></i>用户管理</a></li>
 				<li id="SysDeparment" class="list-group-item"><a href="#" script='com/system/SysDepartment/SysDepartment_bak'><i><span class="iconfont icon-kehuguanli"></span></i>部门管理 </a></li>

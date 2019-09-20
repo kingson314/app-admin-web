@@ -25,7 +25,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			},{
 				type: "buttongroup",
 				items: [{
-					icon: "glyphicon glyphicon-search",
+					icon: "iconfont icon-search",
 					css:{"text-align":"left","padding-left":"20px"},
 					value: "查询",
 					click: function() {
@@ -160,7 +160,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			},
 			toolbar: {
 				items:[{
-					icon: "glyphicon glyphicon-fire",
+					icon: "iconfont icon-publish1",
 					value: "发布",
 					click: function() {
 //						var selected =_grid.getSelected();

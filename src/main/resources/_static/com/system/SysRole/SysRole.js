@@ -5,30 +5,30 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	var _currentId,_grid,_dialog,_formQuery,_formEdit;
 	/***************函数定义***************/
 	//创建查询表单
-	var getQueryForm = function() {
-		var form;
-		var cfgForm = {
-			items: [[{
-				id: "name",
-				label: "角色名称",
-				type: "textfield"
-			},{
-				type: "buttongroup",
-				items: [{
-					icon: "iconfont icon-chaxun",
-					value: "查询",
-					click: function() {
-						if (!_formQuery.check()) {
-							return false;
-						}
-						_grid.reload(_formQuery.val());
-					}
-				}]
-			}]]
-		};
-		_formQuery=FormLayout.create(cfgForm);
-		return _formQuery.formLayout;
-	};
+//	var getQueryForm = function() {
+//		var form;
+//		var cfgForm = {
+//			items: [[{
+//				id: "name",
+//				label: "角色名称",
+//				type: "textfield"
+//			},{
+//				type: "buttongroup",
+//				items: [{
+//					icon: "iconfont icon-chaxun",
+//					value: "查询",
+//					click: function() {
+//						if (!_formQuery.check()) {
+//							return false;
+//						}
+//						_grid.reload(_formQuery.val());
+//					}
+//				}]
+//			}]]
+//		};
+//		_formQuery=FormLayout.create(cfgForm);
+//		return _formQuery.formLayout;
+//	};
 	var cfgForm = {
 		items: [[{
 			id: "name",
@@ -42,7 +42,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			type: "dic",
 			params:{
 				app:"system",
-				type:"State"
+				type:"状态"
 			}
 		}],[{
 			id: "ord",
@@ -70,8 +70,26 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	};
 	var getGrid = function() {
 		var cfgGrid = {
+			title:_title,
 			url: _baseUrl,
 			toolbar: {
+				items:[{
+					id: "search-name",
+					placeholder:"请输入角色名称",
+					type: "textfield",
+					width:"200",
+					icon:"iconfont icon-find",
+					iconCss:{
+						"background-color":"#28B779",
+						"margin-right":"10px"
+					},
+					cssLi:{
+						"float":"right"
+					},
+					click:function(){
+						_grid.reload({"name":$("#search-name").val()});
+					}
+				}],
 				onAdd: function(record, selected) {
 					Component.onAdd(_grid,_dialog,_formEdit,_formQuery,_title,_baseUrl,getFormEdit,record,Dialog);
 				},
@@ -99,7 +117,6 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	
 	var getGridUser = function() {
 		var cfgGrid = {
-			title:"角色用户",
 			columns: [{
 				id: "id",
 				align: "center",
@@ -155,7 +172,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				type: "dic",
 				params:{
 					app:"system",
-					type:"State"
+					type:"状态"
 				}
 			}],
 			url: "SysUser/listRoleUser",
@@ -172,16 +189,19 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	/***************函数调用***************/
 	//创建页面布局
 	BorderLayout.create({
-		north: {
-			height: 60,
-			item: getQueryForm()
-		},
-		west:{
-			width:650,
+//		north: {
+//			height: 60,
+//			item: getQueryForm()
+//		},
+		center:{
 			css:{"padding-right":"10px"},
 			item:getGrid()
 		},
-		center: {
+		east: {
+			width:240,
+			css:{
+				"padding-top":"120px"
+			},
 			item: getGridUser()
 		}
 	});

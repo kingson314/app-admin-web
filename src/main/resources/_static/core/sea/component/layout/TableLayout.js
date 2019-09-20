@@ -86,7 +86,7 @@ define(function(require, exports, module) {
 			Component.attr(me.tableLayout, me.configs);
 			Component.css(me.tableLayout, me.configs);
 			if (me.configs.title) {
-				$("<tr></tr>").addClass(ClassName + "_title").append("<td><i class='glyphicon glyphicon-th'><i/><span style='margin-left:3px'>"+Global.getI18N(me.configs.title)+"</span></td>").appendTo(me.tableLayout);
+				$("<tr></tr>").addClass(ClassName + "_title").append("<td><i class='iconfont icon-viewgrid'><i/><span style='margin-left:3px'>"+Global.getI18N(me.configs.title)+"</span></td>").appendTo(me.tableLayout);
 			}
 			var rowCount = me.configs.items.length;
 			for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
@@ -245,7 +245,7 @@ define(function(require, exports, module) {
 						item.id=item.name;
 						item=$.extend(true,item,{
 							width:80,
-							icon:"glyphicon glyphicon-user",
+							icon:"iconfont icon-user2",
 							iconCss:{
 								"background-color":"#28B779"
 							},

@@ -1,5 +1,5 @@
 define(function(require, exports, module) {
-	exports.getStatic=function(actionName,data){
+	exports.getPage=function(actionName,data){
 		var params="";
 		if(data)
 		$.each(data,function(key,val){
@@ -12,7 +12,7 @@ define(function(require, exports, module) {
 			}
 			params+=key+"="+val;
 		});
-		return Session.staticPath+actionName+params;
+		return actionName+params;
 	};
 	exports.getLocal=function(actionName,data){
 		var params="";

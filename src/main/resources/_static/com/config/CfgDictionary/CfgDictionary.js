@@ -5,42 +5,42 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	var _grid,_dialog,_formQuery,_formEdit;
 	/***************函数定义***************/
 	//创建查询表单
-	var getQueryForm = function() {
-		var cfgForm = {
-			items: [[{
-				id: "app",
-				label: "所属应用",
-				type: "textfield"
-			},{
-				id: "type",
-				label: "字典分类",
-				type: "textfield"
-			},{
-				id: "subType",
-				label: "二级分类",
-				type: "textfield"
-			},{
-				id: "zh_CN",
-				label: "字典文本(中文)",
-				type: "textfield"
-			}], [{
-				type: "buttongroup",
-				colspan: 3,
-				items: [{
-					icon: "iconfont icon-chaxun",
-					value: "查询",
-					click: function() {
-						if (!_formQuery.check()) {
-							return false;
-						}
-						_grid.reload(_formQuery.val());
-					}
-				}]
-			}]]
-		};
-		_formQuery=FormLayout.create(cfgForm);
-		return _formQuery.formLayout;
-	};
+//	var getQueryForm = function() {
+//		var cfgForm = {
+//			items: [[{
+//				id: "app",
+//				label: "所属应用",
+//				type: "textfield"
+//			},{
+//				id: "type",
+//				label: "字典分类",
+//				type: "textfield"
+//			},{
+//				id: "subType",
+//				label: "二级分类",
+//				type: "textfield"
+//			},{
+//				id: "zh_CN",
+//				label: "字典文本(中文)",
+//				type: "textfield"
+//			}], [{
+//				type: "buttongroup",
+//				colspan: 3,
+//				items: [{
+//					icon: "iconfont icon-chaxun",
+//					value: "查询",
+//					click: function() {
+//						if (!_formQuery.check()) {
+//							return false;
+//						}
+//						_grid.reload(_formQuery.val());
+//					}
+//				}]
+//			}]]
+//		};
+//		_formQuery=FormLayout.create(cfgForm);
+//		return _formQuery.formLayout;
+//	};
 	var cfgForm = {
 		id:"formEdit",
 		items: [[{
@@ -110,10 +110,46 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	};
 	var getGrid = function() {
 		var cfgGrid = {
+			title:_title,
 			url: _baseUrl,
 			toolbar: {
+				refresh:false,
 				copy:true,
-				"export":true,
+				items:[{
+					id: "search-subType",
+					placeholder:"请输入二级分类",
+					type: "textfield",
+					width:"200",
+					icon:"iconfont icon-find",
+					iconCss:{
+						"background-color":"#28B779"
+					},
+					cssLi:{
+						"float":"right"
+					},
+					click:function(){
+						_grid.reload({"subType":$("#search-subType").val(),"type":$("#search-type").val(),"app":$("#search-app").val()});
+					}
+				},{
+					id: "search-type",
+					placeholder:"请输入类别",
+					type: "textfield",
+					width:"150",
+					cssLi:{
+						"float":"right",
+						"margin-right":"10px"
+					}
+				},{
+					id: "search-app",
+					placeholder:"请输入应用名称",
+					type: "textfield",
+					width:"150",
+					cssLi:{
+						"float":"right",
+						"margin-right":"10px"
+					}
+				}],
+				
 				onAdd: function(record, selected) {
 					Component.onAdd(_grid,_dialog,_formEdit,_formQuery,_title,_baseUrl,getFormEdit,record,Dialog);
 				},
@@ -130,10 +166,10 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	};
 	/***************函数调用***************/
 	BorderLayout.create({
-		north: {
-			height: 100,
-			item: getQueryForm()
-		},
+//		north: {
+//			height: 100,
+//			item: getQueryForm()
+//		},
 		center: {
 			item: getGrid()
 		}

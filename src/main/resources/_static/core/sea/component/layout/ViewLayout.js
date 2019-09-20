@@ -101,9 +101,9 @@ define(function(require, exports, module) {
 					}
 					if(item.type=="title"){
 						_Component = $("<div>"+(item.html||"")+"</div>").addClass("sea_subtitle").css("width", colWidth + '%').css(item.cssTd || {});
-						_Component.append("<span class='sea_formLayout_subtitle_btn "+"glyphicon glyphicon-chevron-up'></span>");
+						_Component.append("<span class='sea_formLayout_subtitle_btn "+"iconfont icon-up'></span>");
 						_Component.find(".sea_formLayout_subtitle_btn").bind("click",{index:rowIndex},function(event){
-				 			$(this).toggleClass("glyphicon-chevron-up glyphicon-chevron-down");
+				 			$(this).toggleClass("icon-down icon-up");
 				 			$("#"+me.configs.id+" .sea_formLayout_group"+event.data.index).toggle();
 				 		});
 						Component.addClass(_Component, item);

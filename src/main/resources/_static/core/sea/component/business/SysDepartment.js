@@ -46,7 +46,7 @@ define(function(require, exports, module) {
 			isNull:false,
 			params:{
 				app:"system",
-				type:"Sex"
+				type:"性别"
 			}
 		}],[{
 			id: "tel",
@@ -73,7 +73,7 @@ define(function(require, exports, module) {
 			type: "dic",
 			params:{
 				app:"system",
-				type:"State"
+				type:"状态"
 			},
 			hide:true
 		}],[{
@@ -138,7 +138,7 @@ define(function(require, exports, module) {
 						"border-right":"0"
 					}
 				},{
-					icon:"glyphicon glyphicon-search",
+					icon:"iconfont icon-search",
 					click:function(){
 						var String=require("String"); 
 						var val=$("#toolbar #name").val();
@@ -185,23 +185,23 @@ define(function(require, exports, module) {
 		var cfgToolbar={
 			id:"treeToolbar",
 			items:[{
-				icon: "glyphicon glyphicon-plus-sign",
+				icon: "iconfont icon-expand",
 				value:"展开",
 				click:function(){
 					_tree.expandAll(true);
 				}
 			},{
-				icon: "glyphicon glyphicon-minus-sign",
+				icon: "iconfont icon-shousuo",
 				value:"收缩",
 				click:function(){
 					_tree.expandAll(false);
 				}
-			},{
-				icon: "glyphicon glyphicon-refresh",
-				value:"刷新",
-				click:function(){
-					_tree.refresh();
-				}
+//			},{
+//				icon: "iconfont icon-refresh3",
+//				value:"刷新",
+//				click:function(){
+//					_tree.refresh();
+//				}
 			}]
 		};
 		var toolbar=Toolbar.create(cfgToolbar);

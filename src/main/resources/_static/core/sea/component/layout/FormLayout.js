@@ -94,7 +94,7 @@ define(function(require, exports, module) {
 			//控件样式设置
 			Component.css(me.formLayout, me.configs);
 			if (me.configs.title) {
-				$("<div></div>").addClass("sea_title").append("<i class='glyphicon glyphicon-th'><i/><span style='margin-left:3px'>"+Global.getI18N(me.configs.title)+"</span>").appendTo(me.formLayout);
+				$("<div></div>").addClass("sea_title").append("<i class='iconfont icon-Settings'><i/><span style='margin-left:0.5rem'>"+Global.getI18N(me.configs.title)+"</span>").appendTo(me.formLayout);
 			}
 			var table = $("<div></div>").addClass(me.configs._clsTable).appendTo(me.formLayout).css(me.configs.cssInner);
 			var maxColCount = me.configs.items[0].length; // 潜规则1：以首行配置的列数为最大列数(包含hidden类型以及空对象)
@@ -127,9 +127,9 @@ define(function(require, exports, module) {
 					switch (item.type.toLowerCase()) {
 					case "title":
 						_Component = $("<div>"+(item.html||"")+"</div>").addClass("sea_subtitle").css("width", colWidth + '%').css(item.cssTd || {});
-						_Component.append("<span class='sea_formLayout_subtitle_btn "+"glyphicon glyphicon-chevron-up'></span>");
+						_Component.append("<span class='sea_formLayout_subtitle_btn "+"iconfont icon-up'></span>");
 						_Component.find(".sea_formLayout_subtitle_btn").bind("click",{index:rowIndex},function(event){
-				 			$(this).toggleClass("glyphicon-chevron-up glyphicon-chevron-down");
+				 			$(this).toggleClass("icon-down icon-up");
 				 			$("#"+me.configs.id+" .sea_formLayout_group"+event.data.index).toggle();
 				 		});
 						Component.addClass(_Component, item);
@@ -284,7 +284,7 @@ define(function(require, exports, module) {
 						item._id=item.id;
 						item.id=item.name;
 						item=$.extend(true,item,{
-							icon:"glyphicon glyphicon-user",
+							icon:"iconfont icon-user2",
 							iconCss:{
 								"background-color":"#28B779"
 							},

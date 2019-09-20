@@ -31,7 +31,7 @@ define(function(require, exports, module) {
 			$.each(me.configs.items,function(index,item){
 				var li;
 				if(item.icon){
-					li=$("<li></li>").append("<button type='button'><i  class='"+item.icon+"'></i>"+Global.getI18N(item.value)+"</button>").appendTo(ul);
+					li=$("<li></li>").append("<button type='button'><span class='"+item.icon+"'></span>"+Global.getI18N(item.value)+"</button>").appendTo(ul);
 				}else if(item.img){
 					li=$("<li></li>").append("<button type='button'>"+item.img+Global.getI18N(item.value)+"</button>").appendTo(ul);
 				}else{

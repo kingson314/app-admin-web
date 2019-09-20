@@ -385,7 +385,7 @@ define(function(require, exports, module) {
 			hasConfirm:false,
 			hasCancel:false,
 			items:[{
-			    icon: "glyphicon glyphicon-ok",
+			    icon: "iconfont icon-icon_function_baocunbingxinzeng",
 			    value: "保存并新增",
 			    click: function() {
 					_formEdit.submit(_baseUrl,function(rs){
@@ -401,7 +401,7 @@ define(function(require, exports, module) {
 					});
 			    }
 			  },{
-			    icon: "glyphicon glyphicon-ok-sign",
+			    icon: "iconfont icon-icon_saved",
 			    value: "保存并退出",
 			    click: function() {
 					_formEdit.submit(_baseUrl,function(rs){
@@ -414,7 +414,7 @@ define(function(require, exports, module) {
 					});
 			    }
 			},{
-		    icon: "glyphicon glyphicon-share-alt",
+		    icon: "iconfont icon-return",
 		    value: "返回",
 		    cls:"icon_return",
 		    click: function() {
@@ -434,7 +434,7 @@ define(function(require, exports, module) {
 			hasCancel:false,
 			items:[{
 				id:"btn_prev",
-			    icon: "glyphicon glyphicon-step-backward",
+			    icon: "iconfont icon-step-backward",
 			    value: "上一条",
 			    click: function() {
 					var curIndex=Array.getRecordIndex(_grid.configs.records,"id",_currentId);
@@ -459,7 +459,7 @@ define(function(require, exports, module) {
 					}
 			    }
 			  },{
-			    icon: "glyphicon glyphicon-ok-sign",
+			    icon: "iconfont icon-icon_saved",
 			    value: "保存并退出",
 			    click: function() {
 					_formEdit.submit(_baseUrl,function(rs){
@@ -473,7 +473,7 @@ define(function(require, exports, module) {
 			    }
 		  },{
 			id:"btn_next",
-		    icon: "glyphicon glyphicon-step-forward",
+		    icon: "iconfont icon-step-forward",
 		    value: "下一条",
 		    click: function() {
 				var curIndex=Array.getRecordIndex(_grid.configs.records,"id",_currentId);
@@ -511,7 +511,7 @@ define(function(require, exports, module) {
 			hasCancel:false,
 			items:[{
 				id:"btn_prev",
-			    icon: "glyphicon glyphicon-step-backward",
+			    icon: "iconfont icon-step-backward",
 			    value: "上一条",
 			    click: function() {
 					var curIndex=Array.getRecordIndex(_grid.configs.records,"id",_currentId);
@@ -530,14 +530,14 @@ define(function(require, exports, module) {
 					}
 			    }
 			  },{
-			    icon: "glyphicon glyphicon-ok-sign",
+			    icon: "iconfont icon-icon_saved",
 			    value: "退出",
 			    click: function() {
 					_dialog.hide();
 			    }
 		  },{
 			id:"btn_next",
-		    icon: "glyphicon glyphicon-step-forward",
+		    icon: "iconfont icon-step-forward",
 		    value: "下一条",
 		    click: function() {
 				var curIndex=Array.getRecordIndex(_grid.configs.records,"id",_currentId);

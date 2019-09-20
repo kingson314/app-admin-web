@@ -38,51 +38,46 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			_grid.reload();
 		});
 	};
-	//创建查询表单
-	var getQueryForm = function() {
-		var form;
-		var cfgForm = {
-			items: [[{
-				id: "code",
-				label:"工号",
-				type: "textfield"
-			},{
-				id: "name",
-				label:"用户名称",
-				type: "textfield"
-			}], [{
-				type: "buttongroup",
-				colspan: 2,
-				items: [{
-					icon: "iconfont icon-chaxun",
-					value: "查询",
-					click: function() {
-						if (!_formQuery.check()) {
-							return false;
-						}
-						_grid.reload(_formQuery.val());
-					}
-				}]
-			}]]
-		};
-		_formQuery=FormLayout.create(cfgForm);
-		return _formQuery.formLayout;
-	};
+//	//创建查询表单
+//	var getQueryForm = function() {
+//		var form;
+//		var cfgForm = {
+//			title:_title,
+//			items: [[{
+//				id: "code",
+//				label:"工号",
+//				type: "textfield"
+//			},{
+//				id: "name",
+//				label:"用户名称",
+//				type: "textfield"
+//			}], [{
+//				type: "buttongroup",
+//				colspan: 2,
+//				items: [{
+//					icon: "iconfont icon-chaxun",
+//					value: "查询",
+//					click: function() {
+//						if (!_formQuery.check()) {
+//							return false;
+//						}
+//						_grid.reload(_formQuery.val());
+//					}
+//				}]
+//			}]]
+//		};
+//		_formQuery=FormLayout.create(cfgForm);
+//		return _formQuery.formLayout;
+//	};
 	var cfgForm = {
 		items: [[{
-			id: "company",
-			label: "公司名称",
-			type: "textfield",
-			value:Global.CfgRuntime("system","company").value,
-			disabled:"disabled"
-		},{
 			id: "departmentId",
 			_id: "departmentName",
 			label: "部门名称",
 			isNull:false,
 			type: "select",
 			url:"SysDepartment/options"
-		}],[{
+		},{}],[{
 			id: "code",
 			label: "工号",
 			type: "textfield",
@@ -119,7 +114,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			isNull:false,
 			params:{
 				app:"system",
-				type:"Sex"
+				type:"性别"
 			}
 		}],[{
 			id: "tel",
@@ -141,7 +136,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			type: "dic",
 			params:{
 				app:"system",
-				type:"State"
+				type:"状态"
 			}
 		}],[{
 			id: "id",
@@ -158,22 +153,24 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	};
 	var getGridUser = function() {
 		var cfgGrid = {
+			title:_title,
 			url: _baseUrl,
 			toolbar: {
+				refresh:false,
 				items:[{
-					icon: "iconfont icon-view",
-					value: "菜单预览",
-					click: function() {
-						if(!_currentId){
-							Dialog.alert("请选择用户");
-							return;
-						}
-						Dialog.view({
-							title: "用户菜单预览",
-							content: getTree(_currentId).tree
-						});
-					}
-				},{
+//					icon: "iconfont icon-view",
+//					value: "菜单预览",
+//					click: function() {
+//						if(!_currentId){
+//							Dialog.alert("请选择用户");
+//							return;
+//						}
+//						Dialog.view({
+//							title: "用户菜单预览",
+//							content: getTree(_currentId).tree
+//						});
+//					}
+//				},{
 					icon: "iconfont icon-shengxiao",
 					id:"tb_audit",
 					"disabled":"disabled",
@@ -190,6 +187,22 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 					click: function() {
 						audit(_grid,_baseUrl,1);
 						$(this).attr("disabled","disabled");
+					}
+				},{
+					id: "search-name",
+					placeholder:"请输入用户名称",
+					type: "textfield",
+					width:"200",
+					icon:"iconfont icon-find",
+					iconCss:{
+						"background-color":"#28B779"
+					},
+					cssLi:{
+						"float":"right",
+						"margin-right":"10px"
+					},
+					click:function(){
+						_grid.reload({"name":$("#search-name").val()});
 					}
 				}],
 				onAdd: function(record, selected) {
@@ -255,12 +268,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				}],
 				url: _baseUrl,
 				toolbar: {
-					refresh:false,
-					add:false,
-					edit:false,
-					view:false,
-					"delete":false,
-					"export":false
+					hide:true
 				}
 			};
 			_gridRole = Grid.create(cfgGrid);
@@ -294,16 +302,19 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	/***************函数调用***************/
 	//创建页面布局
 	BorderLayout.create({
-		north: {
-			height: 100,
-			item: getQueryForm()
-		},
+//		north: {
+//			height: 100,
+//			item: getQueryForm()
+//		},
 		center: {
 			css:{"padding-right":"10px"},
 			item: getGridUser()
 		},
 		east:{
 			width:240,
+			css:{
+				"padding-top":"120px"
+			},
 			item:getGridRole()
 		}
 	});

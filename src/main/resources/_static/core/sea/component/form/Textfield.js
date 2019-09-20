@@ -32,24 +32,29 @@ define(function(require, exports, module) {
 		//初始化
 		this.textfield=this._input= $("<input autocomplete='off' type='"+this.configs.subtype+"'/>");
 		if(this.configs.icon){
-			this.textfieldIcon=$("<div style='padding:0;text-align:left;width:100%;'></div>");
-			this._input.css({"width":"auto","border-radius":0});
-			this._icon=$("<div class='"+this.configs.icon+"' style='color:#fff;cursor:pointer;margin:0;min-width:28px;line-height:28px;text-align:center;'></div>")
+			this.textfieldIcon=$("<div style='display: inline;position:relative;padding:0;text-align:left;'></div>").css("width",this.configs.width);
+			this._input.css({"width":this.configs.width,"border-radius":"6px"});
+			
+			this._icon=$("<div class='"+this.configs.icon+"' style='width: 46px;height:2.1rem;line-height:2.1rem;border-radius: 0 6px 6px 0;color:#fff;cursor:pointer;margin:0;text-align:center;position:absolute;'></div>")
 			.css(this.configs.iconCss||{
-				"width":"28px",
-				"height":"28px"
 			})
 			.click(function(){
 				if(me.configs.readonly=="readonly"||me.configs.readonly==true||me.configs.disabled=="disabled"||me.configs.disabled==true)return;
 				me.configs.click();
 			});
+			this.textfieldIcon.append(this._icon).append(this._input);
 			if(this.configs.iconAlign=="left"){
-				this.textfieldIcon.append(this._icon).append(this._input);
+				this._icon.css("left","0");
+				this._input.css({"padding-left":"49px"});
 			}else{
-				this.textfieldIcon.append(this._input).append(this._icon);
+				this._icon.css("right","0");
+				this._input.css({"padding-right":"49px"});
 			}
 		}
 		this.init();
+		if(this.configs.icon){
+			this._input.unbind("click");
+		}
 		if(Session.isMini==false){
 			if(this.configs.icon){
 				var interval=setInterval(function(){

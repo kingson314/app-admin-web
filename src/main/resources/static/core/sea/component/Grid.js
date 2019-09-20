@@ -21,7 +21,7 @@ define(function(require, exports, module) {
 		showColumnSet:false,
 		summaryRows:0,//统计记录行数
 		pagerMode : "normal", //normal,simple
-		pageSize : 100,
+		pageSize : 20,
 		url : "", //url优先
 		params : {},
 		paramsDelete : {},
@@ -115,7 +115,7 @@ define(function(require, exports, module) {
 				Ajax.post(me.configs.url, _params, function(result) {
 					if (result.success) {
 						me.configs.records = result.data;
-						me.rowCount = result.rowcount;
+						me.total = result.total;
 					}
 					self.render(me);
 					self.pager(me, _params);
@@ -127,7 +127,7 @@ define(function(require, exports, module) {
 					}
 				}, true);
 			} else {
-				me.rowCount = me.configs.records.length;
+				me.total = me.configs.records.length;
 				if(me.configs.pageSize>0)
 					me.configs.records =me.configs.records.slice((_params.pageIndex - 1) * me.configs.pageSize, _params.pageIndex * me.configs.pageSize);
 				self.render(me);
@@ -458,12 +458,12 @@ define(function(require, exports, module) {
 					pageSize : _params.pageSize,
 					pageIndex : _params.pageIndex,
 					pagerMode : me.configs.pagerMode,
-					rowCount : me.rowCount,
+					total : me.total,
 					select : function(pageIndex, pageSize) {
 						me.configs.params.pageIndex = pageIndex;
 						me.configs.params.pageSize = pageSize || me.configs.pageSize;
 						me.reload(me.configs.params) ;
-						return me.rowCount;
+						return me.total;
 					}
 				});
 				me.grid.find(".sea_grid_pager").empty().append(pager.pager);
@@ -476,7 +476,7 @@ define(function(require, exports, module) {
 			if (!me.configs.toolbar.hide){
 				if (me.configs.toolbar.copy) {
 					me.configs.toolbar.items.unshift({
-						icon : "glyphicon glyphicon-credit-card",
+						icon : "iconfont icon-copy",
 						id:"tb_copy",
 						value : Lang.copy,
 						click : function() {
@@ -502,7 +502,7 @@ define(function(require, exports, module) {
 				}
 				if (me.configs.toolbar["export"]) {
 					me.configs.toolbar.items.unshift({
-						icon : "glyphicon glyphicon-floppy-disk",
+						icon : "iconfont icon-export",
 						id:"tb_export",
 						value : Lang["export"],
 						click : function() {
@@ -537,7 +537,7 @@ define(function(require, exports, module) {
 				}
 				if (me.configs.toolbar["delete"]) {
 					me.configs.toolbar.items.unshift({
-						icon : "glyphicon glyphicon-minus",
+						icon : "iconfont icon-delete3",
 						id:"tb_delete",
 						value : Lang["delete"],
 						click : function() {
@@ -573,7 +573,7 @@ define(function(require, exports, module) {
 				}
 				if (me.configs.toolbar.add) {
 					me.configs.toolbar.items.unshift({
-						icon : "glyphicon glyphicon-plus",
+						icon : "iconfont icon-add2",
 						id:"tb_add",
 						value : Lang.add,
 						click : function() {
@@ -584,7 +584,7 @@ define(function(require, exports, module) {
 				}
 				if (me.configs.toolbar.refresh) {
 					me.configs.toolbar.items.unshift({
-						icon : "glyphicon glyphicon-refresh",
+						icon : "iconfont icon-Refresh",
 						id:"tb_refresh",
 						value : Lang.refresh,
 						click : function() {
@@ -597,30 +597,23 @@ define(function(require, exports, module) {
 				me.toolbar.append(tb.toolbar);
 			} else {
 				me.toolbar.remove();
-				if (me.title) {
-					me.grid.find(".sea_grid_forzen").css("top", "4rem");
-					me.grid.find(".sea_grid_normal").css("top", "4rem");
-				} else {
-					me.grid.find(".sea_grid_forzen").css("top", 0);
-					me.grid.find(".sea_grid_normal").css("top", 0);
-				}
 			}
 		},
 		getViewLink : function(me, record, cellValue) {
-			var a = $("<a style='padding:0 5px;'><i class='glyphicon glyphicon-eye-open'></i>" + cellValue + "</a>").click(function() {
+			var a = $("<a style='padding:0 5px;'><i class='iconfont icon-view3'></i>" + cellValue + "</a>").click(function() {
 				me.configs.toolbar.onView(me.getViewData(record), [ record["id"] ]);
 			});
 			return a;
 		},
 		getEditLink : function(me, record, cellValue) {
-			var a = $("<a style='padding:0 5px;'><i class='glyphicon glyphicon-pencil'></i>" + cellValue + "</a>").click(function() {
+			var a = $("<a style='padding:0 5px;'><i class='iconfont icon-edit'></i>" + cellValue + "</a>").click(function() {
 				me.configs.toolbar.onEdit(record, [ record["id"] ]);
 			});
 			return a;
 		},
 		getDeleteLink : function(me, record, cellValue) {
 			var selected = me.getSelected();
-			var a = $("<a style='padding:0 5px;'><i class='glyphicon glyphicon-remove'></i>" + cellValue + "</a>").click(function() {
+			var a = $("<a style='padding:0 5px;'><i class='iconfont icon-remove'></i>" + cellValue + "</a>").click(function() {
 				if (me.configs.toolbar.onDelete(record,selected)) {
 					Dialog.confirm({
 						content : Lang.ifDel,
@@ -697,7 +690,7 @@ define(function(require, exports, module) {
 			if (this.configs.toolbar && !this.configs.toolbar.baseUrl)
 				this.configs.toolbar.baseUrl = this.configs.url.substr(0, this.configs.url.indexOf("/") + 1);
 		}
-		this.rowCount = 0; //总记录数
+		this.total = 0; //总记录数
 		this.grid = $(self.html());
 		// 控件类名设置
 		Component.addClass(this.grid, this.configs);
@@ -714,18 +707,30 @@ define(function(require, exports, module) {
 		// 初始化
 		//标题
 		if (this.configs.title) {
-			this.title = this.grid.find(".sea_grid_title").html("<i class='glyphicon glyphicon-th'><i/><span style='margin-left:3px'>" + Global.getI18N(this.configs.title) + "</span>");
-			this.grid.find(".sea_grid_toolbar").css("top", "4rem");
-			this.grid.find(".sea_grid_forzen").css("top", "7rem");
-			this.grid.find(".sea_grid_normal").css("top", "7rem");
+			this.title = this.grid.find(".sea_grid_title").html("<i class='iconfont icon-Settings'></i><span style='margin-left:3px'>" + Global.getI18N(this.configs.title) + "</span>");
 		} else {
 			this.grid.find(".sea_grid_title").remove();
 		}
 		//工具栏
 		self.toolbar(this);
-		if(this.configs.title && !this.configs.toolbar.hide){
-			//this.toolbar.css("border-top","1px solid rgb(213, 213, 213)");
-			//this.title.css("border-bottom","1px solid #999");
+		if(this.configs.toolbar.hide){
+			if (this.configs.title) {
+				this.grid.find(".sea_grid_forzen").css("top", "5rem");
+				this.grid.find(".sea_grid_normal").css("top", "5rem");
+			} else {
+				this.grid.find(".sea_grid_forzen").css("top", "0rem");
+				this.grid.find(".sea_grid_normal").css("top", "0rem");
+			}
+		}else{
+			if (this.configs.title) {
+				this.grid.find(".sea_grid_forzen").css("top", "7.5rem");
+				this.grid.find(".sea_grid_normal").css("top", "7.5rem");
+				this.toolbar.css("top", "5rem");
+			} else {
+				this.grid.find(".sea_grid_forzen").css("top", "2.5rem");
+				this.grid.find(".sea_grid_normal").css("top", "2.5rem");
+				this.toolbar.css("top", "0rem");
+			}
 		}
 		//冻结表
 		this.grid_forzen_head = this.grid.find(".sea_grid_forzen>.sea_grid_head table");
@@ -753,7 +758,7 @@ define(function(require, exports, module) {
 			this.columnsForzen.push({
 				id : "_index",
 				width : 30,
-				label : "<span id='_columnset' class='glyphicon' style='color:#999;cursor:pointer;'></span>"
+				label : "<span id='_columnset' class='iconfont' style='color:#999;cursor:pointer;'></span>"
 			});
 		}
 		for (var i = 0; i < columnCount; i++) {
@@ -799,8 +804,8 @@ define(function(require, exports, module) {
 			me.resize(me);
 		});
 		if(this.configs.showColumnSet){
-			$("#_columnset",this.grid).addClass("glyphicon-th").click(function(){
-				$("#_columnset",this.grid).toggleClass("glyphicon-th-list","glyphicon-th");
+			$("#_columnset",this.grid).addClass("iconfont").click(function(){
+				$("#_columnset",this.grid).toggleClass("icon-list2"," icon-liebiao");
 				if($(".sea_grid_columnset").length>0){
 					$(".sea_grid_columnset").toggle();
 					return false;
@@ -817,7 +822,7 @@ define(function(require, exports, module) {
 	Grid.prototype = {
 		print:function(){
 			var formEdit=$("#formEdit");
-	    		$("body").empty().css({"overflow":"auto"}).append(formEdit).find(".glyphicon,input[type=button]").hide();
+	    		$("body").empty().css({"overflow":"auto"}).append(formEdit).find(".iconfont,input[type=button]").hide();
             if (document.execCommand("print")) {
             		window.location.reload();
             }

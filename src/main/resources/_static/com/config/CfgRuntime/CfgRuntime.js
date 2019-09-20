@@ -5,36 +5,36 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	var _grid,_dialog,_formQuery,_formEdit;
 	/***************函数定义***************/
 	//创建查询表单
-	var getFormQuery = function() {
-		var cfgForm = {
-			id:"formQuery",
-			items: [[{
-				id: "app",
-				label: "所属应用",
-				type: "textfield",
-				value:"system"
-			},{
-				id: "name",
-				label: "配置名称	",
-				type: "textfield"
-			}], [{
-				type: "buttongroup",
-				colspan: 2,
-				items: [{
-					icon: "glyphicon glyphicon-search",
-					value: "查询",
-					click: function() {
-						if (!_formQuery.check()) {
-							return false;
-						}
-						_grid.reload(_formQuery.val());
-					}
-				}]
-			}]]
-		};
-		_formQuery=FormLayout.create(cfgForm);
-		return _formQuery.formLayout;
-	};
+//	var getFormQuery = function() {
+//		var cfgForm = {
+//			id:"formQuery",
+//			items: [[{
+//				id: "app",
+//				label: "所属应用",
+//				type: "textfield",
+//				value:"system"
+//			},{
+//				id: "name",
+//				label: "配置名称	",
+//				type: "textfield"
+//			}], [{
+//				type: "buttongroup",
+//				colspan: 2,
+//				items: [{
+//					icon: "iconfont icon-search",
+//					value: "查询",
+//					click: function() {
+//						if (!_formQuery.check()) {
+//							return false;
+//						}
+//						_grid.reload(_formQuery.val());
+//					}
+//				}]
+//			}]]
+//		};
+//		_formQuery=FormLayout.create(cfgForm);
+//		return _formQuery.formLayout;
+//	};
 	var cfgForm = {
 		items: [[{
 			id: "app",
@@ -84,11 +84,39 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	};
 	var getGrid = function() {
 		var cfgGrid = {
+			title:_title,
 			url: _baseUrl,
 			params:{
 				app:"system"
 			},
 			toolbar: {
+				refresh:false,
+				copy:true,
+				items:[{
+					id: "search-name",
+					placeholder:"请输入配置名称",
+					type: "textfield",
+					width:"200",
+					icon:"iconfont icon-find",
+					iconCss:{
+						"background-color":"#28B779"
+					},
+					cssLi:{
+						"float":"right"
+					},
+					click:function(){
+						_grid.reload({"name":$("#search-name").val(),"app":$("#search-app").val()});
+					}
+				},{
+					id: "search-app",
+					placeholder:"请输入应用名称",
+					type: "textfield",
+					width:"150",
+					cssLi:{
+						"float":"right",
+						"margin-right":"10px"
+					}
+				}],
 				onAdd: function(record, selected) {
 					Component.onAdd(_grid,_dialog,_formEdit,_formQuery,_title,_baseUrl,getFormEdit,record,Dialog);
 				},
@@ -105,10 +133,10 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	};
 	/***************函数调用***************/
 	BorderLayout.create({
-		north: {
-			height: 100,
-			item: getFormQuery()
-		},
+//		north: {
+//			height: 100,
+//			item: getFormQuery()
+//		},
 		center: {
 			item: getGrid()
 		}

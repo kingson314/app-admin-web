@@ -109,7 +109,7 @@ define(function(require, exports, module) {
 			});
 			
 //			if(me.configs.position=="top"||me.configs.position=="bottom"){
-//				me.tab.append("<li style='display:inline;'><span class='" + me._className+ "_title_btn glyphicon glyphicon-remove'></span></li>");
+//				me.tab.append("<li style='display:inline;'><span class='" + me._className+ "_title_btn iconfont icon-remove'></span></li>");
 //				me.tab.find("." + me._className + "_title_btn").click(function() {
 //					me.layout.hide();
 //				});

@@ -19,11 +19,11 @@ define(function(require, exports, module) {
  			height: "200",
  			css:{},
  			cssContent:{},
- 			confirmValue: "<i class='glyphicon glyphicon-ok'></i>"+Lang["confirm"],
+ 			confirmValue: "<span class='iconfont icon-yes'></span>"+Lang.confirm,
  			confirm: function(){return true;}, //点击确定后回调函数
- 			cancelValue:"<i style='transform:rotateY(180deg)' class='glyphicon glyphicon-share-alt'></i>"+Lang["cancel"],
+ 			cancelValue:"<span style='transform:rotateY(180deg)' class='iconfont icon-return'></span>"+Lang.cancel,
  			cancel: function(){},  //点击取消后回调函数，默认关闭弹出框
- 			title: Lang["prompt"],  //标题内容，如果不设置，则连同关闭按钮（不论设置显示与否）都不显示标题
+ 			title: Lang.prompt,  //标题内容，如果不设置，则连同关闭按钮（不论设置显示与否）都不显示标题
  			content: '',  //正文内容，可以为纯字符串，html标签字符串，以及URL地址，当content为URL地址时，将内嵌目标页面的iframe（未实现）。
  			items:null
 	    };
@@ -36,9 +36,9 @@ define(function(require, exports, module) {
 	 		Component.css(me.dialog,me.configs);
 	 		if(!me.configs.title)me.configs.hasTitle=false;
 	 		if(me.configs.hasTitle){
-		 		me.title=$("<div><span class='"+me._className+"_title_icon "+"glyphicon glyphicon-th-large'></span>"+Global.getI18N(me.configs.title)+"</div>").addClass(me._className+"_title").appendTo(me.dialog);
+		 		me.title=$("<div><span class='"+me._className+"_title_icon'></span>"+Global.getI18N(me.configs.title)+"</div>").addClass(me._className+"_title").appendTo(me.dialog);
 		 		if(me.configs.hasClose){
-		 			me.title.append("<span class='"+me._className+"_title_btn "+"glyphicon glyphicon-remove'></span>");
+		 			me.title.append("<span class='"+me._className+"_title_btn "+"iconfont icon-remove1'></span>");
 			 		me.title.find("."+me._className+"_title_btn").click(function(){
 			 			me.hide();
 			 		});

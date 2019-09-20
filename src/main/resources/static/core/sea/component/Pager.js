@@ -11,7 +11,7 @@ define(function(require, exports, module) {
 		pageNav:5,
 		pageSize:20,
 		pageIndex:1,
-		rowCount:0,
+		total:0,
 		css : {},
 		attr : {	},
 		select:function(pageIndex,pageSize){}
@@ -24,25 +24,25 @@ define(function(require, exports, module) {
 			html.push('<tr>');
 			html.push('<td class="totalpage">'+Lang["total"]+'<span class="sea_totalpage"></span>'+Lang["page"]+'/<span class="sea_rowCount"></span>'+Lang["record"]+'</span> &nbsp;&nbsp;&nbsp;'+Lang["each.page"]+'</td>');
 			html.push('<td class="pageSize"><select class="sea_pageSize"></select></td>');
-			html.push('<td class="jump">'+Lang["item"]+' &nbsp;&nbsp;&nbsp;'+Lang["jump"]+'&nbsp;<span><input type="text" class="sea_jump" style="width:30px;text-align:center" value=""/></span>&nbsp;页&nbsp;&nbsp;&nbsp;</td>');
+			html.push('<td class="jump" style="display:none;">'+Lang["item"]+' &nbsp;&nbsp;&nbsp;'+Lang["jump"]+'&nbsp;<span><input type="text" class="sea_jump" style="width:30px;text-align:center" value=""/></span>&nbsp;页&nbsp;&nbsp;&nbsp;</td>');
 			html.push('<td class="firstpage">');
-			html.push('<a href="#" class="sea_grid_pager_btn sea_firstpage" sea_pageIndex="first"><i class="glyphicon glyphicon-fast-backward"></i></a>');
-			html.push('<a href="#" class="sea_grid_pager_btn sea_prepage" sea_pageIndex="pre"><i class="glyphicon glyphicon-backward"></i></a>');
+			html.push('<a href="#" class="sea_grid_pager_btn sea_firstpage" sea_pageIndex="first"><i class="iconfont icon-fast-backward"></i></a>');
+			html.push('<a href="#" class="sea_grid_pager_btn sea_prepage" sea_pageIndex="pre"><i class="iconfont icon-backward"></i></a>');
 			html.push('</td>');
 			html.push('<td class="navig"><span class="sea_grid_navig"></span></td>');
 			html.push('<td  class="lastpage">');
-			html.push('<a href="#" class="sea_grid_pager_btn sea_nextpage" sea_pageIndex="next"><i class="glyphicon glyphicon-forward"></i>&nbsp;</a>');
-			html.push('<a href="#" class="sea_grid_pager_btn sea_lastpage" sea_pageIndex="last"><i class="glyphicon glyphicon-fast-forward"></i>&nbsp;</a>');
+			html.push('<a href="#" class="sea_grid_pager_btn sea_nextpage" sea_pageIndex="next"><i class="iconfont icon-forward"></i>&nbsp;</a>');
+			html.push('<a href="#" class="sea_grid_pager_btn sea_lastpage" sea_pageIndex="last"><i class="iconfont icon-fast-forward"></i>&nbsp;</a>');
 			html.push('</td>');
 			html.push('</tr>');
 			html.push('</table>');
 			return html.join('') ;
 	  	},
-	  	reader:function(me,pageIndex,pageSize,rowCount){
-	  		var totalPage=rowCount % pageSize == 0? (rowCount / pageSize): (Math.floor(rowCount / pageSize) + 1);
+	  	reader:function(me,pageIndex,pageSize,total){
+	  		var totalPage=total % pageSize == 0? (total / pageSize): (Math.floor(total / pageSize) + 1);
 
 			me.pager.find(".sea_totalpage").html(totalPage) ;
-			me.pager.find(".sea_rowCount").html(rowCount) ;
+			me.pager.find(".sea_rowCount").html(total) ;
 			me.pager.find(".sea_jump").val(pageIndex) ;
 			
 	  		var pageNav=me.configs.pageNav;
@@ -79,14 +79,14 @@ define(function(require, exports, module) {
 				if(event.keyCode==13){
 					var pageSize=me.pager.find(".sea_pageSize").val();
 					var pageIndex=$(this).val();
-					var rowCount=me.configs.select(pageIndex ,pageSize);
-					self.reader(me,pageIndex,pageSize,rowCount);
+					var total=me.configs.select(pageIndex ,pageSize);
+					self.reader(me,pageIndex,pageSize,total);
 				}
 			}) ;
 	  		me.pager.find(".sea_pageSize").change(function(){
-	  			var rowCount=me.configs.select(1,$(this).val()) ;
+	  			var total=me.configs.select(1,$(this).val()) ;
 				var pageSize=me.pager.find(".sea_pageSize").val();
-	  			self.reader(me,1,pageSize,rowCount);
+	  			self.reader(me,1,pageSize,total);
 			}) ;
 	  		me.pager.delegate("[sea_pageIndex]","click",function(event){
 				if( $(this).hasClass("sea_state_disabled") ) return false ;
@@ -102,8 +102,8 @@ define(function(require, exports, module) {
 					default:
 						break ;
 				}
-				var rowCount=me.configs.select(pageIndex ,pageSize);
-				self.reader(me,pageIndex,pageSize,rowCount);
+				var total=me.configs.select(pageIndex ,pageSize);
+				self.reader(me,pageIndex,pageSize,total);
 				return false ;
 			}) ;
 	  	}
@@ -118,7 +118,7 @@ define(function(require, exports, module) {
 		$(this.configs.pageSizeArr).each(function(){
 			me.pager.find(".sea_pageSize").append("<option value='"+this+"' "+(this==me.configs.pageSize?"selected":"")+">"+this+"</option>") ;
 		}) ;
-		self.reader(this,this.configs.pageIndex,this.configs.pageSize,this.configs.rowCount);
+		self.reader(this,this.configs.pageIndex,this.configs.pageSize,this.configs.total);
 		self.bindEvent(this);
 	};
 	// 类公共方法

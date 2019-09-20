@@ -6,29 +6,29 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	var _currentId,_nodeId,_nodeName,_border,_grid,_dialog,_tree,_formQuery,_formEdit;
 	
 	/***************函数定义***************/
-	var getFormQuery = function() {
-		var cfgForm = {
-			items: [[{
-				id: "name",
-				label: "用户名称",
-				type: "textfield"
-			},{
-				type: "buttongroup",
-				items: [{
-					icon: "iconfont icon-chaxun",
-					value: "查询",
-					click: function() {
-						if (!_formQuery.check()) {
-							return false;
-						}
-						_grid.reload(_formQuery.val());
-					}
-				}]
-			}]]
-		};
-		_formQuery=FormLayout.create(cfgForm);
-		return _formQuery.formLayout;
-	};
+//	var getFormQuery = function() {
+//		var cfgForm = {
+//			items: [[{
+//				id: "name",
+//				label: "用户名称",
+//				type: "textfield"
+//			},{
+//				type: "buttongroup",
+//				items: [{
+//					icon: "iconfont icon-chaxun",
+//					value: "查询",
+//					click: function() {
+//						if (!_formQuery.check()) {
+//							return false;
+//						}
+//						_grid.reload(_formQuery.val());
+//					}
+//				}]
+//			}]]
+//		};
+//		_formQuery=FormLayout.create(cfgForm);
+//		return _formQuery.formLayout;
+//	};
 	
 	var cfgForm = {
 		items: [[{
@@ -83,7 +83,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			isNull:false,
 			params:{
 				app:"system",
-				type:"Sex"
+				type:"性别"
 			}
 		},{
 			id: "birthday",
@@ -159,7 +159,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			type: "dic",
 			params:{
 				app:"system",
-				type:"State"
+				type:"状态"
 			}
 		}],[{
 			id: "id",
@@ -216,6 +216,22 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			}],
 			toolbar: {
 				"delete":false,
+				items:[{
+					id: "search-name",
+					placeholder:"请输入用户名称",
+					type: "textfield",
+					width:"200",
+					icon:"iconfont icon-find",
+					iconCss:{
+						"background-color":"#28B779"
+					},
+					cssLi:{
+						"float":"right"
+					},
+					click:function(){
+						_grid.reload({"name":$("#search-name").val()});
+					}
+				}],
 				onAdd: function(record, selected) {
 					if(!_nodeId||_nodeId===""){
 						Dialog.alert("请选择部门");
@@ -328,12 +344,12 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				click:function(){
 					_tree.expandAll(false);
 				}
-			},{
-				icon: "iconfont icon-shuaxin",
-				value:"刷新",
-				click:function(){
-					_tree.refresh();
-				}
+//			},{
+//				icon: "iconfont icon-shuaxin",
+//				value:"刷新",
+//				click:function(){
+//					_tree.refresh();
+//				}
 			}]
 		};
 		var toolbar=Toolbar.create(cfgToolbar);
@@ -409,6 +425,14 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	};
 	/***************函数调用***************/
 	_border = BorderLayout.create({
+		north:{
+			height:80,
+			css:{
+				"line-height":"80px",
+				"font-size":"1.4rem"
+			},
+			item:"<i class='iconfont icon-Settings'></i><span style='margin-left:3px'>部门管理</span>"
+		},
 		west : {
 			width : 229,
 			north : {
@@ -423,10 +447,10 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			}
 		},
 		center : {
-			north:{
-				height: 60,
-				item: getFormQuery()
-			},
+//			north:{
+//				height: 60,
+//				item: getFormQuery()
+//			},
 			center: {
 				item: getGrid()
 			}

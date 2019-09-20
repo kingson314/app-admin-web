@@ -19,7 +19,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				type: "buttongroup",
 				colspan: 2,
 				items: [{
-					icon: "glyphicon glyphicon-search",
+					icon: "iconfont icon-search",
 					value: "查询",
 					click: function() {
 						if (!_formQuery.check()) {

@@ -14,7 +14,7 @@
 		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
 		<id column="code" jdbcType="VARCHAR" property="code" />
 		<id column="headFile" jdbcType="VARCHAR" property="headFile" />
-		<id column="type" jdbcType="INTEGER" property="type" />
+		<id column="type" jdbcType="VARCHAR" property="type" />
 		<id column="level" jdbcType="INTEGER" property="level" />
 		<id column="company" jdbcType="VARCHAR" property="company" />
 		<id column="companyType" jdbcType="INTEGER" property="companyType" />
@@ -69,6 +69,7 @@
 			and a.state=#{state}
 		</if>
 		order by CAST(a.code as SIGNED)
+		limit #{offset},#{pageSize} 
 	</select>
 	
 	<select id="getCount" parameterType="java.util.Map"
@@ -103,7 +104,7 @@
 			select a.*,b.name departmentName from(select a.*,case when b.id is null
 			then ''else a.id end AS _id from SysUser a
 			left join SysDepartment b on a.departmentId=b.id and
-			b.id=#{departmentId}) as a left join sys_department b on
+			b.id=#{departmentId}) as a left join SysDepartment b on
 			a.departmentId=b.id
 			where a.state=0 
 		</if>

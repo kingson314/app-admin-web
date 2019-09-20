@@ -45,10 +45,10 @@
 @clr-grid-a: #666;
 @bg-grid-mask: transparent;
 @bg-grid-pager: #fff;
-@clr-grid-pager: #0088ff;
-@clr-layout: #abb2bf;
+@clr-grid-pager: #666;
+@clr-layout: #666;
 @bg-layout: #fff;
-@bg-layout-title: #eaeaea;
+@bg-layout-title: #fff;
 @bg-layout-subtitle: #fff; //#f8f9fa;
 @clr-layout-subtitle: #0088ff;
 @clr-layout-border: #444444;
@@ -65,7 +65,7 @@
 @bg-dialog: #fff;
 @bg-dialog-title: #fff;
 @bg-dialog-content: #fff;
-@clr-dialog-border: #eaeaea;
+@clr-dialog-border: #fff;
 @clr-dialog-title: #0088ff;
 @clr-dialog: #222;
 @bg-dialog-box: rgba(0, 0, 0, .2);
@@ -74,6 +74,7 @@
 @clr-bread: #abb2bf;
 @bg-bread: #39414c;
 @bg-iframe: #fff;
+@clr-title:rgba(0, 0, 0, 0.65);
 
 .seperator {
 	background-image: -webkit-linear-gradient(left, transparent, #777, transparent);
@@ -108,21 +109,8 @@
 }
 
 .sea_button {
-	color: @clr-button;
-	background-color: @bg-button;
-	padding: 0.35rem 1rem;
-	font-size: 0.9rem;
-	text-align: center;
-	display: inline-block;
-	cursor: pointer;
-	border: 1px solid @clr-button-border;
-
 	&:hover {
 		color: @clr-button-hover;
-	}
-
-	span {
-		margin-right: 0.3rem;
 	}
 }
 
@@ -229,10 +217,7 @@
 		color: @clr-dialog-title;
 
 		button {
-			height: 2rem;
-			line-height: 2rem;
-			margin-top: 1rem;
-			padding: 0 1rem;
+			 
 		}
 	}
 
@@ -242,12 +227,14 @@
 	}
 
 	.sea_dialog_title_btn {
-		margin-left: 1.5rem;
+		margin: 1.5rem;
 		height: 1.3rem;
 		line-height: 1.3rem;
 		float: right;
 		cursor: pointer;
 		display: inline-block;
+		font-size: 28px!important;
+    	color: #999;
 
 		&:hover {
 			font-weight: 600;
@@ -271,6 +258,8 @@
 			vertical-align: middle;
 			overflow: hidden;
 			word-break: break-all;
+			font-size: 16px;
+    		color: #666;
 		}
 	}
 
@@ -317,7 +306,6 @@
 
 .sea_grid {
 	position: absolute;
-	padding: 2rem 0.8rem;
 	width: 100%;
 	height: 100%;
 	font-weight: normal;
@@ -336,36 +324,33 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 4rem;
-		line-height: 4rem;
 		width: 100%;
-		text-align: left;
 		border-top: 1px solid @clr-grid-border;
-		background-color: @bg-grid-title;
-		color: @clr-grid-title;
 
-		span {
-			font-size: 1.8rem;
-			font-weight: 900;
-			margin-right: 1.3rem;
+		background-color: @bg-layout-title;
+		color: @clr-title;
+		height:5rem;
+		line-height: 5rem;
+   		font-size: 1.4rem;
+		text-align: left;
+
+		.iconfont{
+			font-size: 1.5rem;
+    		margin-right: 0.5rem;
 		}
 	}
 
 	.sea_grid_toolbar {
 		position: absolute;
-		top: 4rem;
+		top: 5rem;
 		left: 0;
 		width: 100%;
 		height: 2rem;
 		line-height: 2rem;
-
 		.sea_toolbar {
 			padding: 0;
-
 			button {
-				height: 2rem;
-				line-height: 2rem;
-				padding: 0 1rem;
+				
 			}
 		}
 
@@ -374,7 +359,7 @@
 	.sea_grid_forzen {
 		position: absolute;
 		left: 0;
-		top: 7rem;
+		top: 2.5rem;
 
 		&>.sea_grid_body {
 			background-color: @bg-grid;
@@ -391,7 +376,7 @@
 
 	.sea_grid_normal {
 		position: absolute;
-		top: 7rem;
+		top: 2.5rem;
 
 		&>.sea_grid_body {
 			background-color: @bg-grid;
@@ -492,19 +477,18 @@
 
 	.sea_grid_pager {
 		position: absolute;
-		bottom: 0;
-		display: none;
-		height: 2.6rem;
-		line-height: 2.6rem;
+		bottom: 0rem;
+		height: 3rem;
+		line-height: 3rem;
 		width: 100%;
 		text-align: center;
 		text-align: -webkit-center;
 		background-color: @bg-grid-pager;
 		color: @clr-grid-pager;
-
 		.sea_grid_pager_btn {
 			border-left: 1px solid #dcefff;
 			padding: 0 0.8rem ! important;
+			color:@clr-font666;
 		}
 	}
 
@@ -616,8 +600,8 @@ input[type=password],
 select {
 	padding: 0 0.3rem;
 	width: 100%;
-	height: 2.2rem;
-	line-height: 2.2rem;
+	height: 2.1rem;
+	line-height: 2.1rem;
 }
 
 input[type=radio],
@@ -637,17 +621,37 @@ input[type=button],
 input[type=submit],
 input[type=reset],
 button {
-	min-width: 3rem;
-	white-space: nowrap; 
-	color: @clr-button;
-	background-color: @bg-button;
-	padding: 0.35rem 1rem;
-	font-size: 0.9rem;
-	text-align: center;
+	color: #fff;
+	background-color:@bg-button;;
+	border-color: @clr-button-border;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+	position: relative;
 	display: inline-block;
+	font-weight: 400;
+	white-space: nowrap;
+	text-align: center;
+	background-image: none;
+	border: 1px solid transparent;
+	-webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
 	cursor: pointer;
-	border: 1px solid @clr-button-border;
-
+	-webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 20px;
+	font-size: 14px;
+	border-radius: 4px;
+	margin-right: 0.4rem;
+	&>i,span{
+		margin-right:0.3rem;
+	}
 	&:hover {
 		color: @clr-button-hover;
 	}
@@ -723,7 +727,6 @@ textarea:focus {
 	border-top: 0 solid @clr-toolbar-border-top;
 	position: relative;
 	text-align: left;
-	padding: 0.5rem 0;
 
 	&>ul {
 		margin-left: 0;
@@ -832,10 +835,10 @@ textarea:focus {
 	background-color: @bg-layout;
 
 	.sea_title {
-		height: 3rem;
-		line-height: 3rem;
 		background-color: @bg-layout-title;
-		color: @clr-font222;
+		color: @clr-title;
+		padding: 2rem 0 2rem 0;
+   		font-size: 1.3rem;
 		text-align: left;
 	}
 
@@ -966,11 +969,11 @@ textarea:focus {
 	color: @clr-layout;
 	border-radius: 0.2rem 0.2rem 0 0;
 
-	.sea_title {
-		height: 3rem;
-		line-height: 3rem;
+	.sea_title { 
 		background-color: @bg-layout-title;
-		color: @clr-layout;
+		color: @clr-title;
+		padding: 2rem 0 2rem 0;
+   		font-size: 1.3rem;
 		text-align: left;
 	}
 

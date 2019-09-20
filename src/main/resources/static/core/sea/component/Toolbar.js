@@ -66,7 +66,7 @@ define(function(require, exports, module) {
 						break;
 					}
 				}else if(item.icon){
-					li.append("<button class='sea_button' type='button'><span style='display:inline-block' class='"+item.icon+"'></span>&nbsp;"+Global.getI18N(item.value||"")+"</button>");
+					li.append("<button class='sea_button' type='button'><span style='display:inline-block' class='"+item.icon+"'></span>"+Global.getI18N(item.value||"")+"</button>");
 				}else{
 					li.append("<button class='sea_button' type='button'>"+Global.getI18N(item.value||"")+"</button>");
 				}

@@ -111,7 +111,7 @@ define(function(require, exports, module) {
 						 		var _img=Img.create({src:me.getPath(item)}).img;
 						 		$("<li style='display:block;width:100%'></li>")
 				 				.appendTo(me.ul).append(_img)
-				 				.append("<a class='deletefile'  path='"+item+"' style='margin-left:10px' href=#><i class='glyphicon glyphicon-remove'></i></a>");
+				 				.append("<a class='deletefile'  path='"+item+"' style='margin-left:10px' href=#><i class='iconfont icon-remove'></i></a>");
 					 		});
 				 		}else{
 				 			$.each(path,function(index,item){
@@ -120,7 +120,7 @@ define(function(require, exports, module) {
 				 				$("<li style='display:block;width:100%'></li>")
 				 				.appendTo(me.ul)
 				 				.append("<a class='_file' style='color:blue'target=_blank href='"+(me.getPath(item))+"' download='"+fileName+"'>"
-				 						+fileName+"</a> <a class='deletefile' path='"+item+"' style='margin-left:10px' href=#><i class='glyphicon glyphicon-remove'></i></a>");
+				 						+fileName+"</a> <a class='deletefile' path='"+item+"' style='margin-left:10px' href=#><i class='iconfont icon-remove'></i></a>");
 					 		});
 				 		}
 				 		me._input.val(pathArr.join(","));
@@ -188,7 +188,7 @@ define(function(require, exports, module) {
 			 			var Img=require("Img");
 				 		var _img=Img.create({src:me.getPath(item)}).img;
 				 		$("<li style='display:block;width:100%'></li>")
-		 				.appendTo(me.ul).append(_img).append("<a class='deletefile' path='"+item+"' style='margin-left:10px' href=#><i class='glyphicon glyphicon-remove'></i></a>");
+		 				.appendTo(me.ul).append(_img).append("<a class='deletefile' path='"+item+"' style='margin-left:10px' href=#><i class='iconfont icon-remove'></i></a>");
 			 		});
 				}else{
 					if(data){
@@ -199,7 +199,7 @@ define(function(require, exports, module) {
 			 				var fileName=Ajax.getUrlParam(item,"attname")||column.label;
 			 				$("<li style='display:block;width:100%'></li>")
 			 				.appendTo(me.ul)
-			 				.append("<a class='_file' style='color:blue'target=_blank href='"+me.getPath(item)+"' download='"+fileName+"'>"+fileName+"</a> <a class='deletefile' path='"+item+"' style='margin-left:10px' href=#><i class='glyphicon glyphicon-remove'></i></a>");
+			 				.append("<a class='_file' style='color:blue'target=_blank href='"+me.getPath(item)+"' download='"+fileName+"'>"+fileName+"</a> <a class='deletefile' path='"+item+"' style='margin-left:10px' href=#><i class='iconfont icon-remove'></i></a>");
 			 				me.files.push({"name":fileName,"href":me.getPath(item)});
 				 		});
 					}
