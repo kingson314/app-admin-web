@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baidu.ueditor.ActionEnter;
@@ -14,6 +15,7 @@ import com.baidu.ueditor.ActionEnter;
 /**
  * Created by ldb on 2017/4/9.
  */
+@CrossOrigin
 @Controller
 @RequestMapping("/ueditor")
 public class UEditorController {
