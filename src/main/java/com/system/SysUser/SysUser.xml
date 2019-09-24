@@ -68,8 +68,6 @@
 		<if test="state != ''">
 			and a.state=#{state}
 		</if>
-		order by CAST(a.code as SIGNED)
-		limit #{offset},#{pageSize} 
 	</select>
 	
 	<select id="getCount" parameterType="java.util.Map"

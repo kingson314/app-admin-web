@@ -205,12 +205,18 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				items: [{
 					icon: "iconfont icon-shuaxin",
 					value: "保存",
+					css:{
+						"padding":"0 12px!important"
+					},
 					click: function() {
 						exec("update");
 					}
 				},{
 					icon: "iconfont icon-edit",
 					value: "生成",
+					css:{
+						"padding":"0 12px!important"
+					},
 					click: function() {
 						exec("run");
 					}
@@ -441,6 +447,9 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				type: "buttonGroup",
 				items:[{
 					value : "保存",
+					css:{
+						"padding":"0 12px!important"
+					},
 					click : function(){
 						 if(!formProperty.check()){
 							    return;
@@ -457,6 +466,9 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				},{
 					type: "button",
 					value : "删除",
+					css:{
+						"padding":"0 12px!important"
+					},
 					click : function(){
 						if(me.hasClass("sea_drager")){ 
 							me.remove();
@@ -498,12 +510,18 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 						items: [{
 							icon: "iconfont icon-shuaxin",
 							value: "保存",
+							css:{
+								"padding":"0 12px!important"
+							},
 							click: function() {
 								exec("update");
 							}
 						},{
 							icon: "iconfont icon-edit",
 							value: "生成",
+							css:{
+								"padding":"0 12px!important"
+							},
 							click: function() {
 								exec("run");
 							}
@@ -748,5 +766,13 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 		}
 	});
 	getPageDesign($(Tab.content[1]));
-//	$("#rapid").change();
+//	$("#rapid").change(); 
+	var timer=setInterval(function(){
+		if($(".sea_button").length>0 && $("button").length>0 ){
+			$(".sea_button").css("padding","0 12px");
+			$("button").css("padding","0 12px");
+			clearInterval(timer);
+		}
+	},100);
+	
 });
