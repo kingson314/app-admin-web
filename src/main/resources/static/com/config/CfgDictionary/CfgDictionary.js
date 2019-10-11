@@ -56,7 +56,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			width:160
 		}],[{
 			id: "subType",
-			label: "字典二级分类",
+			label: "二级分类",
 			type: "textfield",
 			maxLen: "100"
 		}],[{
@@ -69,17 +69,17 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			}
 		}],[{
 			id: "zh_CN",
-			label: "字典文本(中文)",
+			label: "中文字典",
 			type: "textarea",
 			maxLen: "1000"
 		}],[{
 			id: "en_US",
-			label: "字典文本(英文)",
+			label: "英文字典",
 			type: "textarea",
 			maxLen: "1000"
 		}],[{
 			id: "tw_CN",
-			label: "字典文本(繁体)",
+			label: "繁体字典",
 			type: "textarea",
 			maxLen: "1000"
 		}],[{

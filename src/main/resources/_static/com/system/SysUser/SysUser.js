@@ -76,7 +76,16 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "部门名称",
 			type: "select",
 			url:"SysDepartment/options"
-		},{}],[{
+		},{
+			id: "type",
+			label: "类型",
+			type: "dic",
+			isNull:false,
+			params:{
+				app:"system",
+				type:"会员类型"
+			}
+		}],[{
 			id: "code",
 			label: "工号",
 			type: "textfield",
@@ -151,6 +160,9 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 		var cfgGrid = {
 			title:_title,
 			url: _baseUrl,
+			params:{
+				type:1
+			},
 			toolbar: {
 				refresh:false,
 				items:[{
@@ -188,7 +200,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 					id:"importExcel",
 					icon:"glyphicon glyphicon-fire",
 					value:"EXCEL批量导入",
-					importParams:{type:"用户信息","table":"ba_contacts","columns":["ord","company","name","position","tel"],"ignoreRow":[0]},
+					importParams:{type:"用户信息","table":"SysUser","columns":["company"],"ignoreRow":[0]},
 					type:"file",
 					isToolBar:true,
 					action:"import/run",

@@ -290,6 +290,50 @@ gulp.task('package', ['html', 'css', 'image', 'jsOther'], function() {
 //    .pipe(jshint())
 //    .pipe(gulp.dest(dist));
 });
+
+
+//拷贝XML
+gulp.task('xml', function() { 
+	var appSrc="app-base";
+	var system='/Volumes/Docs/Git/app-base/src/main/java/com/system/**/*.xml';
+	var config='/Volumes/Docs/Git/app-base/src/main/java/com/config/**/*.xml';
+	var tool='/Volumes/Docs/Git/app-base/src/main/java/com/tool/**/*.xml';
+	var issue='/Volumes/Docs/Git/app-base/src/main/java/com/issue/**/*.xml';
+	
+	//app-admin-web
+	var appDst="app-admin-web"
+//	gulp.src([system.substring(0,system.indexOf("**")).replace(appSrc,appDst) ], { read: false}).pipe(clean({ force: true}));
+//	gulp.src([config.substring(0,config.indexOf("**")).replace(appSrc,appDst)], { read: false}).pipe(clean({ force: true}));
+//	gulp.src([tool.substring(0,tool.indexOf("**")).replace(appSrc,appDst)], { read: false}).pipe(clean({ force: true}));
+	gulp.src([system], {}).pipe(gulp.dest(system.substring(0,system.indexOf("**")).replace(appSrc,appDst))); 
+	gulp.src([config], {}).pipe(gulp.dest(config.substring(0,config.indexOf("**")).replace(appSrc,appDst))); 
+	gulp.src([tool], {}).pipe(gulp.dest(tool.substring(0,tool.indexOf("**")).replace(appSrc,appDst))); 
+  
+	//app-qy
+	appDst="app-qy"
+//	gulp.src([system.substring(0,system.indexOf("**")).replace(appSrc,appDst)], { read: false}).pipe(clean({ force: true}));
+//	gulp.src([config.substring(0,config.indexOf("**")).replace(appSrc,appDst)], { read: false}).pipe(clean({ force: true}));
+//	gulp.src([issue.substring(0,issue.indexOf("**")).replace(appSrc,appDst) ], { read: false}).pipe(clean({ force: true}));
+	gulp.src([system], {}).pipe(gulp.dest(system.substring(0,system.indexOf("**")).replace(appSrc,appDst))); 
+	gulp.src([config], {}).pipe(gulp.dest(config.substring(0,config.indexOf("**")).replace(appSrc,appDst))); 
+	gulp.src([issue], {}).pipe(gulp.dest(issue.substring(0,tool.indexOf("**")).replace(appSrc,appDst))); 
+  
+	//app-infoCenter
+	appDst="app-infoCenter"
+//	gulp.src([system.substring(0,system.indexOf("**")).replace(appSrc,appDst)], { read: false}).pipe(clean({ force: true}));
+//	gulp.src([config.substring(0,config.indexOf("**")).replace(appSrc,appDst) ], { read: false}).pipe(clean({ force: true}));
+	gulp.src([system], {}).pipe(gulp.dest(system.substring(0,system.indexOf("**")).replace(appSrc,appDst))); 
+	gulp.src([config], {}).pipe(gulp.dest(config.substring(0,config.indexOf("**")).replace(appSrc,appDst))); 
+//	//app-spm
+	appDst="app-spm"
+//	gulp.src([system.substring(0,system.indexOf("**")).replace(appSrc,appDst)], { read: false}).pipe(clean({ force: true}));
+//	gulp.src([config.substring(0,config.indexOf("**")).replace(appSrc,appDst)], { read: false}).pipe(clean({ force: true}));
+//	gulp.src([issue.substring(0,issue.indexOf("**")).replace(appSrc,appDst)], { read: false}).pipe(clean({ force: true}));
+	gulp.src([system], {}).pipe(gulp.dest(system.substring(0,system.indexOf("**")).replace(appSrc,appDst))); 
+	gulp.src([config], {}).pipe(gulp.dest(config.substring(0,config.indexOf("**")).replace(appSrc,appDst))); 
+	gulp.src([issue], {}).pipe(gulp.dest(issue.substring(0,tool.indexOf("**")).replace(appSrc,appDst)));
+	return;
+});
 /**
  * gulp入口
  * -w: 监听文件改变

@@ -474,32 +474,7 @@ define(function(require, exports, module) {
 		toolbar : function(me) { //创建工具栏
 			me.toolbar = me.grid.find(".sea_grid_toolbar");
 			if (!me.configs.toolbar.hide){
-				if (me.configs.toolbar.copy) {
-					me.configs.toolbar.items.unshift({
-						icon : "iconfont icon-copy",
-						id:"tb_copy",
-						value : Lang.copy,
-						click : function() {
-							var selected = me.getSelected();
-							if (selected.length === 0) {
-								Dialog.alert(Lang.select);
-								return false;
-							} else {
-								var records = me.getSelectedRecord();
-								if (me.configs.toolbar.onCopy(records, selected)) {
-									Ajax.post(me.configs.toolbar.baseUrl + "copy", {
-										"id" : selected
-									}, function(rs) {
-										Dialog.alert(rs.msg);
-									});
-								}
-								me.reload();
-								return true;
-							}
-							return false;
-						}
-					});
-				}
+				
 				if (me.configs.toolbar["export"]) {
 					me.configs.toolbar.items.unshift({
 						icon : "iconfont icon-export",
@@ -566,6 +541,32 @@ define(function(require, exports, module) {
 										}
 									});
 								}
+							}
+							return false;
+						}
+					});
+				}
+				if (me.configs.toolbar.copy) {
+					me.configs.toolbar.items.unshift({
+						icon : "iconfont icon-copy",
+						id:"tb_copy",
+						value : Lang.copy,
+						click : function() {
+							var selected = me.getSelected();
+							if (selected.length === 0) {
+								Dialog.alert(Lang.select);
+								return false;
+							} else {
+								var records = me.getSelectedRecord();
+								if (me.configs.toolbar.onCopy(records, selected)) {
+									Ajax.post(me.configs.toolbar.baseUrl + "copy", {
+										"id" : selected
+									}, function(rs) {
+										Dialog.alert(rs.msg);
+									});
+								}
+								me.reload();
+								return true;
 							}
 							return false;
 						}
@@ -984,13 +985,21 @@ define(function(require, exports, module) {
 		resize : function() {
 			var me = this;
 			setTimeout(function() {
-				var _height=me.grid.height() - me.grid_forzen_head.height() 
-				- me.grid.find(".sea_grid_pager").height() 
-				- me.grid.find(".sea_grid_toolbar").height() - me.grid.find(".sea_grid_title").height();
+				var _height=me.grid.height() - me.grid_normal_head.height();
+				if( me.grid.find(".sea_grid_title").length>0){
+					_height-=me.grid.find(".sea_grid_title").height() 
+				}
+				if( me.grid.find(".sea_grid_toolbar").length>0){
+					_height-=me.grid.find(".sea_grid_toolbar").height() 
+				}
+				if(me.grid.find(".sea_grid_pager").length>0){
+					_height-=me.grid.find(".sea_grid_pager").height() 
+				}
 				var sea_grid_summary=me.grid.find(".sea_grid_summary");
 				if(sea_grid_summary.css("display")!="none"){
 					_height=_height-sea_grid_summary.height();
 				}
+				console.log(_height);
 				me.grid.find(".sea_grid_body").height(_height);
 				
 				var width = me.grid.parent().width() - me.columnForzenWidth;

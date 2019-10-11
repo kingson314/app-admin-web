@@ -162,9 +162,9 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			},
 			toolbar: {
 				items:[{
-					icon: "iconfont icon-publish1",
-					value: "发布",
-					click: function() {
+//					icon: "iconfont icon-publish1",
+//					value: "发布",
+//					click: function() {
 //						var selected =_grid.getSelected();
 //						var params={
 //							id: selected
@@ -173,8 +173,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 //							Dialog.alert(rs.msg);
 //							_grid.reload(_formQuery.val());
 //						});
-					}
-				},{
+//					}
+//				},{
 					id: "search-title",
 					placeholder:"请输入标题",
 					type: "textfield",

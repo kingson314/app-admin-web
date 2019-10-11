@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.SysLogOp.dao.SysLogOpDao">
+	<resultMap id="BaseResultMap" type="com.system.SysLogOp.model.SysLogOp">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+		<id column="name" jdbcType="VARCHAR" property="name" />
+		<id column="state" jdbcType="INTEGER" property="state" />
+		<id column="ord" jdbcType="INTEGER" property="ord" />
+		<id column="memo" jdbcType="VARCHAR" property="memo" />
+		<id column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="modifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
+		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
+		<id column="app" jdbcType="VARCHAR" property="app" />
+		<id column="type" jdbcType="VARCHAR" property="type" />
+		<id column="menuId" jdbcType="BIGINT" property="menuId" />
+		<id column="menuName" jdbcType="VARCHAR" property="menuName" />
+		<id column="functionId" jdbcType="VARCHAR" property="functionId" />
+		<id column="functionName" jdbcType="VARCHAR" property="functionName" />
+		<id column="userId" jdbcType="BIGINT" property="userId" />
+		<id column="device" jdbcType="VARCHAR" property="device" />
+		<id column="userAgent" jdbcType="VARCHAR" property="userAgent" />
+		<id column="ip" jdbcType="VARCHAR" property="ip" />
+		<id column="mapParams" jdbcType="VARCHAR" property="mapParams" />
+	</resultMap>
+
+</mapper>

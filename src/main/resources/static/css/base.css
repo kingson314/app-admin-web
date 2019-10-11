@@ -9976,10 +9976,10 @@ ul.ztree.zTreeDragUL {
   white-space: nowrap;
   text-overflow: ellipsis;
   text-align: center;
-  border-right: 1px solid #d8edf7;
-  border-bottom: 1px solid #d8edf7;
-  background-color: #d8edf7;
-  color: #0088ff;
+  border-right: 1px solid #f6f6f6;
+  border-bottom: 1px solid #f6f6f6;
+  background-color: #f6f6f6;
+  color: rgba(0, 0, 0, 0.65);
 }
 .sea_grid .sea_grid_tr {
   height: 2rem;

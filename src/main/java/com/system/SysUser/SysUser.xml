@@ -44,6 +44,7 @@
 		<id column="sex" jdbcType="INTEGER" property="sex" />
 		<id column="birthday" jdbcType="VARCHAR" property="birthday" />
 		<id column="departmentId" jdbcType="BIGINT" property="departmentId" />
+		<id column="source" jdbcType="VARCHAR" property="source" />
 	</resultMap>
 	
 	<select id="exitTel" parameterType="java.util.Map" resultType="java.lang.Integer">
@@ -58,18 +59,27 @@
 	<select id="getList" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
 		select a.*,b.name departmentName from SysUser a left join
-		SysDepartment b on a.departmentId=b.id where 1=1 
+		SysDepartment b on a.departmentId=b.id where a.type=1
+		
 		<if test="code != ''">
 			and a.code=#{code}
 		</if>
+		<if test="type != ''">
+			and a.type=#{type}
+		</if>
 		<if test="name != ''">
-			and a.name=#{name}
+			and a.name like CONCAT('%',#{name},'%')
 		</if>
 		<if test="state != ''">
 			and a.state=#{state}
 		</if>
 	</select>
 	
+	
+ 	<select id="getLogin" parameterType="java.util.Map"
+		resultType="com.system.SysUser.model.SysUser">
+		select *  from SysUser a where a.password=#{password} and ( a.code=#{code} ||  a.tel=#{tel} ||  a.email=#{email})
+	</select>	
 	<select id="getCount" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select count(1)  from SysUser a where 1=1
@@ -86,7 +96,7 @@
 	<select id="listRoleUser" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
 		select a.*,c.userId as _id ,b.name departmentName from
-		SysUser a left join SysUserRole c on a.id=c.userId and
+		SysUser a left join SysUserRole c on a.id=c.userId and a.type=1 and
 		c.roleId=#{roleId} left join SysDepartment b on a.departmentId=b.id
 		where a.state=0 order by _id desc,a.departmentId, CAST(a.code as
 		SIGNED)
@@ -96,7 +106,7 @@
 		<if test="userName !=''">
 			select a.*,b.name departmentName from SysUser a left join
 			SysDepartment b on a.departmentId=b.id
-			where a.state=0 and a.name like #{userName} 
+			where a.state=0 and a.name like #{userName} and a.type=1
 		</if>
 		<if test="userName ==''">
 			select a.*,b.name departmentName from(select a.*,case when b.id is null
@@ -110,7 +120,7 @@
 	</select>
 	<select id="listDepartmentUserByScene"
 		parameterType="java.util.Map" resultType="java.util.HashMap">
-		select a.*,b.name departmentName from SysUser a,SysDepartment b  where a.departmentId=b.id  and a.state=0
+		select a.*,b.name departmentName from SysUser a,SysDepartment b  where a.departmentId=b.id  and a.state=0 and a.type=1
 		<if test="departmentId !=''">
 			and a.departmentId =#{departmentId}
 		</if>

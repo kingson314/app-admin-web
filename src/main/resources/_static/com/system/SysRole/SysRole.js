@@ -178,7 +178,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			url: "SysUser/listRoleUser",
 			pageSize:0,
 			params:{
-				roleId:"-1"
+				roleId:"-1",
 			},
 			toolbar:{
 				hide:true
