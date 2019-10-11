@@ -80,11 +80,11 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 					width:"200",
 					icon:"iconfont icon-find",
 					iconCss:{
-						"background-color":"#28B779",
-						"margin-right":"10px"
+						"background-color":"#28B779"
 					},
 					cssLi:{
-						"float":"right"
+						"float":"right",
+						"margin-right":"10px"
 					},
 					click:function(){
 						_grid.reload({"name":$("#search-name").val()});
@@ -176,6 +176,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				}
 			}],
 			url: "SysUser/listRoleUser",
+			pageSize:0,
 			params:{
 				roleId:"-1"
 			},
@@ -202,7 +203,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			css:{
 				"padding-top":"120px"
 			},
-			item: getGridUser()
+			item:getGridUser()
 		}
 	});
 });

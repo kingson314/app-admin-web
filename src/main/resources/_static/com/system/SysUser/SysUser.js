@@ -74,7 +74,6 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "departmentId",
 			_id: "departmentName",
 			label: "部门名称",
-			isNull:false,
 			type: "select",
 			url:"SysDepartment/options"
 		},{}],[{
@@ -99,8 +98,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 		},{
 			id: "position",
 			label: "职务",
-			type:"textfield",
-			isNull:false
+			type:"textfield"
 		}],[{
 			id: "ord",
 			label: "排序号",
@@ -121,15 +119,13 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "手机号",
 			type: "textfield",
 			limit:"tel",
-			maxLen: "20",
-			isNull:false
+			maxLen: "20"
 		},{
 			id: "email",
 			label: "邮箱地址",
 			type: "textfield",
 			limt:"email",
-			maxLen: "100",
-			isNull:false
+			maxLen: "100"
 		}],[{
 			id: "state",
 			label: "状态",
@@ -187,6 +183,22 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 					click: function() {
 						audit(_grid,_baseUrl,1);
 						$(this).attr("disabled","disabled");
+					}
+				},{
+					id:"importExcel",
+					icon:"glyphicon glyphicon-fire",
+					value:"EXCEL批量导入",
+					importParams:{type:"用户信息","table":"ba_contacts","columns":["ord","company","name","position","tel"],"ignoreRow":[0]},
+					type:"file",
+					isToolBar:true,
+					action:"import/run",
+					onSuccess:function(rs){
+						if(rs.success===true){
+							Dialog.alert("导入成功");
+							_border.getCenter().empty().append(getGrid());
+						}else{
+							Dialog.alert("导入失败");
+						}
 					}
 				},{
 					id: "search-name",

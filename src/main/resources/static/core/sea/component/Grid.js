@@ -27,7 +27,7 @@ define(function(require, exports, module) {
 		paramsDelete : {},
 		toolbar : {
 			baseUrl : "",
-			refresh : true,
+			refresh : false,
 			add : true,
 			"delete" : true,
 			"export" : false,
@@ -537,7 +537,7 @@ define(function(require, exports, module) {
 				}
 				if (me.configs.toolbar["delete"]) {
 					me.configs.toolbar.items.unshift({
-						icon : "iconfont icon-delete3",
+						icon : "iconfont icon-remove1",
 						id:"tb_delete",
 						value : Lang["delete"],
 						click : function() {

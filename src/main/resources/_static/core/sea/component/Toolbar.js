@@ -44,7 +44,18 @@ define(function(require, exports, module) {
 						if (_Component.label) {
 							 li.append(_Component.label);
 						}
-						li.append( _Component.textfield);
+						if(item.icon){
+							li.append( _Component.textfieldIcon);
+						}else{
+							li.append( _Component.textfield);
+						}
+						break;
+					case "dic":
+						_Component = require("CfgDictionary").create(item);
+						if (_Component.label) {
+							 li.append(_Component.label);
+						}
+						li.append( _Component.dic);
 						break;
 					case "file":
 						if(!item.path)	item.path="uploads/import";

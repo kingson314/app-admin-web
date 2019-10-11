@@ -36,7 +36,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			maxLen: "100",
 			isNull: false
 		},{
-			id: "id",
+			id: "menuId",
 			label: "菜单ID",
 			type: "textfield",
 			maxLen: "100",
@@ -75,6 +75,9 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "备注",
 			type: "textfield",
 			maxLen: "1000"
+		},{
+			id: "id",
+			type: "hidden"
 		}]]
 	};
 	var getFormView = function(record) {
@@ -88,7 +91,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	var getGrid = function() {
 		var cfgGrid = {
 			url: _baseUrl,
-			params:{parentId:"root"},
+			params:{parentId:0},
 			toolbar: {
 				"export":false,
 				copy:false,
@@ -102,7 +105,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 						"background-color":"#28B779"
 					},
 					cssLi:{
-						"float":"right"
+						"float":"right",
+						"margin-right" : "15px"
 					},
 					click:function(){
 						_grid.reload({"name":$("#search-name").val()});
@@ -138,11 +142,10 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 						var selectNode = _tree.getSelectedNodes()[0];
 						_nodeId = selectNode.id;
 						_nodeName = selectNode.name;
-						if (selectNode.isParent) {
+//						if (selectNode.isParent) {
 							_tree.getTree().expandNode(selectNode);
 							_grid.reload({parentId:selectNode.id});
-						}else{
-						}
+//						}
 						return;
 					}
 				}
@@ -154,15 +157,15 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	//创建页面布局
 	BorderLayout.create({
 		west:{
-			width :250,
-			north: {
-				height: 35,
-				item: "<div class='sea_formLayout_title'><i class='iconfont icon-liebiao'><i/>菜单列表</div>"
-			},
-			center: {
+			width :220,
+//			north: {
+//				height: 35,
+//				item: "<div class='sea_formLayout_title'><i class='iconfont icon-liebiao'><i/>菜单列表</div>"
+//			},
+//			center: {
 				 css:{"border":"1px solid #eee","overflow":"auto"},
 				 item:getTree().tree
-			}
+//			}
 		},
 //		north: {
 //			height: 60,
@@ -177,6 +180,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			item:"<i class='iconfont icon-Settings'></i><span style='margin-left:3px'>菜单管理</span>"
 		},
 		center: {
+			 css:{"padding":"0 0 0 15px"},
 			item: getGrid()
 		}
 	});

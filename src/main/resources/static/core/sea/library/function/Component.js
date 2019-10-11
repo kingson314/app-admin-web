@@ -387,6 +387,7 @@ define(function(require, exports, module) {
 			items:[{
 			    icon: "iconfont icon-icon_function_baocunbingxinzeng",
 			    value: "保存并新增",
+			    cls:"btn_saveNew",
 			    click: function() {
 					_formEdit.submit(_baseUrl,function(rs){
 						Dialog.alert(rs.msg);
@@ -403,6 +404,7 @@ define(function(require, exports, module) {
 			  },{
 			    icon: "iconfont icon-icon_saved",
 			    value: "保存并退出",
+			    cls:"btn_saveExit",
 			    click: function() {
 					_formEdit.submit(_baseUrl,function(rs){
 						Dialog.alert(rs.msg);
@@ -416,7 +418,7 @@ define(function(require, exports, module) {
 			},{
 		    icon: "iconfont icon-return",
 		    value: "返回",
-		    cls:"icon_return",
+		    cls:"btn_return",
 		    click: function() {
 			  _dialog.hide();
 		    }
@@ -435,6 +437,7 @@ define(function(require, exports, module) {
 			items:[{
 				id:"btn_prev",
 			    icon: "iconfont icon-step-backward",
+			    cls:"btn_prev",
 			    value: "上一条",
 			    click: function() {
 					var curIndex=Array.getRecordIndex(_grid.configs.records,"id",_currentId);
@@ -461,6 +464,7 @@ define(function(require, exports, module) {
 			  },{
 			    icon: "iconfont icon-icon_saved",
 			    value: "保存并退出",
+			    cls:"btn_saveExit",
 			    click: function() {
 					_formEdit.submit(_baseUrl,function(rs){
 						Dialog.alert(rs.msg);
@@ -474,6 +478,7 @@ define(function(require, exports, module) {
 		  },{
 			id:"btn_next",
 		    icon: "iconfont icon-step-forward",
+		    cls:"btn_next",
 		    value: "下一条",
 		    click: function() {
 				var curIndex=Array.getRecordIndex(_grid.configs.records,"id",_currentId);
@@ -512,6 +517,7 @@ define(function(require, exports, module) {
 			items:[{
 				id:"btn_prev",
 			    icon: "iconfont icon-step-backward",
+			    cls:"btn_prev",
 			    value: "上一条",
 			    click: function() {
 					var curIndex=Array.getRecordIndex(_grid.configs.records,"id",_currentId);
@@ -532,6 +538,7 @@ define(function(require, exports, module) {
 			  },{
 			    icon: "iconfont icon-icon_saved",
 			    value: "退出",
+			    cls:"btn_return",
 			    click: function() {
 					_dialog.hide();
 			    }
@@ -539,6 +546,7 @@ define(function(require, exports, module) {
 			id:"btn_next",
 		    icon: "iconfont icon-step-forward",
 		    value: "下一条",
+		    cls:"btn_next",
 		    click: function() {
 				var curIndex=Array.getRecordIndex(_grid.configs.records,"id",_currentId);
 				if(_grid.configs.records.length>(curIndex+1)){

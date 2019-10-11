@@ -4,52 +4,52 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	var _title='新闻发布',_baseUrl = "IssueNews/";
 	var _currentId,_grid,_dialog,_formQuery,_formEdit;
 	/***************函数定义***************/
-	var getFormQuery = function() {
-		var cfgForm = {
-			id:"formQuery",
-			items: [[{
-				id: "type",
-				label: "类型",
-				type: "textfield",
-//				params:{
-//					app:"system",
-//					type:"newsType"
-//				},
-//				isNull:false,
-//				
-//				change:function(){
-//					if (_formQuery.check()) {
-//						_grid.reload(_formQuery.val());
+//	var getFormQuery = function() {
+//		var cfgForm = {
+//			id:"formQuery",
+//			items: [[{
+//				id: "type",
+//				label: "类型",
+//				type: "textfield",
+////				params:{
+////					app:"system",
+////					type:"newsType"
+////				},
+////				isNull:false,
+////				
+////				change:function(){
+////					if (_formQuery.check()) {
+////						_grid.reload(_formQuery.val());
+////					}
+////				}
+//			},{
+//				type: "buttongroup",
+//				items: [{
+//					icon: "iconfont icon-search",
+//					css:{"text-align":"left","padding-left":"20px"},
+//					value: "查询",
+//					click: function() {
+//						if (_formQuery.check()) {
+//							_grid.reload(_formQuery.val());
+//						}
 //					}
-//				}
-			},{
-				type: "buttongroup",
-				items: [{
-					icon: "iconfont icon-search",
-					css:{"text-align":"left","padding-left":"20px"},
-					value: "查询",
-					click: function() {
-						if (_formQuery.check()) {
-							_grid.reload(_formQuery.val());
-						}
-					}
-				}]
-			}]]
-		};
-		_formQuery=FormLayout.create(cfgForm);
-		return _formQuery.formLayout;
-	};
+//				}]
+//			}]]
+//		};
+//		_formQuery=FormLayout.create(cfgForm);
+//		return _formQuery.formLayout;
+//	};
 	var cfgForm = {
 		id: "formEdit",
 		items: [[{
 			id: "type",
 			label: "类型",
 			isNull:false,
-			type: "textfield",
-//			params:{
-//				app:"system",
-//				type:"newsType"
-//			}
+			type: "dic",
+			params:{
+				app:"system",
+				type:"newsType"
+			}
 		},{
 			id: "subType",
 			label: "子类型",
@@ -69,6 +69,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "title",
 			label: "标题",
 			type: "textfield",
+			isNull:false,
 			maxLen: "1000",
 			colspan:2
 		},{}],[{
@@ -154,6 +155,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	};
 	var getGrid = function() {
 		var cfgGrid = {
+			title:_title,
 			url: _baseUrl,
 			params:{
 				type:"-1"
@@ -172,15 +174,43 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 //							_grid.reload(_formQuery.val());
 //						});
 					}
+				},{
+					id: "search-title",
+					placeholder:"请输入标题",
+					type: "textfield",
+					width:"300",
+					icon:"iconfont icon-find",
+					iconCss:{
+						"background-color":"#28B779"
+					},
+					cssLi:{
+						"float":"right"
+					},
+					click:function(){
+						_grid.reload({"title":$("#search-title").val(),"type":$("#search-type").val()});
+					}
+				},{
+					id: "search-type",
+					nullText:"请选择类型",
+					type:"dic",
+					params:{
+						app:"system",
+						type:"newsType"
+					},
+					width:"150",
+					cssLi:{
+						"float":"right",
+						"margin-right":"10px"
+					}
 				}],
 				onAdd: function(record, selected) {
-					if(_formQuery.check()==false){
-						Dialog.alert("请选择类型");
-						return;
-					}
-					record={
-						type:$("#formQuery #type").val()
-					};
+//					if(_formQuery.check()==false){
+//						Dialog.alert("请选择类型");
+//						return;
+//					}
+//					record={
+//						type:$("#formQuery #type").val()
+//					};
 					Component.onAdd(_grid,_dialog,_formEdit,_formQuery,_title,_baseUrl,getFormEdit,record,Dialog);
 				},
 				onEdit: function(record, selected) {
@@ -204,10 +234,10 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	};
 	/***************函数调用***************/
 	BorderLayout.create({
-		north: {
-			height: 60,
-			item: getFormQuery()
-		},
+//		north: {
+//			height: 60,
+//			item: getFormQuery()
+//		},
 		center: {
 			item: getGrid()
 		}

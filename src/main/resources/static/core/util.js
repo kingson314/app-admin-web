@@ -11,7 +11,8 @@ var SessionStorage = {
 		sessionStorage.removeItem(key);
 	}
 }
-var String = {
+//Ueditor使用了String类，改名为UtilString
+var UtilString = {
 	isNil : function(str) {
 		if (str == undefined || str == null)
 			str = '';

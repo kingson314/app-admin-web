@@ -10,9 +10,9 @@ define(function(require) {
 			"fail.modify.audit":"不能修改已审核记录！",
 			"fail.delete.audit":"不能删除已审核记录!",
 			//Dialog
-			"confirm":"确定",
-			"cancel":"取消",
-			"prompt":"提示",
+			"confirm":"<span class='iconfont icon-yes'></span>确定",
+			"cancel":"<span style='transform:rotateY(180deg)' class='iconfont icon-return'></span>取消",
+			"prompt":"<span class='iconfont icon-info'></span>&nbsp;提示",
 			//Grid
 			"refresh":"刷新",
 			add:"录入",
@@ -26,7 +26,6 @@ define(function(require) {
 			copySuccess:"拷贝成功!",
 			copyFail:"拷贝失败!",
 			select:"请选择一条记录!",
-			"confirm":"确定",
 			ifDel:'是否删除?',
 			//Paper
 			"page":"页",
@@ -72,9 +71,9 @@ define(function(require) {
 			"fail.modify.audit":"Can not modify the audit record!",
 			"fail.delete.audit":"Can not delete the audited records!",
 			//Dialog
-			"confirm":"Confirm",
-			"cancel":"Cancel",
-			"prompt":"Prompt",
+			"confirm":"<span class='iconfont icon-yes'></span>Confirm",
+			"cancel":"<span style='transform:rotateY(180deg)' class='iconfont icon-return'></span>Cancel",
+			"prompt":"<span class='iconfont icon-info'></span>&nbsp;Prompt",
 			//Grid
 			"refresh":"Refresh",
 			"add":"Add",
@@ -88,7 +87,6 @@ define(function(require) {
 			copySuccess:"Success Copy!",
 			copyFail:"Fail delete!",
 			select:"Please select a record!",
-			confirm:"Confirm",
 			ifDel:'Whether to delete?',
 			//Paper
 			"page":"Page",

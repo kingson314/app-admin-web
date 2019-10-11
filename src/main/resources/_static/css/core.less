@@ -52,7 +52,7 @@
 @bg-layout-subtitle: #fff; //#f8f9fa;
 @clr-layout-subtitle: #0088ff;
 @clr-layout-border: #444444;
-@bg-input-disabled: #383e4b;
+@bg-input-disabled: #ced0d6;
 @bg-input: transparent;
 @clr-input: #444;
 @clr-input-border: #dddddd;
@@ -66,7 +66,7 @@
 @bg-dialog-title: #fff;
 @bg-dialog-content: #fff;
 @clr-dialog-border: #fff;
-@clr-dialog-title: #0088ff;
+@clr-dialog-title: #666;
 @clr-dialog: #222;
 @bg-dialog-box: rgba(0, 0, 0, .2);
 @clr-progress: #abb2bf;
@@ -211,11 +211,10 @@
 		padding: 0 0 0 1.5rem;
 		vertical-align: middle;
 		border-radius: 0.3rem 0.3rem 0 0;
-		font-size: 1.8rem;
-		font-weight: 900;
+		font-size: 1.4rem;
+		font-weight: 600;
 		background-color: @bg-dialog-title;
 		color: @clr-dialog-title;
-
 		button {
 			 
 		}
@@ -675,6 +674,7 @@ input[type=submit]:disabled,
 input[type=reset]:disabled,
 button:disabled {
 	cursor: not-allowed;
+	color: #fff!important;
 	background-color: @bg-input-disabled  ! important;
 	border-color: @bg-input-disabled  ! important;
 }
@@ -1795,4 +1795,32 @@ a {
 	margin-right: 0.4rem;
 	color: #598ee7;
 	opacity: 0.5;
+}
+
+#tb_delete{
+	color: #ff4d4f!important;
+    border-color: pink!important;
+	background-color: #fff!important;
+	&:focus {
+		border: 1px solid pink!important;
+	}
+}
+
+#tb_refresh,.btn_return{
+	color: rgba(0, 0, 0, 0.65)!important;
+    background-color: #fff!important;
+    border-color: #d9d9d9!important;
+}
+.btn_next,.btn_prev{
+	color: rgba(0, 0, 0, 0.65)!important;
+    background-color: #fff!important;
+    border-color: #d9d9d9!important;
+} 
+.btn_saveExit{
+	color: @bg-button!important;
+    border-color: @bg-button!important;
+	background-color: #fff!important;
+}
+.btn_saveNew{
+	font-weight: 500;
 }

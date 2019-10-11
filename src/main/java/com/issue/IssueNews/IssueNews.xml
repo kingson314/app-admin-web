@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.issue.IssueNews.dao.IssueNewsDao">
+	<resultMap id="BaseResultMap" type="com.issue.IssueNews.model.IssueNews">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+		<id column="name" jdbcType="VARCHAR" property="name" />
+		<id column="state" jdbcType="INTEGER" property="state" />
+		<id column="ord" jdbcType="INTEGER" property="ord" />
+		<id column="memo" jdbcType="VARCHAR" property="memo" />
+		<id column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="modifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
+		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
+		<id column="type" jdbcType="VARCHAR" property="type" />
+		<id column="subType" jdbcType="VARCHAR" property="subType" />
+		<id column="title" jdbcType="VARCHAR" property="title" />
+		<id column="editor" jdbcType="VARCHAR" property="editor" />
+		<id column="mark" jdbcType="VARCHAR" property="mark" />
+		<id column="originalTitle" jdbcType="VARCHAR" property="originalTitle" />
+		<id column="subTitle" jdbcType="VARCHAR" property="subTitle" />
+		<id column="coverUrl" jdbcType="VARCHAR" property="coverUrl" />
+		<id column="summary" jdbcType="VARCHAR" property="summary" />
+		<id column="content" jdbcType="VARCHAR" property="content" />
+		<id column="source" jdbcType="VARCHAR" property="source" />
+		<id column="newsTime" jdbcType="VARCHAR" property="newsTime" />
+		<id column="cntFavorite" jdbcType="INTEGER" property="cntFavorite" />
+		<id column="cntShare" jdbcType="INTEGER" property="cntShare" />
+		<id column="cntClick" jdbcType="INTEGER" property="cntClick" />
+		<id column="cntComment" jdbcType="INTEGER" property="cntComment" />
+	</resultMap>
+	
+	<select id="getRecommendList" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select  id,cntClick,cntComment,cntFavorite,cntShare,content,coverUrl,editor,mark,newsTime,source,subtype,summary,title,type from IssueNews a where 1=1
+		<if test="mark != ''">
+			and a.mark=#{mark}
+		</if>
+		order by ord LIMIT 0,3
+	</select>
+	<select id="getPopularList" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select  id,cntClick,cntComment,cntFavorite,cntShare,coverUrl,editor,mark,newsTime,source,subtype,summary,title,type from IssueNews a where 1=1 
+		order by cntClick desc LIMIT 0,10
+	</select>
+	
+	<select id="getList" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select  id,cntClick,cntComment,cntFavorite,cntShare,coverUrl,editor,mark,newsTime,source,subtype,summary,title,type from IssueNews a where 1=1
+		<if test="type != ''">
+			and a.type=#{type}
+		</if>  
+		<if test="subType != ''">
+			and a.subType=#{subType}
+		</if>  
+		<if test="mark != ''">
+			and a.mark=#{mark}
+		</if> 
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from IssueNews a where 1=1
+		<if test="type != ''">
+			and a.type=#{type}
+		</if>  
+		<if test="subType != ''">
+			and a.subType=#{subType}
+		</if>  
+		<if test="mark != ''">
+			and a.mark=#{mark}
+		</if>  
+	</select>
+	
+	<select id="getRelatedList" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select  id,cntClick,cntComment,cntFavorite,cntShare,coverUrl,editor,mark,newsTime,source,subtype,summary,title,type from IssueNews a where 1=1
+		<if test="type != ''">
+			and a.type=#{type}
+		</if>  
+		<if test="id != ''">
+			and a.id!=#{id}
+		</if> 
+		order by cntClick desc LIMIT 0,10
+	</select>
+</mapper>

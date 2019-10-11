@@ -9777,10 +9777,10 @@ ul.ztree.zTreeDragUL {
   padding: 0 0 0 1.5rem;
   vertical-align: middle;
   border-radius: 0.3rem 0.3rem 0 0;
-  font-size: 1.8rem;
-  font-weight: 900;
+  font-size: 1.4rem;
+  font-weight: 600;
   background-color: #fff;
-  color: #0088ff;
+  color: #666;
 }
 .sea_dialog .sea_dialog_title_icon {
   height: 1.3rem;
@@ -10185,8 +10185,9 @@ input[type=submit]:disabled,
 input[type=reset]:disabled,
 button:disabled {
   cursor: not-allowed;
-  background-color: #383e4b ! important;
-  border-color: #383e4b ! important;
+  color: #fff!important;
+  background-color: #ced0d6 ! important;
+  border-color: #ced0d6 ! important;
 }
 input[type=text]:read-only,
 input[type=number]:read-only,
@@ -11120,6 +11121,34 @@ a {
   margin-right: 0.4rem;
   color: #598ee7;
   opacity: 0.5;
+}
+#tb_delete {
+  color: #ff4d4f!important;
+  border-color: pink!important;
+  background-color: #fff!important;
+}
+#tb_delete:focus {
+  border: 1px solid pink!important;
+}
+#tb_refresh,
+.btn_return {
+  color: rgba(0, 0, 0, 0.65) !important;
+  background-color: #fff!important;
+  border-color: #d9d9d9!important;
+}
+.btn_next,
+.btn_prev {
+  color: rgba(0, 0, 0, 0.65) !important;
+  background-color: #fff!important;
+  border-color: #d9d9d9!important;
+}
+.btn_saveExit {
+  color: #0088ff !important;
+  border-color: #0088ff !important;
+  background-color: #fff!important;
+}
+.btn_saveNew {
+  font-weight: 500;
 }
 
 #app-body {

@@ -11,11 +11,11 @@
 	</delete>
 	
      <insert id ="insertSysMenu" parameterType="java.util.List" >
-           insert into SysMenu(parentId,id,type,name,url,ord,checked,open,modifyTime)
+           insert into SysMenu(parentId,id,menuId,type,name,url,ord,checked,open,modifyTime)
            values
             <foreach collection ="list" item="menu" index= "index" separator =",">
                 (
-                #{menu.parentId}, #{menu.id},
+                #{menu.parentId}, #{menu.id}, #{menu.menuId},
                 #{menu.type},
                 #{menu.name},
                 #{menu.ord}, #{menu.checked}, #{menu.open}, #{menu.modifyTime}

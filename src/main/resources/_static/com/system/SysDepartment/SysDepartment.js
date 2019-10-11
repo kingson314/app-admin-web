@@ -32,19 +32,19 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 	
 	var cfgForm = {
 		items: [[{
-			id: "company",
-			label: "公司名称",
-			type: "textfield",
-			value:Global.CfgRuntime("system","company").value,
-			disabled:"disabled"
-		},{
+//			id: "company",
+//			label: "公司名称",
+//			type: "textfield",
+//			value:Global.CfgRuntime("system","company").value,
+//			disabled:"disabled"
+//		},{
 			id: "departmentId",
 			_id: "departmentName",
 			label: "部门名称",
 			isNull:false,
 			type: "select",
 			url:"SysDepartment/options"
-		}],[{
+		},{}],[{
 			id: "code",
 			label: "工号",
 			type: "textfield",
@@ -226,7 +226,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 						"background-color":"#28B779"
 					},
 					cssLi:{
-						"float":"right"
+						"float":"right",
+						"margin-right" : "15px"
 					},
 					click:function(){
 						_grid.reload({"name":$("#search-name").val()});
@@ -434,26 +435,25 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			item:"<i class='iconfont icon-Settings'></i><span style='margin-left:3px'>部门管理</span>"
 		},
 		west : {
-			width : 229,
-			north : {
-				height : 36,
-				item : getTreeToolbar()
-			},
-			center : {
-				css : {
-					"overflow" : "auto"
-				},
+			width : 220,
+//			north : {
+//				height : 36,
+//				item : getTreeToolbar()
+//			},
+//			center : {
+				css:{"border":"1px solid #eee","overflow":"auto"},
 				item :getTree().tree
-			}
+//			}
 		},
 		center : {
 //			north:{
 //				height: 60,
 //				item: getFormQuery()
 //			},
-			center: {
+//			center: {
+				css:{"padding":"0 0 0 15px"},
 				item: getGrid()
-			}
+//			}
 		}
 	});
 	getPopuMenu();

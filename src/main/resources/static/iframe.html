@@ -5,7 +5,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <title>app-admin</title>
 	    <!-- 公共模块 -->
-		<link href="http://at.alicdn.com/t/font_302447_64eklme158r.css" rel="stylesheet" type="text/css"/>
+		<link href="http://at.alicdn.com/t/font_302447_25pj6l3v9mmi.css" rel="stylesheet" type="text/css"/>
 		<link href="./css/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 		<link href="./css/base.css" rel="stylesheet" type="text/css"/>
 		<script src="./core/jquery/jquery.js"></script>
@@ -16,8 +16,8 @@
 		<script>	
 		var env=Ajax.getParam("env");
 		var serverPath=Ajax.getParam("serverPath");//除本地调试外必传
-		if(!String.endsWith(serverPath,"/"))serverPath=serverPath+"/";
-		if(String.isBlank(serverPath))Dialog.alert("非开发环境，serverPath为必传参数！");
+		if(!UtilString.endsWith(serverPath,"/"))serverPath=serverPath+"/";
+		if(UtilString.isBlank(serverPath))Dialog.alert("非开发环境，serverPath为必传参数！");
 		var localPath="http://localhost:8888/"
 		if(env=="uat")localPath="http://app-adminuat.7ipr.com/";
 		else if(env=="prod")localPath="http://app-admin.7ipr.com/";
