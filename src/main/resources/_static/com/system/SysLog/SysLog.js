@@ -65,25 +65,31 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "访问链接"
 		},{
 			id: "recordId",
-			label: "记录ID"
+			label: "记录ID",
+			hide:true
 		}],[{
 			id: "baseParams",
-			label: "基础参数"
+			label: "基础参数",
+			hide:true
 		},{
 			id: "mapParams",
-			label: "参数"
+			label: "参数",
+			hide:true
 		}],[{
 			id: "functionId",
-			label: "功能ID"
+			label: "功能ID",
+			hide:true
 		},{
 			id: "functionName",
 			label: "功能名称"
 		}],[{
 			id: "exception",
-			label: "异常信息"
+			label: "异常信息",
+			hide:true
 		},{
 			id: "memo",
-			label: "备注"
+			label: "备注",
+			hide:true
 		}],[{
 			id: "device",
 			label: "设备"

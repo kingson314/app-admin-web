@@ -91,7 +91,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "memo",
 			label: "字典说明",
 			type: "textarea",
-			maxLen: "4000"
+			maxLen: "4000",
+			hide:true
 		}],[{
 			id: "id",
 			type: "hidden"

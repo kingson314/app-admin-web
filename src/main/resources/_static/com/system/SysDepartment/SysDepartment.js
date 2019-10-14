@@ -54,12 +54,14 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "密码",
 			type: "textfield",
 			//subtype:"password",
-			maxLen: "100"
+			maxLen: "100",
+			hide:true
 		}],[{
 			id: "name",
 			label: "用户名称",
 			type: "textfield",
-			maxLen: "100"
+			maxLen: "100",
+			hide:true
 		},{
 			id: "position",
 			label: "职位名称",
@@ -69,12 +71,14 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "level",
 			label: "职位级别",
 			type: "textfield",
-			maxLen: "100"
+			maxLen: "100",
+			hide:true
 		},{
 			id: "ratio",
 			label: "折算系数",
 			type: "textfield",
-			limit:"num"
+			limit:"num",
+			hide:true
 		}],[{
 			id: "sex",
 			label: "性别",
@@ -84,13 +88,15 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			params:{
 				app:"system",
 				type:"性别"
-			}
+			},
+			hide:true
 		},{
 			id: "birthday",
 			label: "出生日期",
 			type: "date",
 			format:"YYYY-MM-DD",
-			maxLen: "10"
+			maxLen: "10",
+			hide:true
 		}],[{
 			id: "tel",
 			label: "手机号",
@@ -102,44 +108,52 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "邮箱地址",
 			type: "textfield",
 			limt:"email",
-			maxLen: "100"
+			maxLen: "100",
+			hide:true
 		}],[{
 			id: "education",
 			label: "学历",
 			type: "textfield",
-			maxLen: "100"
+			maxLen: "100",
+			hide:true
 		},{
 			id: "photo",
 			label: "头像",
 			type: "textfield",
-			maxLen: "1000"
+			maxLen: "1000",
+			hide:true
 		}],[{
 			id: "idcard",
 			label: "身份证",
 			type: "textfield",
-			maxLen: "100"
+			maxLen: "100",
+			hide:true
 		},{
 			id: "address",
 			label: "住址",
 			type: "textfield",
-			maxLen: "1000"
+			maxLen: "1000",
+			hide:true
 		}],[{
 			id: "wxCode",
 			label: "微信",
 			type: "textfield",
 			maxLen: "100",
-			limit:"char"
+			limit:"char",
+			hide:true
 		},{
 			id: "qq",
 			label: "QQ",
 			type: "textfield",
 			maxLen: "100",
-			limit:"qq"
+			limit:"qq",
+			hide:true
 		}],[{
 			id: "entryDate",
 			label: "入职日期",
 			type: "date",
-			format:"YYYY-MM-DD"
+			format:"YYYY-MM-DD",
+			hide:true
 //		},{
 //			id: "entryDate",
 //			label: "工资计算方式",

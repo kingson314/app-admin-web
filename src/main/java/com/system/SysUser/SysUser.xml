@@ -59,7 +59,7 @@
 	<select id="getList" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
 		select a.*,b.name departmentName from SysUser a left join
-		SysDepartment b on a.departmentId=b.id where a.type=1
+		SysDepartment b on a.departmentId=b.id where 1=1
 		
 		<if test="code != ''">
 			and a.code=#{code}
@@ -69,6 +69,9 @@
 		</if>
 		<if test="name != ''">
 			and a.name like CONCAT('%',#{name},'%')
+		</if>
+		<if test="company != ''">
+			and a.company like CONCAT('%',#{company},'%')
 		</if>
 		<if test="state != ''">
 			and a.state=#{state}

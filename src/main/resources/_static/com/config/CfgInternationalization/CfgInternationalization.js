@@ -72,7 +72,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "memo",
 			label: "备注",
 			type: "textarea",
-			maxLen: "1000"
+			maxLen: "1000",
+			hide:true
 		}],[{
 			id: "id",
 			type: "hidden"

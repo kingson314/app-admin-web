@@ -66,29 +66,29 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 					"padding-top":"0"
 				},
 				items:[{
-					label:"JsTable",
-					value:"JsTable",
-					checked:true
-				},{
 					label:"JsList",
 					value:"JsList",
 					checked:true
 				},{
+					label:"JsTable",
+					value:"JsTable",
+					checked:false
+				},{
 					label:"JsView",
 					value:"JsView",
-					checked:true
+					checked:false
 				},{
 					label:"JsEdit",
 					value:"JsEdit",
-					checked:true
+					checked:false
 				},{
 					label:"JsViewEdit",
 					value:"JsViewEdit",
-					checked:true
+					checked:false
 				},{
 					label:"JsConfig",
 					value:"JsConfig",
-					checked:true
+					checked:false
 				}],
 				colspan:2
 			},{}],[{
@@ -649,16 +649,20 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				width: 150
 			},{
 				id: "fields",
-				label: "字段列表"
+				label: "字段列表",
+				hide:true
 			},{
 				id: "basePathSrc",
-				label: "基本路径"
+				label: "基本路径",
+				hide:true
 			},{
 				id: "packagePath",
-				label: "代码包路径"
+				label: "代码包路径",
+				hide:true
 			},{
 				id: "baseUrl",
-				label: "基本Url "
+				label: "基本Url",
+				hide:true
 			},{
 				id: "entityType",
 				label: "实体类型"
@@ -670,13 +674,16 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				label: "父菜单名称"
 			},{
 				id: "jsOptions",
-				label: "jsOptions"
+				label: "jsOptions",
+				hide:true
 			},{
 				id: "javaOptions",
-				label: "javaOptions"
+				label: "javaOptions",
+				hide:true
 			},{
 				id: "ddl",
-				label: "ddl"
+				label: "ddl",
+				hide:true
 			}],
 			url: "ToolCgen/list",
 			pagerMode:"simple",

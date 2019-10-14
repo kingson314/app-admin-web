@@ -68,7 +68,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 		}],[{
 			id: "memo",
 			label: "备注说明",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		}],[{
 			id: "id",
 			type: "hidden"

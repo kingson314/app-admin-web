@@ -50,29 +50,35 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "快速通道",
 			type: "textarea",
 			colspan:2,
-			maxLen: "4000"
+			maxLen: "4000",
+			hide:true
 		}],[{
 			id: "fields",
 			label: "字段列表",
 			type: "textarea",
-			colspan:2
+			colspan:2,
+			hide:true
 		}],[{
 			id: "basePathSrc",
 			label: "基本路径",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		},{
 			id: "packagePath",
 			label: "代码包路径",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		}],[{
 			id: "baseUrl",
 			label: "基本Url ",
-			type: "textfield"
+			type: "textfield",
+			hide:true
 		},{
 			id: "entityType",
 			label: "实体类型",
 			type: "textfield",
-			maxLen: "20"
+			maxLen: "20",
+			hide:true
 		}],[{
 			id: "menuName",
 			label: "菜单名称",
@@ -84,39 +90,48 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 		}],[{
 			id: "menuUrl",
 			label: "MenuUrl",
-			type: "textfield"
+			type: "textfield",
+			hide:true
 		}],[{
 			id: "pathController",
 			label: "PathController",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		},{
 			id: "jsPath",
 			label: "JsPath",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		}],[{
 			id: "pathService",
 			label: "PathService",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		},{
 			id: "pathIService",
 			label: "PathIService",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		}],[{
 			id: "pathDao",
 			label: "PathDao",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		},{
 			id: "pathIDao",
 			label: "PathIDao",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		}],[{
 			id: "pathEntity",
 			label: "PathEntity",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		},{
 			id: "pathHibernate",
 			label: "PathHibernate",
-			type: "textarea"
+			type: "textarea",
+			hide:true
 		}],			// 主键以及不为null字段须隐藏域 
 		[{
 			id: "id",

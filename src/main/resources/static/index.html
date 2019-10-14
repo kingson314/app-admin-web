@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-    <meta charset="UTF-8" />
-    <title>app-base</title>
-    <!-- 公共模块 -->
-	<link href="http://at.alicdn.com/t/font_302447_25pj6l3v9mmi.css" rel="stylesheet" type="text/css"/>
-	<link href="./css/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
-	<link href="./css/base.css" rel="stylesheet" type="text/css"/>
-	<script src="./core/jquery/jquery.js"></script>
-	<script src="./core/util.js"></script>
-	<script th:inline="javascript">
+<!DOCTYPE html><html lang=zh-CN xmlns:th=http://www.thymeleaf.org><head lang=en><meta charset=UTF-8><title>app-base</title><link href=http://at.alicdn.com/t/font_302447_25pj6l3v9mmi.css rel=stylesheet type=text/css><link href=./css/images/favicon.ico rel="shortcut icon" type=image/x-icon><link href=./css/base.css rel=stylesheet type=text/css><script src=./core/jquery/jquery.js></script><script src=./core/util.js></script><script th:inline=javascript>
 		var env=Ajax.getParam("env");
 		var serverPath=Ajax.getParam("serverPath");//除本地调试外必传
 		if(!UtilString.endsWith(serverPath,"/"))serverPath=serverPath+"/";
 		if(UtilString.isBlank(env) && UtilString.isBlank(serverPath))Dialog.alert("非开发环境，serverPath为必传参数！");
-		var localPath="http://localhost:8888/"
-		if(env=="uat")localPath="http://app-adminuat.7ipr.com/";
-		else if(env=="prod")localPath="http://app-admin.7ipr.com/";
+		var localPath="http://busicloud.com:8888/"
+		//else if(env=="prod")localPath="http://busicloud.com:8888/";
 		console.log("serverPath:"+serverPath);
 		console.log("localPath:"+localPath);
 		var Session={
@@ -35,10 +23,7 @@
 		    isMini:($(window).width()<=980),
 		    isChrome:true
 		}; 
-	</script>
-	<script src="./core/sea/sea.js"></script>
-	<script src="./core/session.js"></script>
-	<script type="text/javascript">
+	</script><script src=./core/sea/sea.js></script><script src=./core/session.js></script><script type=text/javascript>
 	var centerCenterIframe;
 	seajs.use( ["Iframe" ,"Ajax"],
 		function(Iframe,Ajax) {
@@ -105,72 +90,4 @@
 			$("#app-main").css("margin-top",0);
 		});
 	});
-	</script>
-</head>
-<body id="app-body">
-<nav id="app-nav">
-	<div class="container">
-		<div class="row d-flex justify-content-between" style="padding-left: 15px;">
-			<div class="">Hello APP</div>
-			<div class="">平台部策划组 XXX</div>
-		</div>
-	</div>
-</nav>
-<div id="app-main" class="container">
-	<div class="row">
-		<div id="app-menu" class="col-sm-2 d-none d-sm-block d-md-block d-lg-block d-xl-block">
-			<ul class="list-group">
-				<li><img class="header" src="./css/images/headline.png"></li>
-				<li id="IssueNews" class="active list-group-item"><a script="com/issue/IssueNews/IssueNews" href="#"><span class="iconfont icon-kehuguanli"></span>新闻发布</a></li>
-				<li id="SysUser" class="list-group-item"><a href="#" script='com/system/SysUser/SysUser'><i><span class="iconfont icon-kehuguanli"></span></i>用户管理</a></li>
-				<li id="SysDeparment" class="list-group-item"><a href="#" script='com/system/SysDepartment/SysDepartment_bak'><i><span class="iconfont icon-kehuguanli"></span></i>部门管理 </a></li>
-				<li id="SysRole" class="list-group-item"><a href="#" script='com/system/SysRole/SysRole'><i><span class="iconfont icon-kehuguanli"></span></i>角色管理 </a></li>
-				<li id="SysMenu" class="list-group-item"><a href="#" script='com/system/SysMenu/SysMenu'><i><span class="iconfont icon-kehuguanli"></span></i>菜单管理 </a></li>
-				<li id="SysAuthority" class="list-group-item"><a href="#" script='com/system/SysAuthority/SysAuthority'><i><span class="iconfont icon-kehuguanli"></span></i>权限管理 </a></li>
-				<li id="CfgDictionary" class="list-group-item"><a href="#" script='com/config/CfgDictionary/CfgDictionary'><i><span class="iconfont icon-kehuguanli"></span></i>数字字典</a></li>
-				<li id="CfgRuntime" class=" list-group-item"><a href="#" script='com/config/CfgRuntime/CfgRuntime'><i><span class="iconfont icon-kehuguanli"></span></i>运行参数</a></li>
-				<li id="ToolCgen" class="list-group-item"><a script="com/tool/ToolCgen/ToolCgen"href="#"><span class="iconfont icon-kehuguanli"></span>集成开发管理</a></li>
-				<li id="Cgen" class="list-group-item" screen="full"><a script="com/tool/ToolCgen/Cgen"href="#"><span class="iconfont icon-kehuguanli"></span>集成开发</a></li>
-
-			</ul>
-		</div>
-		<div  id="app-iframe" class="col-sm-10">
-		</div>
-	</div>
-</div>
-<div id="app-footer">	
-	<div class="container">
-		<div class="footer1 row">
-			<div class="col-sm-9">
-				<div class="row">
-					<div class="col-sm-4">关于7CRM</div>
-					<div class="col-sm-4">使用帮助</div>
-					<div class="col-sm-4">开发团队</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4">联系我们</div>
-					<div class="col-sm-4">提交BUG</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="row">
-					<div class="col-sm-12">用户服务热线</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12 tel">400-8063-777</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="footer2 row">
-			<div class="col-sm-9">
-				©横琴国际知识产权交易中心，7CRM，七弦琴客户管理系统.
-			</div>
-			<div class="col-sm-3">
-				粤ICP备15074917号 7ipr.com
-			</div>
-		</div>
-	</div>
-</div>
-</body>
-</html>
+	</script></head><body id=app-body><nav id=app-nav><div class=container><div class="row d-flex justify-content-between" style="padding-left: 15px;"><div>Hello APP</div><div>平台部策划组 XXX</div></div></div></nav><div id=app-main class=container><div class=row><div id=app-menu class="col-sm-2 d-none d-sm-block d-md-block d-lg-block d-xl-block"><ul class=list-group><li><img class=header src=./css/images/headline.png></li><li id=IssueNews class="active list-group-item"><a script=com/issue/IssueNews/IssueNews href=#><span class="iconfont icon-kehuguanli"></span>新闻发布</a></li><li id=SysUser class=list-group-item><a href=# script=com/system/SysUser/SysUser><i><span class="iconfont icon-kehuguanli"></span></i>用户管理</a></li><li id=SysDeparment class=list-group-item><a href=# script=com/system/SysDepartment/SysDepartment_bak><i><span class="iconfont icon-kehuguanli"></span></i>部门管理</a></li><li id=SysRole class=list-group-item><a href=# script=com/system/SysRole/SysRole><i><span class="iconfont icon-kehuguanli"></span></i>角色管理</a></li><li id=SysMenu class=list-group-item><a href=# script=com/system/SysMenu/SysMenu><i><span class="iconfont icon-kehuguanli"></span></i>菜单管理</a></li><li id=SysAuthority class=list-group-item><a href=# script=com/system/SysAuthority/SysAuthority><i><span class="iconfont icon-kehuguanli"></span></i>权限管理</a></li><li id=CfgDictionary class=list-group-item><a href=# script=com/config/CfgDictionary/CfgDictionary><i><span class="iconfont icon-kehuguanli"></span></i>数字字典</a></li><li id=CfgRuntime class=list-group-item><a href=# script=com/config/CfgRuntime/CfgRuntime><i><span class="iconfont icon-kehuguanli"></span></i>运行参数</a></li><li id=ToolCgen class=list-group-item><a script=com/tool/ToolCgen/ToolCgen href=#><span class="iconfont icon-kehuguanli"></span>集成开发管理</a></li><li id=Cgen class=list-group-item screen=full><a script=com/tool/ToolCgen/Cgen href=#><span class="iconfont icon-kehuguanli"></span>集成开发</a></li></ul></div><div id=app-iframe class=col-sm-10></div></div></div><div id=app-footer><div class=container><div class="footer1 row"><div class=col-sm-9><div class=row><div class=col-sm-4>关于7CRM</div><div class=col-sm-4>使用帮助</div><div class=col-sm-4>开发团队</div></div><div class=row><div class=col-sm-4>联系我们</div><div class=col-sm-4>提交BUG</div></div></div><div class=col-sm-3><div class=row><div class=col-sm-12>用户服务热线</div></div><div class=row><div class="col-sm-12 tel">400-8063-777</div></div></div></div><div class="footer2 row"><div class=col-sm-9>©横琴国际知识产权交易中心，7CRM，七弦琴客户管理系统.</div><div class=col-sm-3>粤ICP备15074917号 7ipr.com</div></div></div></div></body></html>

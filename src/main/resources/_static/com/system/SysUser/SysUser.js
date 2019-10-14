@@ -97,7 +97,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			type: "textfield",
 			//subtype:"password",
 			maxLen: "100",
-			isNull:false
+			isNull:false,
+			hide:true
 		}],[{
 			id: "name",
 			label: "用户名称",
@@ -112,7 +113,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "ord",
 			label: "排序号",
 			type: "textfield",
-			limit:"num"
+			limit:"num",
+			hide:true
 		},{
 			id: "sex",
 			label: "性别",
@@ -122,19 +124,22 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			params:{
 				app:"system",
 				type:"性别"
-			}
+			},
+			hide:true
 		}],[{
 			id: "tel",
 			label: "手机号",
 			type: "textfield",
 			limit:"tel",
-			maxLen: "20"
+			maxLen: "20",
+			width:130
 		},{
 			id: "email",
 			label: "邮箱地址",
 			type: "textfield",
 			limt:"email",
-			maxLen: "100"
+			maxLen: "100",
+			hide:true
 		}],[{
 			id: "state",
 			label: "状态",
@@ -196,22 +201,22 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 						audit(_grid,_baseUrl,1);
 						$(this).attr("disabled","disabled");
 					}
-				},{
-					id:"importExcel",
-					icon:"glyphicon glyphicon-fire",
-					value:"EXCEL批量导入",
-					importParams:{type:"用户信息","table":"SysUser","columns":["company"],"ignoreRow":[0]},
-					type:"file",
-					isToolBar:true,
-					action:"import/run",
-					onSuccess:function(rs){
-						if(rs.success===true){
-							Dialog.alert("导入成功");
-							_border.getCenter().empty().append(getGrid());
-						}else{
-							Dialog.alert("导入失败");
-						}
-					}
+//				},{
+//					id:"importExcel",
+//					icon:"glyphicon glyphicon-fire",
+//					value:"EXCEL批量导入",
+//					importParams:{type:"用户信息","table":"SysUser","columns":["company"],"ignoreRow":[0]},
+//					type:"file",
+//					isToolBar:true,
+//					action:"import/run",
+//					onSuccess:function(rs){
+//						if(rs.success===true){
+//							Dialog.alert("导入成功");
+//							_border.getCenter().empty().append(getGrid());
+//						}else{
+//							Dialog.alert("导入失败");
+//						}
+//					}
 				},{
 					id: "search-name",
 					placeholder:"请输入用户名称",

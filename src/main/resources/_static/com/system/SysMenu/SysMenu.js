@@ -51,12 +51,14 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "url",
 			label: "URL",
 			type: "textfield",
-			maxLen: "100"
+			maxLen: "100",
+			hide:true
 		}],[{
 			id: "countUrl",
 			label: "COUNTURL",
 			type: "textfield",
-			maxLen: "100"
+			maxLen: "100",
+			hide:true
 		},{
 			id: "state",
 			label: "状态",
@@ -64,7 +66,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			params:{
 				app:"system",
 				type:"状态"
-			}
+			},
+			hide:true
 		}],[{
 			id: "ord",
 			label: "排序号",
@@ -74,7 +77,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "memo",
 			label: "备注",
 			type: "textfield",
-			maxLen: "1000"
+			maxLen: "1000",
+			hide:true
 		},{
 			id: "id",
 			type: "hidden"

@@ -1,7 +1,7 @@
 seajs.use(["BorderLayout", "FormLayout", "ViewLayout", "Dialog", "Grid", "Ajax", "Component", "Array"],
 function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Array) {
 	/***************变量定义***************/
-	var _title='新闻发布',_baseUrl = "IssueNews/";
+	var _title='咨讯发布',_baseUrl = "IssueNews/";
 	var _currentId,_grid,_dialog,_formQuery,_formEdit;
 	/***************函数定义***************/
 //	var getFormQuery = function() {
@@ -89,7 +89,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "摘要",
 			type: "textarea",
 			maxLen: "4000",
-			colspan:2
+			colspan:2,
+			hide:true
 		}],[{
 			id: "newsTime",
 			label: "新闻时间",
@@ -106,20 +107,20 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "内容",
 			type: "ueditor",
 			colspan:2,
-			css:{
-				display:"none"
-			}
+			hide:true
 		}],[{
 			id: "coverUrl",
 			label: "缩略图",
 			type:"file",
-			colspan:2
+			colspan:2,
+			hide:true
 		}],[{
 			id: "contentUrl",
 			label: "网址",
 			type: "textfield",
 			maxLen: "1000",
-			colspan:2
+			colspan:2,
+			hide:true
 //		}],[{
 //			id: "cntFavorite",
 //			label: "收藏数",
@@ -214,17 +215,17 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 					Component.onAdd(_grid,_dialog,_formEdit,_formQuery,_title,_baseUrl,getFormEdit,record,Dialog);
 				},
 				onEdit: function(record, selected) {
-					if(_formQuery.check()==false){
-						Dialog.alert("请选择类型");
-						return;
-					}
+//					if(_formQuery.check()==false){
+//						Dialog.alert("请选择类型");
+//						return;
+//					}
 					Component.onEdit(_grid,_dialog,_formEdit,_formQuery,_title,_baseUrl,getFormEdit,record,Dialog,Array,_currentId);
 				},
 				onView: function(record, selected) {
-					if(_formQuery.check()==false){
-						Dialog.alert("请选择类型");
-						return;
-					}
+//					if(_formQuery.check()==false){
+//						Dialog.alert("请选择类型");
+//						return;
+//					}
 					Component.onView(_grid,_dialog,_title,getFormView,record,Dialog,Array,_currentId);
 				}
 			}

@@ -149,11 +149,13 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				label: "名称"
 			},{
 				id: "simpleCode",
-				label: "拼音简码"
+				label: "拼音简码",
+				hide:true
 			},{
 				id: "sex",
 				label: "性别",
-				format:Global.DicJson("system","Sex")
+				format:Global.DicJson("system","Sex"),
+				hide:true
 			},{
 				id: "tel",
 				label: "手机号"
@@ -162,10 +164,12 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				label: "职位名称"
 			},{
 				id: "level",
-				label: "职位级别"
+				label: "职位级别",
+				hide:true
 			},{
 				id: "ratio",
-				label: "折算系数"
+				label: "折算系数",
+				hide:true
 			},{
 				id: "state",
 				label: "状态",
@@ -173,7 +177,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				params:{
 					app:"system",
 					type:"状态"
-				}
+				},
+				hide:true
 			}],
 			url: "SysUser/listRoleUser",
 			pageSize:0,

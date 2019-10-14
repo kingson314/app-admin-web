@@ -53,7 +53,8 @@ seajs.use([ "BorderLayout", "FormLayout", "ViewLayout", "Dialog", "Grid",
 			id : "memo",
 			label : "备注",
 			type : "textfield",
-			maxLen : "1000"
+			maxLen : "1000",
+			hide:true
 		} ], [ {
 			id : "id",
 			type : "hidden"

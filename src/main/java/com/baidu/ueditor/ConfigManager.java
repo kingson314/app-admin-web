@@ -1,18 +1,15 @@
 package com.baidu.ueditor;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.util.ClassUtils;
 
 import com.baidu.ueditor.define.ActionMap;
 
@@ -146,7 +143,7 @@ public final class ConfigManager {
 			file = new File(file.getAbsolutePath());
 		}
 		this.setParentPath(file.getParent());
-		String configContent = this.readFile(this.getConfigPath());
+		String configContent = this.readFile();
 		try {
 			JSONObject jsonConfig = new JSONObject(configContent);
 			this.jsonConfig = jsonConfig;
@@ -156,16 +153,16 @@ public final class ConfigManager {
 
 	}
 
-	private String getConfigPath() {
-		// return this.parentPath + File.separator + ConfigManager.configFileName;
-		try {
-			// 获取classpath下的config.json路径
-			return ClassUtils.getDefaultClassLoader().getResource("").getPath() + configFileName;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	private String getConfigPath() {
+//		// return this.parentPath + File.separator + ConfigManager.configFileName;
+//		try {
+//			// 获取classpath下的config.json路径
+//			return ClassUtils.getDefaultClassLoader().getResource("").getPath() + configFileName;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 
 	private String[] getArray(String key) {
 		JSONArray jsonArray = this.jsonConfig.getJSONArray(key);
@@ -177,19 +174,28 @@ public final class ConfigManager {
 		return result;
 	}
 
-	private String readFile(String path) throws IOException {
-		StringBuilder builder = new StringBuilder();
-		try {
-			InputStreamReader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
-			BufferedReader bfReader = new BufferedReader(reader);
-			String tmpContent = null;
-			while ((tmpContent = bfReader.readLine()) != null) {
-				builder.append(tmpContent);
-			}
-			bfReader.close();
-		} catch (UnsupportedEncodingException e) {
-		}
-		return this.filter(builder.toString());
+	private String readFile() throws IOException {
+//		StringBuilder builder = new StringBuilder();
+//		try {
+//			InputStreamReader reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
+//			BufferedReader bfReader = new BufferedReader(reader);
+//			String tmpContent = null;
+//			while ((tmpContent = bfReader.readLine()) != null) {
+//				builder.append(tmpContent);
+//			}
+//			bfReader.close();
+//		} catch (UnsupportedEncodingException e) {
+//		}
+//		return this.filter(builder.toString());
+		InputStream is = getClass().getClassLoader().getResourceAsStream(configFileName);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+		int i;  
+		while ((i = is.read()) != -1) {  
+		    baos.write(i);  
+		}  
+		String str = baos.toString();  
+//		System.out.println(str);  
+		return this.filter(str);
 	}
 
 	// 过滤输入字符串, 剔除多行注释以及替换掉反斜杠
