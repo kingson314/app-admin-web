@@ -1,5 +1,5 @@
-seajs.use(["BorderLayout", "FormLayout", "TabLayout","AccordionLayout", "Dialog", "Toolbar", "Ajax","Drop","Grid"],
-function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, Ajax,Drop,Grid) {
+seajs.use(["BorderLayout", "FormLayout", "TabLayout","AccordionLayout", "Dialog", "Toolbar", "Ajax","Drop","Grid","Boolean"],
+function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, Ajax,Drop,Grid,Boolean) {
 	/***************变量定义***************/
 	var baseUrl = "ToolCgen/";
 	var Tab,BaseMsgForm,ToolCgenGrid; //表格变量
@@ -11,8 +11,8 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 	var _BaseMsgFormValue={
 //			"srcPath": "/Users/guoqufeng/Projects/Github/app-qy1/src/main/java/com/system",
 //			"jsPath": "/Users/guoqufeng/Projects/Github/app-qy-web/pages/system",
-			"srcPath": "/Volumes/Docs/Git/app-qy/src/main/java/com/system",
-			"jsPath": "/Volumes/Docs/Git/app-qy-web/pages/system",
+			"srcPath": "/Volumes/Docs/Git/app-spm/src/main/java/com/business/",
+			"jsPath": "/Volumes/Docs/Git/app-spm-web/pages/admin/business/",
 			"menuParentName":"",
 			"menuName":"",
 			"packagePath":"",
@@ -240,6 +240,10 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				var data=$(this).find(".sea_button,.sea_textfield,.sea_textarea,.sea_select").data("data");
 				if(data){
 					if(data.id&&data.id!==""){
+						if(Boolean.isChineseChar(data.id)){
+							throw("存在字段包含中文字符");
+							return;
+						}
 						data._id=data.id;
 						fieldArr.push(data);
 						Ajax.post("ToolDictionary/save", data,function(rs) {
@@ -344,12 +348,10 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 					label: "数据类型",
 					type: "select",
 					value:"String",
-					options:[{id:"dic","name":"dic"},{id:"String","name":"String"},{id:"Integer","name":"Integer"},{id:"Long","name":"Long"},{id:"Double","name":"Double"},{id:"Boolean","name":"Boolean"}],
+					options:[{id:"String","name":"String"},{id:"Integer","name":"Integer"},{id:"Long","name":"Long"},{id:"Double","name":"Double"},{id:"Boolean","name":"Boolean"},{id:"Date","name":"Date"}],
 					blur:function(){
 						$("#btnSave a").click();
-						if($(this).val()=='dic'){
-							$("#property #length").val("app:em,type:xxx");
-						}else if($(this).val()=='String'){
+						if($(this).val()=='String'){
 							$("#property #length").val("100");
 						}else if($(this).val()=='Integer'){
 							$("#property #length").val("10");
@@ -357,12 +359,12 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 							$("#property #length").val("20");
 						}else if($(this).val()=='Double'||$(this).val()=='Float'){
 							$("#property #length").val("16,4");
-						}
+						}else if($(this).val()=='Date'){
+							$("#property #length").val("6");
+						} 
 					},
 					change:function(){
-						if($(this).val()=='dic'){
-							$("#property #length").val("app:em,type:xxx");
-						}else if($(this).val()=='String'){
+						if($(this).val()=='String'){
 							$("#property #length").val("100");
 						}else if($(this).val()=='Integer'){
 							$("#property #length").val("10");
@@ -370,7 +372,9 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 							$("#property #length").val("20");
 						}else if($(this).val()=='Double'||$(this).val()=='Float'){
 							$("#property #length").val("16,4");
-						}
+						}else if($(this).val()=='Date'){
+							$("#property #length").val("20");
+						} 
 					}
 				}]);
 			   cfgForm.items.push([{
@@ -385,9 +389,11 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 					},
 					change:function(){
 						if($(this).val()=='Dic'){
-							$("#property #componentProp").val("123");
+							$("#property #componentProp").val("params={{app:\"app\",type:\"\"}}");
 						}else if($(this).val()=='Select'){
 							$("#property #componentProp").val("100");
+						}else if($(this).val()=='DatePicker'){
+							$("#property #componentProp").val("format=\"YYYY-MM-DD\"");
 						}
 					}
 				}]);
@@ -410,7 +416,7 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 						$("#btnSave a").click();
 					}
 				}]);
-			   cfgForm.items.push([{
+			   cfgForm.items.push([{	
 					id:"isNull",
 					label: "isNull",
 					type: "select",
@@ -619,7 +625,13 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 			var  me=$(this);
 			Border.getEast().empty();
 				formProperty=getPropertyForm(me);
-				formProperty.val(me.data("data"));
+				var data=me.data("data");
+				if(data&&data.label!=""){
+					Ajax.post("ToolDictionary/getDic", {"label":data.label},function(rs) {
+						data.id=rs.data.id;
+					});
+				}
+				formProperty.val(data);
 				Border.getEast().append(formProperty.layout);
 				formProperty.focus("id");
 				return false;

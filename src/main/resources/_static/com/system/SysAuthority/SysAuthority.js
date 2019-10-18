@@ -4,7 +4,7 @@ seajs.use([ "BorderLayout", "FormLayout", "ViewLayout", "Dialog", "Grid",
 		Array, Toolbar, Tree, Mask) {
 	/** *************变量定义************** */
 	var _title = '权限管理', _baseUrl = "SysRole/";
-	var _currentId, _tree, _grid, _dialog, _formQuery, _formEdit;
+	var _currentId, _tree, _grid, _dialog, _formQuery, _formEdit,_border;
 	/** *************函数定义************** */
 	// var getQueryForm = function() {
 	// var cfgForm = {
@@ -110,7 +110,7 @@ seajs.use([ "BorderLayout", "FormLayout", "ViewLayout", "Dialog", "Grid",
 			rowClick : function(record) {
 				_currentId = record.id;
 				$("#tool_publish").removeAttr("disabled");
-				Border.getCenter().getCenter().empty().append(
+				_border.getEast().getCenter().getCenter().empty().append(
 						getTree(_currentId).tree);
 			}
 		};
@@ -140,7 +140,7 @@ seajs.use([ "BorderLayout", "FormLayout", "ViewLayout", "Dialog", "Grid",
 		return _tree;
 	};
 	/** *************函数调用************** */
-	Border = BorderLayout.create({
+	_border = BorderLayout.create({
 		// north: {
 		// height: 60,
 		// item: getQueryForm()
@@ -175,8 +175,9 @@ seajs.use([ "BorderLayout", "FormLayout", "ViewLayout", "Dialog", "Grid",
 								Mask.show({}, function() {
 									var menuIds = [];
 									var nodes = _tree.getCheckedNodes(true);
+									debugger;
 									for (var i = 0; i < nodes.length; i++) {
-										menuIds.push(nodes[i].id);
+										menuIds.push(nodes[i].menuId);
 									}
 									Ajax.post("SysAuthority/save", {
 										roleId : _currentId,

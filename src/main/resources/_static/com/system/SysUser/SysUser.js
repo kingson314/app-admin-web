@@ -231,7 +231,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 						"margin-right":"10px"
 					},
 					click:function(){
-						_grid.reload({"name":$("#search-name").val()});
+						_grid.reload({type:1,"name":$("#search-name").val()});
 					}
 				}],
 				onAdd: function(record, selected) {

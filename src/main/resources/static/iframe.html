@@ -1,10 +1,26 @@
-<!DOCTYPE html><html lang=zh-CN xmlns:th=http://www.thymeleaf.org><head lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>app-admin</title><link href=http://at.alicdn.com/t/font_302447_25pj6l3v9mmi.css rel=stylesheet type=text/css><link href=./css/images/favicon.ico rel="shortcut icon" type=image/x-icon><link href=./css/base.css rel=stylesheet type=text/css><script src=./core/jquery/jquery.js></script><script src=./ueditor/ueditor.config.js></script><script src=./ueditor/ueditor.all.js></script><script src=./ueditor/lang/zh-cn/zh-cn.js></script><script src=./core/util.js></script><script>	
+<!DOCTYPE html>
+	<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head lang="en">
+	    <meta charset="UTF-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>app-admin</title>
+	    <!-- 公共模块 -->
+		<link href="http://at.alicdn.com/t/font_302447_25pj6l3v9mmi.css" rel="stylesheet" type="text/css"/>
+		<link href="./css/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+		<link href="./css/base.css" rel="stylesheet" type="text/css"/>
+		<script src="./core/jquery/jquery.js"></script>
+		<script src="./ueditor/ueditor.config.js"></script>
+		<script src="./ueditor/ueditor.all.js"></script>
+		<script src="./ueditor/lang/zh-cn/zh-cn.js"></script>
+		<script src="./core/util.js"></script>
+		<script>	
 		var env=Ajax.getParam("env");
 		var serverPath=Ajax.getParam("serverPath");//除本地调试外必传
 		if(!UtilString.endsWith(serverPath,"/"))serverPath=serverPath+"/";
 		if(UtilString.isBlank(serverPath))Dialog.alert("非开发环境，serverPath为必传参数！");
-		var localPath="http://busicloud.com:8888/"
-		//else if(env=="prod")localPath="http://busicloud.com:8888/";
+		var localPath="http://localhost:8888/"
+		if(env=="uat")localPath="http://app-adminuat.7ipr.com/";
+		else if(env=="prod")localPath="http://app-admin.7ipr.com/";
 		console.log("serverPath:"+serverPath);
 		console.log("localPath:"+localPath);
 		var userId=Ajax.getParam("userId");
@@ -30,8 +46,12 @@
 		    isChrome:true,
 		    isTest:true
 		}; 
-	</script><script src=./core/sea/sea.js></script><script src=./core/session.js></script><style>
-     </style><script type=text/javascript>
+	</script>
+	<script src="./core/sea/sea.js"></script>
+	<script src="./core/session.js"></script>
+     <style>
+     </style>
+	<script type="text/javascript">
 		var _parent="body";
 		$(function(){
 			seajs.use( ["Ajax"],
@@ -45,4 +65,8 @@
 				Global.loadJs(Session.localPath+__script+".js");
 			}); 
 		});
-	</script></head><body></body></html>
+	</script>
+</head>
+<body>
+</body>
+</html>
