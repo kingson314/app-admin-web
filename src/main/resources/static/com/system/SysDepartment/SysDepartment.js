@@ -60,8 +60,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "name",
 			label: "用户名称",
 			type: "textfield",
-			maxLen: "100",
-			hide:true
+			maxLen: "100"
 		},{
 			id: "position",
 			label: "职位名称",
@@ -210,14 +209,12 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 					var departmentId="";
 					if(selected){
 						departmentId=_nodeId;
-					}else{
-						_nodeId="-1";
 					}
 					Ajax.post("SysUser/updateDepartment", {"userId": _userId,"departmentId":departmentId},function(rs) {
 						_grid.reload({
 							"departmentId":_nodeId
 						});
-						Dialog.alert(rs.msg);
+//						Dialog.alert(rs.msg);
 					});
 				}
 			},{
@@ -286,7 +283,6 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 					_grid.reload({
 						"departmentId":_nodeId
 					});
-					
 					return;
 				},
 				onRightClick : function(event, treeId, treeNode) {
@@ -317,7 +313,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 						name : treeNode.name
 					}, function(rs) {
 						if (rs.success === false) Dialog.alert(rs.msg);
-						else _grid.reload(_formQuery.val());
+						else _grid.reload({"departmentId":_nodeId});
 					});
 				},
 				beforeDrop : function(treeId, treeNodes, targetNode, moveType, isCopy) {
@@ -331,11 +327,11 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 					}
 					Ajax.post(_baseUrlTree + "move", {
 						id : selectNode.id,
-						parentId : parentId,
-						"ord" : Component.getOrd()
+						parentId : parentNode.id,
+						"ord" : Component.getOrd(selectNode)
 					}, function(rs) {
 						if (rs.success === false) Dialog.alert(rs.msg);
-						else _grid.reload(_formQuery.val());
+						else _grid.reload({"departmentId":_nodeId});
 					});
 				}
 			}
@@ -391,6 +387,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				name : "新建节点",
 				type : "0",
 				open : "true",
+				state:"0",
 				userId : Log.userId
 			};
 			Ajax.post(_baseUrlTree+"save", newNodeData, function(rs) {
@@ -434,7 +431,7 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 				id : selectNode.id
 			}, function(rs) {
 				if (rs.success === false) Dialog.alert(rs.msg);
-				else _grid.reload(_formQuery.val());
+				else _grid.reload({"departmentId":_nodeId});
 			});
 		});
 	};

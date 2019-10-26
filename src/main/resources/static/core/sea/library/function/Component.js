@@ -594,22 +594,24 @@ define(function(require, exports, module) {
 			var clen=cfgForm.items[i].length;
 			for(var j=0;j<clen;j++){
 				var item=cfgForm.items[i][j];
-				if(!item["id"])continue;
-				if(item["type"]=="hidden"||item["isColumn"]==false)continue;
+				if(!item.id)continue;
+				if(item.type=="hidden"||item.isColumn==false)continue;
 				columns.push(item);
 			}
 		}
 		cfgGrid.columns=columns;
 		return cfgGrid;
-	}
+	};
 	exports.getOrd = function(selectNode) {
 		var preNode = selectNode.getPreNode();
 		var nextNode = selectNode.getNextNode();
-		var preOrd = preNode ? preNode.ord : 0;
-		var nextOrd = nextNode ? nextNode.ord : (preOrd + 1);
-		var ord = (preOrd + nextOrd) * 0.5;
-		return ord;
-	}
+//		var preOrd = preNode ? preNode.ord : 0;
+//		var nextOrd = nextNode ? nextNode.ord : (preOrd + 1);
+//		var ord = (preOrd + nextOrd) * 0.5;
+		if(preNode)return preNode.ord+1;
+		if(nextNode)return nextNode.ord+1;
+		return selectNode.ord;
+	};
 	
 	exports.setVal=function(ids,record,parentSelector){
 		var len=ids.length;
@@ -617,5 +619,5 @@ define(function(require, exports, module) {
 			var id=ids[i];
 			$("#"+id,parentSelector).val(record[id]);
 		}
-	}
+	};
 });

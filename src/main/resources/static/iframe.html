@@ -19,8 +19,8 @@
 		if(!UtilString.endsWith(serverPath,"/"))serverPath=serverPath+"/";
 		if(UtilString.isBlank(serverPath))Dialog.alert("非开发环境，serverPath为必传参数！");
 		var localPath="http://localhost:8888/"
-		if(env=="uat")localPath="http://app-adminuat.7ipr.com/";
-		else if(env=="prod")localPath="http://app-admin.7ipr.com/";
+		if(env=="prod")localPath="http://busicloud.com:8888/";
+		//else if(env=="uat")localPath="http://app-adminuat.7ipr.com/";
 		console.log("serverPath:"+serverPath);
 		console.log("localPath:"+localPath);
 		var userId=Ajax.getParam("userId");

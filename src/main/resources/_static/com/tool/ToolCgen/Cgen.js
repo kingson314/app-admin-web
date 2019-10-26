@@ -213,9 +213,10 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 					}
 				},{
 					icon: "iconfont icon-edit",
-					value: "生成",
+					value: "运行",
 					css:{
-						"padding":"0 12px!important"
+						"padding":"0 12px!important",
+						background:"rgb(22, 173, 35)"
 					},
 					click: function() {
 						exec("run");
@@ -401,6 +402,7 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 					id:"componentProp",
 					label: "控件属性",
 					type: "textarea",
+					rows:2,
 					blur:function(){
 						$("#btnSave a").click();
 					}
@@ -499,7 +501,7 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 //				}
 //			},{
 //				icon: "iconfont icon-edit",
-//				value: "生成",
+//				value: "运行",
 //				click: function() {
 //					exec("run");
 //				}
@@ -524,9 +526,10 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 							}
 						},{
 							icon: "iconfont icon-edit",
-							value: "生成",
+							value: "运行",
 							css:{
-								"padding":"0 12px!important"
+								"padding":"0 12px!important",
+								background:"rgb(22, 173, 35)"
 							},
 							click: function() {
 								exec("run");
@@ -643,6 +646,7 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 		var cfgGrid = {
 			title:"集成开发管理",
 			isFlow:false,
+			indexColumn:false,
 			css:{
 				"padding":"0.8rem"
 			},
@@ -654,11 +658,12 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 			},{
 				id: "tableName",
 				label: "表名称",
-				width: 150
+				width: 130
 			},{
 				id: "entityName",
 				label: "实体类名称",
-				width: 150
+				width: 150,
+				hide:true
 			},{
 				id: "fields",
 				label: "字段列表",
@@ -677,13 +682,15 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				hide:true
 			},{
 				id: "entityType",
-				label: "实体类型"
+				label: "实体类型",
+				hide:true
 			},{
 				id: "menuName",
 				label: "菜单名称"
 			},{
 				id: "menuParentName",
-				label: "父菜单名称"
+				label: "父菜单名称",
+				hide:true
 			},{
 				id: "jsOptions",
 				label: "jsOptions",
@@ -700,6 +707,9 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 			url: "ToolCgen/list",
 			pagerMode:"simple",
 			toolbar:{
+				css:{
+					"padding-left":"10px"
+				},
 				refresh:false,
 				add:false,
 				edit:false,
@@ -707,12 +717,12 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				"delete":true,
 				"export":false,
 				"copy":true,
-				items:[{
-					value:"<i class='iconfont icon-xinzeng'>新建</i>",
-					click:function(){
-						BaseMsgForm.val(_BaseMsgFormValue);
-					}
-				}],
+//				items:[{
+//					value:"<i class='iconfont icon-xinzeng'>新建</i>",
+//					click:function(){
+//						BaseMsgForm.val(_BaseMsgFormValue);
+//					}
+//				}],
 				onCopy:function(selected){return true;}
 			},
 			rowClick:function(record){

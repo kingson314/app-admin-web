@@ -133,5 +133,13 @@
 		order by  CAST(a.code as SIGNED)
 	</select>
 
-
+	
+	<select id="listTreeUser" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select id, parentId pId,name title,cast(id as char) value,ord from sysdepartment where state=0
+		union all 
+		select id, departmentId pId,name title,cast(id as char) value ,ord from sysuser 
+		where  state=0 and departmentId is not null and departmentId!=-1
+		order by pid,ord 
+	</select>
 </mapper>
