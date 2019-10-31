@@ -20,5 +20,10 @@
 		<!-- truncate table ${tableName} -->
 		<!-- create table ${newTableName} as select * from ${originalTableName} -->
     </update>
-	
+	<!-- <delete id="delUsers" parameterType="java.util.List">
+       DELETE FROM user_first WHERE id in
+       <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+         #{item.id}
+       </foreach>
+    </delete> -->
 </mapper>

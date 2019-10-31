@@ -383,8 +383,8 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 					label: "控件类型",
 					type: "select",
 					value:"Input",
-					options:["AutoComplete","Checkbox","Cascader","DatePicker","InputNumber","Input","Hidden",
-					 "Mention", "Rate", "Radio", "Switch","Dic", "Select","Slider", "TextArea","TreeSelect", "Transfer", "TimePicker", "File"],
+					options:["AutoComplete","Checkbox","CheckGroup","Cascader","District","DatePicker","InputNumber","Input","Hidden",
+					 "Mention", "Rate", "Radio", "Switch","Dic", "Select","Slider", "TextArea","TreeSelect", "Transfer", "TimePicker", "Tree","File"],
 					blur:function(){
 						$("#btnSave a").click();
 					},
@@ -395,6 +395,8 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 							$("#property #componentProp").val("100");
 						}else if($(this).val()=='DatePicker'){
 							$("#property #componentProp").val("format=\"YYYY-MM-DD\"");
+						}else if($(this).val()=='CheckGroup'){
+							$("#property #componentProp").val("options=[\"item1\",\"item2\"]");
 						}
 					}
 				}]);

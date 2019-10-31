@@ -1,5 +1,8 @@
 #app-admin-web工程
 
+1.修改base的mybatis代码需要执行 app-admin-web 中的 
+gulp xml
+
 
 1.部署时修改如下文件中的后台调用链接与app-admin-web的域名一致
 src/main/resources/_static/ueditor/config.json 中的 imageUrlPrefix等（ueidtor的文件存在 app-admin-web 服务端CfgRuntime指定的nginx中）
