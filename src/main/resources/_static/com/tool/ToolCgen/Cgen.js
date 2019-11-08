@@ -242,7 +242,7 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				if(data){
 					if(data.id&&data.id!==""){
 						if(Boolean.isChineseChar(data.id)){
-							throw("存在字段包含中文字符");
+							Dialog.alert("存在字段包含中文字符");
 							return;
 						}
 						data._id=data.id;
@@ -392,11 +392,11 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 						if($(this).val()=='Dic'){
 							$("#property #componentProp").val("params={{app:\"app\",type:\"\"}}");
 						}else if($(this).val()=='Select'){
-							$("#property #componentProp").val("100");
+							$("#property #componentProp").val("url=\"\" params={{}}");
 						}else if($(this).val()=='DatePicker'){
 							$("#property #componentProp").val("format=\"YYYY-MM-DD\"");
 						}else if($(this).val()=='CheckGroup'){
-							$("#property #componentProp").val("options=[\"item1\",\"item2\"]");
+							$("#property #componentProp").val("options={[\"item1\",\"item2\"]}");
 						}
 					}
 				}]);
@@ -633,7 +633,7 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				var data=me.data("data");
 				if(data&&data.label!=""){
 					Ajax.post("ToolDictionary/getDic", {"label":data.label},function(rs) {
-						data.id=rs.data.id;
+						if(rs.data.id)data.id=rs.data.id;
 					});
 				}
 				formProperty.val(data);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.SysDepartment.dao.SysDepartmentDao">
+	 
+	<select id="getOptions" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select id,name
+		from SysDepartment a where a.state=#{state}
+	</select>
+	<select id="listTreeDept" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select id, parentId pId,name title,cast(id as char) value,ord from sysdepartment where state=0
+		order by parentId,ord 
+	</select>
+</mapper>
