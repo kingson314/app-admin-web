@@ -40,36 +40,44 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "app",
 			label: "所属应用",
 			type: "textfield",
-			maxLen: "100"
-		}],[{
+			maxLen: "100",
+			colspan:2,
+			value:"system"
+		},{}],[{
 			id: "name",
 			label: "配置名称",
 			type: "textfield",
-			maxLen: "100"
+			maxLen: "100",
+			colspan:2
 		}],[{
 			id: "value",
 			label: "配置值",
-			type: "textfield"
+			type: "textfield",
+			colspan:2
 		}],[{
 			id: "runType",
 			label: "运行类型",
-			type: "textfield",
-			maxLen: "100"
+			type: "hidden",
+			maxLen: "100",
+			value:"0"
 		}],[{
 			id: "loadType",
 			label: "加载类型",
-			type: "textfield",
-			maxLen: "100"
+			type: "hidden",
+			maxLen: "100",
+			value:"0"
 		}],[{
 			id: "destroyType",
 			label: "销毁类型",
-			type: "textfield",
-			maxLen: "100"
+			type: "hidden",
+			maxLen: "100",
+			value:"0"
 		}],[{
 			id: "memo",
 			label: "备注说明",
 			type: "textarea",
-			hide:true
+			hide:true,
+			colspan:2
 		}],[{
 			id: "id",
 			type: "hidden"

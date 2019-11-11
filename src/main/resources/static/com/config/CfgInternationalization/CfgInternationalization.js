@@ -9141,36 +9141,43 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			type: "textfield",
 			maxLen: "10",
 			isNull: false,
-			value:"system"
-		}],[{
+			value:"system",
+			colspan:2
+		},{}],[{
 			id: "keyword",
 			label: "关键字",
 			type: "textfield",
 			maxLen: "100",
-			isNull: false
+			isNull: false,
+			colspan:2
 		}],[{
 			id: "zh_CN",
 			label: "中文标签",
-			type: "textarea",
-			isNull: false
+			type: "textfield",
+			isNull: false,
+			colspan:2
 		}],[{
 			id: "en_US",
 			label: "英文标签",
-			type: "textarea"
-		}],[{
-			id: "iw_IL",
-			label: "希伯来语",
-			type: "textarea"
-		}],[{
-			id: "zh_TW",
-			label: "繁体标签",
-			type: "textarea"
+			type: "textfield",
+			colspan:2
+//		}],[{
+//			id: "iw_IL",
+//			label: "希伯来语",
+//			type: "textfield",
+//			colspan:2
+//		}],[{
+//			id: "zh_TW",
+//			label: "繁体标签",
+//			type: "textfield",
+//			colspan:2
 		}],[{
 			id: "memo",
 			label: "备注",
 			type: "textarea",
 			maxLen: "1000",
-			hide:true
+			hide:true,
+			colspan:2
 		}],[{
 			id: "id",
 			type: "hidden"

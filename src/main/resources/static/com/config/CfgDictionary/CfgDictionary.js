@@ -9144,14 +9144,16 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			id: "app",
 			label: "所属应用",
 			type: "textfield",
-			maxLen: "100"
-		}],[{
+			maxLen: "100",
+			colspan:2,
+			value:"app"
+		},{}],[{
 			id: "type",
 			label: "字典分类",
 			type: "textfield",
 			maxLen: "100",
 			width:160
-		}],[{
+		},{
 			id: "subType",
 			label: "二级分类",
 			type: "textfield",
@@ -9163,22 +9165,20 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			maxLen: "4000",
 			blur:function(){
 				$("#formEdit #ord").val($(this).val());
-			}
+			},
+			colspan:2
 		}],[{
 			id: "zh_CN",
 			label: "中文字典",
-			type: "textarea",
-			maxLen: "1000"
+			type: "textfield",
+			maxLen: "1000",
+			colspan:2
 		}],[{
 			id: "en_US",
 			label: "英文字典",
-			type: "textarea",
-			maxLen: "1000"
-		}],[{
-			id: "tw_CN",
-			label: "繁体字典",
-			type: "textarea",
-			maxLen: "1000"
+			type: "textfield",
+			maxLen: "1000",
+			colspan:2
 		}],[{
 			id: "ord",
 			label: "顺序号",
@@ -9189,7 +9189,8 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 			label: "字典说明",
 			type: "textarea",
 			maxLen: "4000",
-			hide:true
+			hide:true,
+			colspan:2
 		}],[{
 			id: "id",
 			type: "hidden"
