@@ -7433,7 +7433,6 @@ define('Grid',['Lang','String','Component','Ajax','Dialog','Array','Textfield','
 				if(sea_grid_summary.css("display")!="none"){
 					_height=_height-sea_grid_summary.height();
 				}
-				console.log(_height);
 				me.grid.find(".sea_grid_body").height(_height);
 				
 				var width = me.grid.parent().width() - me.columnForzenWidth;
@@ -9168,6 +9167,11 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 //	};
 	var cfgForm = {
 		items: [[{
+			id: "headFile",
+			label: "头像",
+			type: "file",
+			colspan:2
+		},{}],[{ 
 			id: "departmentId",
 			_id: "departmentName",
 			label: "部门名称",
@@ -9248,6 +9252,10 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 		}],[{
 			id: "id",
 			type: "hidden"
+		},{
+			id: "type",
+			type: "hidden",
+			value:"1"
 		}]]
 	};
 	var getFormView = function(record) {

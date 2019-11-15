@@ -71,6 +71,11 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 //	};
 	var cfgForm = {
 		items: [[{
+			id: "headFile",
+			label: "头像",
+			type: "file",
+			colspan:2
+		},{}],[{ 
 			id: "departmentId",
 			_id: "departmentName",
 			label: "部门名称",
@@ -151,6 +156,10 @@ function(BorderLayout, FormLayout, ViewLayout, Dialog, Grid, Ajax,Component,Arra
 		}],[{
 			id: "id",
 			type: "hidden"
+		},{
+			id: "type",
+			type: "hidden",
+			value:"1"
 		}]]
 	};
 	var getFormView = function(record) {

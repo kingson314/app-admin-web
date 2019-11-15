@@ -7433,7 +7433,6 @@ define('Grid',['Lang','String','Component','Ajax','Dialog','Array','Textfield','
 				if(sea_grid_summary.css("display")!="none"){
 					_height=_height-sea_grid_summary.height();
 				}
-				console.log(_height);
 				me.grid.find(".sea_grid_body").height(_height);
 				
 				var width = me.grid.parent().width() - me.columnForzenWidth;
