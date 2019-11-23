@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.config.CfgInternationalization.dao.CfgInternationalizationDao">
-	<resultMap id="BaseResultMap" type="com.config.CfgInternationalization.model.CfgInternationalization">
+<mapper namespace="com.system.SysRole.dao.SysRoleDao">
+	<resultMap id="BaseResultMap" type="com.system.SysRole.model.SysRole">
 		<id column="id" jdbcType="BIGINT" property="id" />
 		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
 		<id column="name" jdbcType="VARCHAR" property="name" />
 		<id column="state" jdbcType="VARCHAR" property="state" />
-		<id column="ord" jdbcType="INTEGER" property="ord" />
+		<id column="ord" jdbcType="DOUBLE" property="ord" />
 		<id column="memo" jdbcType="VARCHAR" property="memo" />
 		<id column="createTime" jdbcType="TIMESTAMP" property="createTime" />
 		<id column="modifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
 		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
 		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
-		<id column="app" jdbcType="VARCHAR" property="app" />
-		<id column="keyword" jdbcType="VARCHAR" property="keyword" />
-		<id column="zh_CN" jdbcType="VARCHAR" property="zh_CN" />
-		<id column="en_US" jdbcType="VARCHAR" property="en_US" />
-		<id column="zh_TW" jdbcType="VARCHAR" property="zh_TW" />
-		<id column="iw_IL" jdbcType="VARCHAR" property="iw_IL" />
 	</resultMap>
 	<select id="getList" parameterType="java.util.Map" resultType="java.util.HashMap">
 		select 
@@ -30,21 +24,12 @@
 		a.createTime,
 		a.modifyTime,
 		a.createUserId,
-		a.modifyUserId,
-		a.app,
-		a.keyword,
-		a.zh_CN,
-		a.en_US,
-		a.zh_TW,
-		a.iw_IL
-		from CfgInternationalization a where 1=1 
+		a.modifyUserId
+		from SysRole a where 1=1 
 		
-		<if test="app != null and app != ''">
-			and a.app like CONCAT('%',#{app},'%')
+		<if test="name != null and name != ''">
+			and a.name like CONCAT('%',#{name},'%')
 		</if> 
-		<if test="keyword != null and keyword != ''">
-			and a.keyword like CONCAT('%',#{keyword},'%')
-		</if>
 		<if test="userId != null and userId != ''">
 			and a.createUserId=#{userId}
 		</if> 
@@ -61,17 +46,11 @@
 		a.createTime,
 		a.modifyTime,
 		a.createUserId,
-		a.modifyUserId,
-		a.app,
-		a.keyword,
-		a.zh_CN,
-		a.en_US,
-		a.zh_TW,
-		a.iw_IL
-		from CfgInternationalization a where a.id=#{id}
+		a.modifyUserId
+		from SysRole a where a.id=#{id}
 	</select>
 	<select id="getOptions" parameterType="java.util.Map" resultType="java.util.HashMap">
 		select id,name
-		from CfgInternationalization a where a.state=#{state}
+		from SysRole a where a.state=#{state}
 	</select>
 </mapper>

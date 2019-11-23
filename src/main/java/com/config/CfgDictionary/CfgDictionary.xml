@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.config.CfgRuntime.dao.CfgRuntimeDao">
-	<resultMap id="BaseResultMap"
-		type="com.config.CfgRuntime.model.CfgRuntime">
+<mapper namespace="com.config.CfgDictionary.dao.CfgDictionaryDao">
+	<resultMap id="BaseResultMap" type="com.config.CfgDictionary.model.CfgDictionary">
 		<id column="id" jdbcType="BIGINT" property="id" />
 		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
 		<id column="name" jdbcType="VARCHAR" property="name" />
@@ -14,14 +13,16 @@
 		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
 		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
 		<id column="app" jdbcType="VARCHAR" property="app" />
+		<id column="type" jdbcType="VARCHAR" property="type" />
+		<id column="subType" jdbcType="VARCHAR" property="subType" />
 		<id column="value" jdbcType="VARCHAR" property="value" />
-		<id column="runType" jdbcType="VARCHAR" property="runType" />
-		<id column="loadType" jdbcType="VARCHAR" property="loadType" />
-		<id column="destroyType" jdbcType="VARCHAR" property="destroyType" />
+		<id column="zh_CN" jdbcType="VARCHAR" property="zh_CN" />
+		<id column="en_US" jdbcType="VARCHAR" property="en_US" />
+		<id column="tw_CN" jdbcType="VARCHAR" property="tw_CN" />
+		<id column="iw_IL" jdbcType="VARCHAR" property="iw_IL" />
 	</resultMap>
-	<select id="getList" parameterType="java.util.Map"
-		resultType="java.util.HashMap">
-		select
+	<select id="getList" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select 
 		a.id,
 		a.createDate,
 		a.name,
@@ -33,26 +34,28 @@
 		a.createUserId,
 		a.modifyUserId,
 		a.app,
+		a.type,
+		a.subType,
 		a.value,
-		a.runType,
-		a.loadType,
-		a.destroyType
-		from CfgRuntime a where 1=1
-
+		a.zh_CN,
+		a.en_US,
+		a.tw_CN,
+		a.iw_IL
+		from CfgDictionary a where 1=1 
+		
 		<if test="app != null and app != ''">
 			and a.app like CONCAT('%',#{app},'%')
-		</if>
-		<if test="name != null and name != ''">
-			and a.name like CONCAT('%',#{name},'%')
-		</if>
+		</if> 
+		<if test="type != null and type != ''">
+			and a.type like CONCAT('%',#{type},'%')
+		</if> 
 		<if test="userId != null and userId != ''">
 			and a.createUserId=#{userId}
-		</if>
+		</if> 
 	</select>
-
-	<select id="getModel" parameterType="java.util.Map"
-		resultType="java.util.HashMap">
-		select
+	
+		<select id="getModel" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select 
 		a.id,
 		a.createDate,
 		a.name,
@@ -64,19 +67,17 @@
 		a.createUserId,
 		a.modifyUserId,
 		a.app,
+		a.type,
+		a.subType,
 		a.value,
-		a.runType,
-		a.loadType,
-		a.destroyType
-		from CfgRuntime a where a.id=#{id}
+		a.zh_CN,
+		a.en_US,
+		a.tw_CN,
+		a.iw_IL
+		from CfgDictionary a where a.id=#{id}
 	</select>
-	<select id="getOptions" parameterType="java.util.Map"
-		resultType="java.util.HashMap">
+	<select id="getOptions" parameterType="java.util.Map" resultType="java.util.HashMap">
 		select id,name
-		from CfgRuntime a where a.state=#{state}
-	</select>
-	<select id="getBy" parameterType="String"
-		resultType="java.util.HashMap">
-		select * from CfgRuntime where app=#{app} and name=#{name}
+		from CfgDictionary a where a.state=#{state}
 	</select>
 </mapper>

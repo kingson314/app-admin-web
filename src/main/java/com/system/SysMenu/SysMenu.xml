@@ -4,7 +4,64 @@
 	<resultMap id="BaseResultMap" type="com.system.SysMenu.model.SysMenu">
 		<id column="id" jdbcType="BIGINT" property="id" />
 		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+		<id column="name" jdbcType="VARCHAR" property="name" />
+		<id column="state" jdbcType="VARCHAR" property="state" />
+		<id column="ord" jdbcType="INTEGER" property="ord" />
+		<id column="memo" jdbcType="VARCHAR" property="memo" />
+		<id column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="modifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
+		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
+		<id column="parentId" jdbcType="BIGINT" property="parentId" />
+		<id column="parentName" jdbcType="VARCHAR" property="parentName" />
+		<id column="menuName" jdbcType="VARCHAR" property="menuName" />
 	</resultMap>
+	<select id="getList" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select 
+		a.id,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.parentId,
+		a.parentName,
+		a.menuName
+		from SysMenu a where 1=1 
+		
+		<if test="name != null and name != ''">
+			and a.name like CONCAT('%',#{name},'%')
+		</if> 
+		<if test="userId != null and userId != ''">
+			and a.createUserId=#{userId}
+		</if> 
+	</select>
+	
+		<select id="getModel" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select 
+		a.id,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.parentId,
+		a.parentName,
+		a.menuName
+		from SysMenu a where a.id=#{id}
+	</select>
+	<select id="getOptions" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select id,name
+		from SysMenu a where a.state=#{state}
+	</select>
 
 	<delete id="deleteSysMenu">
 		delete from SysMenu

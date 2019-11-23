@@ -332,6 +332,15 @@ gulp.task('xml', function() {
 	gulp.src([system], {}).pipe(gulp.dest(system.substring(0,system.indexOf("**")).replace(appSrc,appDst))); 
 	gulp.src([config], {}).pipe(gulp.dest(config.substring(0,config.indexOf("**")).replace(appSrc,appDst))); 
 	gulp.src([issue], {}).pipe(gulp.dest(issue.substring(0,tool.indexOf("**")).replace(appSrc,appDst)));
+	
+	
+	//hf-race
+	appDst="hf-race"
+//	gulp.src([system.substring(0,system.indexOf("**")).replace(appSrc,appDst)], { read: false}).pipe(clean({ force: true}));
+//	gulp.src([config.substring(0,config.indexOf("**")).replace(appSrc,appDst) ], { read: false}).pipe(clean({ force: true}));
+	gulp.src([system], {}).pipe(gulp.dest(system.substring(0,system.indexOf("**")).replace(appSrc,appDst))); 
+	gulp.src([config], {}).pipe(gulp.dest(config.substring(0,config.indexOf("**")).replace(appSrc,appDst))); 
+	gulp.src([issue], {}).pipe(gulp.dest(issue.substring(0,tool.indexOf("**")).replace(appSrc,appDst)));
 	return;
 });
 /**

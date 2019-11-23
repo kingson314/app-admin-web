@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>app-admin</title>
+    <!-- 公共模块 -->
+	<link href="http://at.alicdn.com/t/font_302447_25pj6l3v9mmi.css" rel="stylesheet" type="text/css"/>
+	<link href="./css/images/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+	<link href="./css/base.css" rel="stylesheet" type="text/css"/>
+	<script src="./core/jquery/jquery.js"></script>
+	<script src="./core/util.js"></script>
+	<script>
+		var Session={
+		    langue: "zh_CN", 
+		    basePath: "http://app-adminuat.7ipr.com/",//app-server 外部传入服务端后台访问基本路径
+		    localPath:"http://app-adminuat.7ipr.com/",//app-admin-web 服务访问基本路径
+		    token:"",
+		    theme:"", 
+		    sysUser:{},
+		    sysDepartment:{},
+		    strength:-1,
+		    _LangueEnum:{"zh_CN":0,"en_US":1,"tw_CN":2},
+		    _DicList:{}, 	
+		    _DicJson:{},	
+		    _CfgRuntime:{},	
+		    isMini:($(window).width()<=980),
+		    isChrome:true
+		}; 
+		var _parent="#app-iframe";
+		//alert("静态路径："+Session.basePath);
+	</script>
+	<script src="./core/sea/sea.js"></script>
+	<script src="./core/session.js"></script>
+	<style>
+     </style>	
+	<script type="text/javascript">
+	seajs.use( ["Ajax"],
+		function(Ajax) {
+		var bindEvent=function(){
+			$("#app-menu a").click(function() {
+				var script = $(this).attr("script")||"";
+				var page = $(this).attr("page")||"";
+				var link = $(this).attr("link")||"";
+				console.log(script);
+				$("#app-iframe").empty();
+				if(script.indexOf("/Cgen")>=0){
+					$("body").empty();
+				}
+				$(".sea_dialog").remove();
+				if (script || page || link) {
+					if (script) {
+						var css = $(this).attr("css");
+						if(css&&css!="undefined")Global.loadCss(Session.localPath+css+".css"); 
+						Global.loadJs(Session.localPath+script+".js"); 
+					} else if (page) {
+						/* getIframe().attr("src", Ajax.getPage(page, {
+							"id":Session.sysUser.id,
+							"params":$(this).attr("params")||"",
+							"menuId":$(this).parent().attr("id"),
+							"theme": Session.theme||""
+						})); */
+					} else if (link) {
+						/* getIframe().attr("src", link).attr("scrolling", "yes"); */
+					}
+				}
+			});
+		};
+		var resize=function(){
+			//$("#app-iframe").height($("#app-menu").height()-20);	
+		};
+		$(function(){
+			bindEvent();
+			resize();
+			$("#app-menu li.active").css("display","").find("a").click();
+			var timer=setInterval(function(){
+				if($("#tb_add").length>0){
+					//$("#tb_add").click();
+					//$(document).scrollTop(1000);
+					clearInterval(timer);
+				}
+			},100);
+		});
+	});
+	</script>
+</head>
+<body id="app-body">
+<nav id="app-nav" class="fixed-top">
+	<div class="container">
+		<div class="row d-flex justify-content-between" style="padding-left: 15px;">
+			<div class="">Hello APP</div>
+			<div class="">平台部策划组 XXX</div>
+		</div>
+	</div>
+</nav>
+<div id="app-main" class="container">
+	<div class="row">
+		<div id="app-menu" class="col-sm-2 d-none d-sm-block d-md-block d-lg-block d-xl-block">
+			<ul class="list-group">
+				<li><img class="header" src="./css/images/headline.png"></li>
+				<li id="Cgen" class="active list-group-item"><a script="com/tool/ToolCgen/Cgen"href="#"><span class="iconfont icon-kehuguanli"></span>集成开发</a></li>
+				<li id="ToolCgen" class="list-group-item"><a script="com/tool/ToolCgen/ToolCgen"href="#"><span class="iconfont icon-kehuguanli"></span>集成开发管理</a></li>
+			</ul>
+		</div>
+		<div  id="app-iframe" class="col-sm-10">
+		</div>
+	</div>
+</div>
+<div id="app-footer">	
+	<div class="container">
+		<div class="footer1 row">
+			<div class="col-sm-9">
+				<div class="row">
+					<div class="col-sm-4">关于7CRM</div>
+					<div class="col-sm-4">使用帮助</div>
+					<div class="col-sm-4">开发团队</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">联系我们</div>
+					<div class="col-sm-4">提交BUG</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="row">
+					<div class="col-sm-12">用户服务热线</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 tel">400-8063-777</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer2 row">
+			<div class="col-sm-9">
+				©横琴国际知识产权交易中心，7CRM，七弦琴客户管理系统.
+			</div>
+			<div class="col-sm-3">
+				粤ICP备15074917号 7ipr.com
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.system.SysDepartment.dao.SysDepartmentDao">
-	 
-	<select id="getOptions" parameterType="java.util.Map" resultType="java.util.HashMap">
+	<resultMap id="BaseResultMap"
+		type="com.system.SysDepartment.model.SysDepartment">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+		<id column="name" jdbcType="VARCHAR" property="name" />
+		<id column="state" jdbcType="VARCHAR" property="state" />
+		<id column="ord" jdbcType="INTEGER" property="ord" />
+		<id column="memo" jdbcType="VARCHAR" property="memo" />
+		<id column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="modifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
+		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
+		<id column="parentId" jdbcType="BIGINT" property="parentId" />
+		<id column="parentName" jdbcType="VARCHAR" property="parentName" />
+	</resultMap>
+	<select id="getList" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select
+		a.id,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.parentId,
+		a.parentName
+		from
+		SysDepartment a where 1=1
+
+		<if test="name != null and name != ''">
+			and a.name like CONCAT('%',#{name},'%')
+		</if>
+		<if test="userId != null and userId != ''">
+			and a.createUserId=#{userId}
+		</if>
+	</select>
+
+	<select id="getModel" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select
+		a.id,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.parentId,
+		a.parentName
+		from
+		SysDepartment a where a.id=#{id}
+	</select>
+	<select id="getOptions" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
 		select id,name
 		from SysDepartment a where a.state=#{state}
 	</select>
 	<select id="listTreeDept" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
-		select id, parentId pId,name title,cast(id as char) value,ord from sysdepartment where state=0
-		order by parentId,ord 
+		select id, parentId pId,name title,cast(id as char)
+		value,ord from sysdepartment where state=0
+		order by parentId,ord
 	</select>
 </mapper>

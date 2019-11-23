@@ -5,16 +5,16 @@
 		<id column="id" jdbcType="BIGINT" property="id" />
 		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
 		<id column="name" jdbcType="VARCHAR" property="name" />
-		<id column="state" jdbcType="INTEGER" property="state" />
+		<id column="state" jdbcType="VARCHAR" property="state" />
 		<id column="ord" jdbcType="INTEGER" property="ord" />
 		<id column="memo" jdbcType="VARCHAR" property="memo" />
 		<id column="createTime" jdbcType="TIMESTAMP" property="createTime" />
 		<id column="modifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
 		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
 		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
-		<id column="code" jdbcType="VARCHAR" property="code" />
 		<id column="headFile" jdbcType="VARCHAR" property="headFile" />
-		<id column="type" jdbcType="VARCHAR" property="type" />
+		<id column="code" jdbcType="VARCHAR" property="code" />
+		<id column="type" jdbcType="INTEGER" property="type" />
 		<id column="level" jdbcType="INTEGER" property="level" />
 		<id column="company" jdbcType="VARCHAR" property="company" />
 		<id column="companyType" jdbcType="INTEGER" property="companyType" />
@@ -44,7 +44,6 @@
 		<id column="sex" jdbcType="INTEGER" property="sex" />
 		<id column="birthday" jdbcType="VARCHAR" property="birthday" />
 		<id column="departmentId" jdbcType="BIGINT" property="departmentId" />
-		<id column="source" jdbcType="VARCHAR" property="source" />
 	</resultMap>
 	
 	<select id="exitTel" parameterType="java.util.Map" resultType="java.lang.Integer">
@@ -58,26 +57,117 @@
 	</select>
 	<select id="getList" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
-		select a.*,b.name departmentName from SysUser a left join
+		select a.id,
+		a.code,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.headFile,
+		a.type,
+		a.level,
+		a.company,
+		a.companyType,
+		a.industry,
+		a.country,
+		a.province,
+		a.city,
+		a.region,
+		a.address,
+		a.scale,
+		a.tel,
+		a.phone,
+		a.email,
+		a.idCard,
+		a.idCardFile,
+		a.fax,
+		a.credit,
+		a.licenseFile,
+		a.position,
+		a.technicalTitle,
+		a.profession,
+		a.professionalLife,
+		a.education,
+		a.school,
+		a.unionId,
+		a.password,
+		a.sex,
+		a.birthday,
+		a.departmentId
+		,b.name departmentName from SysUser a left join
 		SysDepartment b on a.departmentId=b.id where 1=1
 		
-		<if test="code != ''">
+		<if test="code !=null and code != ''">
 			and a.code=#{code}
 		</if>
-		<if test="type != ''">
+		<if test="type !=null and type != ''">
 			and a.type=#{type}
 		</if>
-		<if test="name != ''">
+		<if test="name !=null and name != ''">
 			and a.name like CONCAT('%',#{name},'%')
 		</if>
-		<if test="company != ''">
+		<if test="company !=null and company != ''">
 			and a.company like CONCAT('%',#{company},'%')
 		</if>
-		<if test="state != ''">
+		<if test="state !=null and state != ''">
 			and a.state=#{state}
 		</if>
 	</select>
-	
+	<select id="getModel" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select 
+		a.id,
+		a.code,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.headFile,
+		a.type,
+		a.level,
+		a.company,
+		a.companyType,
+		a.industry,
+		a.country,
+		a.province,
+		a.city,
+		a.region,
+		a.address,
+		a.scale,
+		a.tel,
+		a.phone,
+		a.email,
+		a.idCard,
+		a.idCardFile,
+		a.fax,
+		a.credit,
+		a.licenseFile,
+		a.position,
+		a.technicalTitle,
+		a.profession,
+		a.professionalLife,
+		a.education,
+		a.school,
+		a.unionId,
+		a.password,
+		a.sex,
+		a.birthday,
+		a.departmentId
+		from SysUser a where a.id=#{id}
+	</select>
+	<select id="getOptions" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select id,name
+		from SysUser a where a.state=#{state}
+	</select>
 	
  	<select id="getLogin" parameterType="java.util.Map"
 		resultType="com.system.SysUser.model.SysUser">
@@ -86,13 +176,13 @@
 	<select id="getCount" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select count(1)  from SysUser a where 1=1
-		<if test="code != ''">
+		<if test="code !=null and code != ''">
 			and a.code=#{code}
 		</if>
-		<if test="name != ''">
+		<if test="name !=null and name != ''">
 			and a.name=#{name}
 		</if>
-		<if test="state != ''">
+		<if test="state !=null and state != ''">
 			and a.state=#{state}
 		</if>
 	</select>	
@@ -124,10 +214,10 @@
 	<select id="listDepartmentUserByScene"
 		parameterType="java.util.Map" resultType="java.util.HashMap">
 		select a.*,b.name departmentName from SysUser a,SysDepartment b  where a.departmentId=b.id  and a.state=0 and a.type=1
-		<if test="departmentId !=''">
+		<if test="departmentId !=null and departmentId !=''">
 			and a.departmentId =#{departmentId}
 		</if>
-		<if test="userName !=''">
+		<if test="userName !=null and userName !=''">
 			and a.name like #{userName}
 		</if>
 		order by  CAST(a.code as SIGNED)

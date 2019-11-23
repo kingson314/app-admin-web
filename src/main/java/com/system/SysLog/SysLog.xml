@@ -4,7 +4,115 @@
 	<resultMap id="BaseResultMap" type="com.system.SysLog.model.SysLog">
 		<id column="id" jdbcType="BIGINT" property="id" />
 		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+		<id column="name" jdbcType="VARCHAR" property="name" />
+		<id column="state" jdbcType="VARCHAR" property="state" />
+		<id column="ord" jdbcType="INTEGER" property="ord" />
+		<id column="memo" jdbcType="VARCHAR" property="memo" />
+		<id column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="modifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
+		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
+		<id column="app" jdbcType="VARCHAR" property="app" />
+		<id column="functionId" jdbcType="VARCHAR" property="functionId" />
+		<id column="functionName" jdbcType="VARCHAR" property="functionName" />
+		<id column="operation" jdbcType="VARCHAR" property="operation" />
+		<id column="userId" jdbcType="BIGINT" property="userId" />
+		<id column="token" jdbcType="VARCHAR" property="token" />
+		<id column="device" jdbcType="VARCHAR" property="device" />
+		<id column="userAgent" jdbcType="VARCHAR" property="userAgent" />
+		<id column="ip" jdbcType="VARCHAR" property="ip" />
+		<id column="begTime" jdbcType="VARCHAR" property="begTime" />
+		<id column="endTime" jdbcType="VARCHAR" property="endTime" />
+		<id column="url" jdbcType="VARCHAR" property="url" />
+		<id column="mapParams" jdbcType="VARCHAR" property="mapParams" />
+		<id column="baseParams" jdbcType="VARCHAR" property="baseParams" />
+		<id column="recordId" jdbcType="BIGINT" property="recordId" />
 	</resultMap>
+	<select id="getList" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select 
+		a.id,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.app,
+		a.functionId,
+		a.functionName,
+		a.operation,
+		a.userId,
+		a.token,
+		a.device,
+		a.userAgent,
+		a.ip,
+		a.begTime,
+		a.endTime,
+		a.url,
+		a.mapParams,
+		a.baseParams,
+		a.recordId
+		from SysLog a left join SysUser b on  a.userId=b.id where 1=1
+		
+		<if test="app != null and app != ''">
+			and a.app like CONCAT('%',#{app},'%')
+		</if> 
+		<if test="functionName != null and functionName != ''">
+			and a.functionName like CONCAT('%',#{functionName},'%')
+		</if> 
+		<if test="functionId != null and functionId != ''">
+			and a.functionId like CONCAT('%',#{functionId},'%')
+		</if> 
+		<if test="operation != null and operation != ''">
+			and a.operation like CONCAT('%',#{operation},'%')
+		</if> 
+		<if test="userName != null and userName != ''">
+			and b.name like CONCAT('%',#{userName},'%')
+		</if> 
+		<if test="recordId != null and recordId != ''">
+			and a.recordId like CONCAT('%',#{recordId},'%')
+		</if> 
+		<if test="userId != null and userId != ''">
+			and a.createUserId=#{userId}
+		</if> 
+	</select>
+	
+		<select id="getModel" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select 
+		a.id,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.app,
+		a.functionId,
+		a.functionName,
+		a.operation,
+		a.userId,
+		a.token,
+		a.device,
+		a.userAgent,
+		a.ip,
+		a.begTime,
+		a.endTime,
+		a.url,
+		a.mapParams,
+		a.baseParams,
+		a.recordId
+		from SysLog a where a.id=#{id}
+	</select>
+	<select id="getOptions" parameterType="java.util.Map" resultType="java.util.HashMap">
+		select id,name
+		from SysLog a where a.state=#{state}
+	</select>
 
 	<select id="listSysLog"  parameterType="java.util.Map" resultType="java.util.HashMap">
 		select c.name userName,a.*  from SysLog a inner join SysUser c on  a.userId=c.id 
