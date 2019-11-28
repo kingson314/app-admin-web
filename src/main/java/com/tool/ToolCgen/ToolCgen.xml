@@ -13,6 +13,10 @@
 	<select id="map" resultType="java.util.HashMap">
 		${value}
 	</select>
+	<select id="getColumns" resultType="java.util.HashMap">
+		select distinct COLUMN_NAME from information_schema.COLUMNS where table_name =#{tableName}; 
+	</select>
+	
 	
 	<update id="ddl">
 	 	${value}

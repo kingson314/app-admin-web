@@ -22,6 +22,38 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 			"rapid":""
 	};
 	/***************函数定义***************/
+	var rowClick=function(record){
+		BaseMsgForm.val(record);
+		var rows= $.parseJSON(record.fields);
+		if(rows){
+			$(".sea_dropmain").empty();
+			$(".sea_dropmain").append('<div style="width:100%;height:40px;margin: 8px 0;" class="sea_droper sea_droper_auto"><div class=" sea_drager sea_draglayout" style="width:100%; height: 38px;line-height:38px; margin: 0px;">	<div style="width:50%;border:0;" class="sea_droper "> </div>	<div style="width:50%; border:0" class="sea_droper"> </div></div></div>');
+			for(var i=0;i<rows.length;i++){
+				var draglayout= $('<div class="sea_droper sea_droper_auto" style="width:100%;height:40px;margin: 8px 0;"><div class=" sea_drager sea_draglayout" style="width:100%; height: 38px;line-height:38px; margin: 0px;">	</div></div>').appendTo($(".sea_dropmain"));
+				var cols=rows[i];
+				for(var j=0;j<cols.length;j++){
+					var col=cols[j];
+					col.id=col._id;
+					var component;
+					if(col.type=="textfield"){
+						component=$('<div class="sea_droper" style="width:50%; border:0"> <div class="sea_accordionLayout_groupItem sea_drager" style="width:100%;height: 36px; margin: 0px;"><label for="" style="background-color: transparent; width: 38.2%; text-align: right; padding-right: 5px;">Label</label><input type="text" class="sea_textfield" style="float: none; width:100%;height: 35px; width: 61.8%;"></div></div>').appendTo(draglayout.find(".sea_draglayout"));
+						component=component.find(".sea_textfield").data("data",col);
+					}else if(col.type=="textarea"){
+						component=$('<div class="sea_droper" style="width:50%;border:0;"> <div class="sea_accordionLayout_groupItem sea_drager" rows="1" placeholder="多行文本" style="width: 462px; height: 36px; margin: 0px;"><label for="" style="width: 38.2%; text-align: right; padding-right: 5px; background-color: transparent;">Label</label><textarea class="sea_textarea" rows="1" cols="20" placeholder="多行文本" style="float: none; height: 35px; width: 61.8%;"></textarea></div></div>').appendTo(draglayout.find(".sea_draglayout"));
+						component=component.find(".sea_textarea").data("data",col);
+					}else if(col.type=="select"){
+						component=$('<div class="sea_droper" style="width:50%;border:0;"> <div class="sea_accordionLayout_groupItem sea_drager" style="width: 462px; height: 36px; margin: 0px;"><label for="" style="width: 38.2%; text-align: right; padding-right: 5px; background-color: transparent;">Label</label><select class="sea_select" style="float: none; height: 35px; width: 61.8%;"><option value="">请选择</option></select></div></div>').appendTo(draglayout.find(".sea_draglayout"));
+						component=component.find(".sea_select").data("data",col);
+					}
+					component.attr("id",col.id);
+					component.attr("_id",col.id);
+					component.val(col.id);
+					component.parent().find("label").html(col.label);
+				}
+			}
+			$(".sea_dropmain").append('<div style="width:100%;height:40px;margin: 8px 0;" class="sea_droper sea_droper_auto"><div class=" sea_drager sea_draglayout" style="width:100%; height: 38px;line-height:38px; margin: 0px;">	<div style="width:50%;border:0;" class="sea_droper "> </div>	<div style="width:50%; border:0" class="sea_droper"> </div></div></div>');
+		}
+	};
 	//创建查询表单
 	var getBaseMsgForm = function() {
 		var cfgForm = {
@@ -216,10 +248,20 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 					value: "运行",
 					css:{
 						"padding":"0 12px!important",
-						background:"rgb(22, 173, 35)"
+						background:"#28a745"
 					},
 					click: function() {
 						exec("run");
+					}
+				},{
+					icon: "iconfont icon-edit",
+					value: "运行Table",
+					css:{
+						"padding":"0 12px!important",
+						background:"#ffc107"
+					},
+					click: function() {
+						exec("execTable");
 					}
 				}]
 			}],[{
@@ -254,10 +296,11 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 			});
 			if(fieldArr.length>0)Configs.fields.push(fieldArr);
 		});
-		if(action=="update"){
+		if(action=="update" || action=="execTable"){
 			Ajax.post(baseUrl + action, {"Configs":JSON.stringify(Configs)},function(rs) {
 					Dialog.alert(rs.msg);
 					ToolCgenGrid.reload({});
+					rowClick(rs.data);
 			});
 		}else{
 			Configs.cover="false";//覆盖
@@ -276,6 +319,7 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 								var menu='<li id="'+Configs.tableName+'" class="list-group-item"><a script="'+Configs.jsPath.substring(Configs.jsPath.indexOf("_static/")+"_static/".length,Configs.jsPath.indexOf(".js"))+'"href="#"><span class="iconfont icon-kehuguanli"></span>'+Configs.menuName+'</a></li>';
 								Dialog.alert(menu);
 								ToolCgenGrid.reload({});
+								rowClick(rs.data);
 							});
 							return true;
 						}
@@ -472,6 +516,9 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 						 var data=formProperty.val();
 						 data.type=me.attr("class").replace("sea_","");
 						 me.data("data",data);
+						 Ajax.post("ToolDictionary/save", data,function(rs) {
+							 console.log("save ToolDictionary!");
+						 });
 					}
 				},{
 					type: "button",
@@ -643,6 +690,8 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 		});
 		return Border.layout;
 	};
+	
+	
 	// 创建表格
 	var getToolCgenGrid = function() {
 		var cfgGrid = {
@@ -728,36 +777,7 @@ function(BorderLayout, FormLayout, TabLayout, AccordionLayout,Dialog, Toolbar, A
 				onCopy:function(selected){return true;}
 			},
 			rowClick:function(record){
-				BaseMsgForm.val(record);
-				var rows= $.parseJSON(record.fields);
-				if(rows){
-					$(".sea_dropmain").empty();
-					$(".sea_dropmain").append('<div style="width:100%;height:40px;margin: 8px 0;" class="sea_droper sea_droper_auto"><div class=" sea_drager sea_draglayout" style="width:100%; height: 38px;line-height:38px; margin: 0px;">	<div style="width:50%;border:0;" class="sea_droper "> </div>	<div style="width:50%; border:0" class="sea_droper"> </div></div></div>');
-					for(var i=0;i<rows.length;i++){
-						var draglayout= $('<div class="sea_droper sea_droper_auto" style="width:100%;height:40px;margin: 8px 0;"><div class=" sea_drager sea_draglayout" style="width:100%; height: 38px;line-height:38px; margin: 0px;">	</div></div>').appendTo($(".sea_dropmain"));
-						var cols=rows[i];
-						for(var j=0;j<cols.length;j++){
-							var col=cols[j];
-							col.id=col._id;
-							var component;
-							if(col.type=="textfield"){
-								component=$('<div class="sea_droper" style="width:50%; border:0"> <div class="sea_accordionLayout_groupItem sea_drager" style="width:100%;height: 36px; margin: 0px;"><label for="" style="background-color: transparent; width: 38.2%; text-align: right; padding-right: 5px;">Label</label><input type="text" class="sea_textfield" style="float: none; width:100%;height: 35px; width: 61.8%;"></div></div>').appendTo(draglayout.find(".sea_draglayout"));
-								component=component.find(".sea_textfield").data("data",col);
-							}else if(col.type=="textarea"){
-								component=$('<div class="sea_droper" style="width:50%;border:0;"> <div class="sea_accordionLayout_groupItem sea_drager" rows="1" placeholder="多行文本" style="width: 462px; height: 36px; margin: 0px;"><label for="" style="width: 38.2%; text-align: right; padding-right: 5px; background-color: transparent;">Label</label><textarea class="sea_textarea" rows="1" cols="20" placeholder="多行文本" style="float: none; height: 35px; width: 61.8%;"></textarea></div></div>').appendTo(draglayout.find(".sea_draglayout"));
-								component=component.find(".sea_textarea").data("data",col);
-							}else if(col.type=="select"){
-								component=$('<div class="sea_droper" style="width:50%;border:0;"> <div class="sea_accordionLayout_groupItem sea_drager" style="width: 462px; height: 36px; margin: 0px;"><label for="" style="width: 38.2%; text-align: right; padding-right: 5px; background-color: transparent;">Label</label><select class="sea_select" style="float: none; height: 35px; width: 61.8%;"><option value="">请选择</option></select></div></div>').appendTo(draglayout.find(".sea_draglayout"));
-								component=component.find(".sea_select").data("data",col);
-							}
-							component.attr("id",col.id);
-							component.attr("_id",col.id);
-							component.val(col.id);
-							component.parent().find("label").html(col.label);
-						}
-					}
-					$(".sea_dropmain").append('<div style="width:100%;height:40px;margin: 8px 0;" class="sea_droper sea_droper_auto"><div class=" sea_drager sea_draglayout" style="width:100%; height: 38px;line-height:38px; margin: 0px;">	<div style="width:50%;border:0;" class="sea_droper "> </div>	<div style="width:50%; border:0" class="sea_droper"> </div></div></div>');
-				}
+				rowClick(record);
 			}
 		};
 		ToolCgenGrid = Grid.create(cfgGrid);
