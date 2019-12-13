@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.SysRoleMenu.dao.SysRoleMenuDao">
+	<resultMap id="BaseResultMap"
+		type="com.system.SysRoleMenu.model.SysRoleMenu">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
+		<id column="name" jdbcType="VARCHAR" property="name" />
+		<id column="state" jdbcType="VARCHAR" property="state" />
+		<id column="ord" jdbcType="INTEGER" property="ord" />
+		<id column="memo" jdbcType="VARCHAR" property="memo" />
+		<id column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<id column="modifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+		<id column="createUserId" jdbcType="BIGINT" property="createUserId" />
+		<id column="modifyUserId" jdbcType="BIGINT" property="modifyUserId" />
+		<id column="roleId" jdbcType="BIGINT" property="roleId" />
+		<id column="menuId" jdbcType="BIGINT" property="menuId" />
+		<id column="type" jdbcType="VARCHAR" property="type" />
+	</resultMap>
+	<select id="getList" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select
+		a.id,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.roleId,
+		a.menuId,
+		a.type
+		from SysRoleMenu
+		a where 1=1
+
+		<if test="name != null and name != ''">
+			and a.name like CONCAT('%',#{name},'%')
+		</if>
+		<if test="userId != null and userId != ''">
+			and a.createUserId=#{userId}
+		</if>
+	</select>
+
+	<select id="getModel" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select
+		a.id,
+		a.createDate,
+		a.name,
+		a.state,
+		a.ord,
+		a.memo,
+		a.createTime,
+		a.modifyTime,
+		a.createUserId,
+		a.modifyUserId,
+		a.roleId,
+		a.menuId,
+		a.type
+		from SysRoleMenu
+		a where a.id=#{id}
+	</select>
+	<select id="getOptions" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select id,name
+		from SysRoleMenu a where a.state=#{state}
+	</select>
+
+	<select id="listSysRoleMenu" parameterType="String"
+		resultType="java.util.HashMap">
+		select menuId from SysRoleMenu where roleId in (select
+		roleId from SysUserRole where userId=#{userId})
+	</select>
+
+	<select id="listTree" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select
+		a.id,
+		a.id `key`,
+		a.`name` title,
+		a.`ord`,
+		a.type,
+		a.parentId pId ,
+		b.menuId as _id
+		from SysMenu a LEFT JOIN SysRoleMenu b on a.id=b.menuId
+		<if test="roleId != null and roleId != ''">
+			and b.roleId=#{roleId}
+		</if>
+		where 1=1
+		<if test="type != null and type != ''">
+			and a.type=#{type}
+		</if>
+		<if test="parentId != null and parentId != ''">
+			and a.parentId=#{parentId}
+		</if>
+		<if test="name !=null and name != ''">
+			and a.name like CONCAT('%',#{name},'%')
+		</if>
+		<if test="state != null and state != ''">
+			and a.state=#{state}
+		</if>
+		order by a.parentId,a.`ord`
+	</select>
+	
+	<delete id="delByRoleId" parameterType="java.util.HashMap">
+       DELETE FROM SysRoleMenu WHERE  roleId=#{roleId}
+    </delete>
+</mapper>

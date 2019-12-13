@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.system.SysMenu.dao.SysMenuDao">
-	<resultMap id="BaseResultMap" type="com.system.SysMenu.model.SysMenu">
+	<resultMap id="BaseResultMap"
+		type="com.system.SysMenu.model.SysMenu">
 		<id column="id" jdbcType="BIGINT" property="id" />
 		<id column="createDate" jdbcType="VARCHAR" property="createDate" />
 		<id column="name" jdbcType="VARCHAR" property="name" />
@@ -16,33 +17,62 @@
 		<id column="parentName" jdbcType="VARCHAR" property="parentName" />
 		<id column="menuName" jdbcType="VARCHAR" property="menuName" />
 	</resultMap>
-	<select id="getList" parameterType="java.util.Map" resultType="java.util.HashMap">
-		select 
+	<select id="getList" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select
 		a.id,
-		a.createDate,
 		a.name,
 		a.state,
 		a.ord,
-		a.memo,
-		a.createTime,
-		a.modifyTime,
-		a.createUserId,
-		a.modifyUserId,
+		a.type,
 		a.parentId,
-		a.parentName,
-		a.menuName
-		from SysMenu a where 1=1 
-		
-		<if test="name != null and name != ''">
+		ifNull(b.name,'') parentName
+		from SysMenu a LEFT JOIN SysMenu b on a.parentId=b.id
+		where 1=1
+		<if test="type != null and type != ''">
+			and a.type=#{type}
+		</if>
+		<if test="parentId != null and parentId != ''">
+			and a.parentId=#{parentId}
+		</if>
+		<if test="name !=null and name != ''">
 			and a.name like CONCAT('%',#{name},'%')
-		</if> 
-		<if test="userId != null and userId != ''">
-			and a.createUserId=#{userId}
-		</if> 
+		</if>
+		<if test="state != null and state != ''">
+			and a.state=#{state}
+		</if>
+	</select>
+	<select id="listTreeMenu" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select
+		a.id,
+		a.id `key`,
+		a.`name` title,
+		a.`ord`,
+		a.type,
+		a.parentId pId ,
+		ifNull(b.name,'') parentName
+		from SysMenu a LEFT JOIN SysMenu b on a.parentId=b.id
+		where a.type in('1','2')
+		<if test="type != null and type != ''">
+			and a.type=#{type}
+		</if>
+		<if test="name !=null and name != ''">
+			and a.name like CONCAT('%',#{name},'%')
+		</if>
+		<if test="parentId != null and parentId != ''">
+			and a.parentId=#{parentId}
+		</if>
+		<if test="state != null and state != ''">
+			and a.state=#{state}
+		</if>
+		order by a.parentId,a.`ord`
 	</select>
 	
-		<select id="getModel" parameterType="java.util.Map" resultType="java.util.HashMap">
-		select 
+	
+	<select id="getModel" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select
 		a.id,
 		a.createDate,
 		a.name,
@@ -56,9 +86,11 @@
 		a.parentId,
 		a.parentName,
 		a.menuName
-		from SysMenu a where a.id=#{id}
+		from
+		SysMenu a where a.id=#{id}
 	</select>
-	<select id="getOptions" parameterType="java.util.Map" resultType="java.util.HashMap">
+	<select id="getOptions" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
 		select id,name
 		from SysMenu a where a.state=#{state}
 	</select>
@@ -66,17 +98,19 @@
 	<delete id="deleteSysMenu">
 		delete from SysMenu
 	</delete>
-	
-     <insert id ="insertSysMenu" parameterType="java.util.List" >
-           insert into SysMenu(parentId,id,menuId,type,name,url,ord,checked,open,modifyTime)
-           values
-            <foreach collection ="list" item="menu" index= "index" separator =",">
-                (
-                #{menu.parentId}, #{menu.id}, #{menu.menuId},
-                #{menu.type},
-                #{menu.name},
-                #{menu.ord}, #{menu.checked}, #{menu.open}, #{menu.modifyTime}
-                )
-            </foreach >
-     </insert >
+
+	<insert id="insertSysMenu" parameterType="java.util.List">
+		insert into
+		SysMenu(parentId,id,menuId,type,name,url,ord,checked,open,modifyTime)
+		values
+		<foreach collection="list" item="menu" index="index"
+			separator=",">
+			(
+			#{menu.parentId}, #{menu.id}, #{menu.menuId},
+			#{menu.type},
+			#{menu.name},
+			#{menu.ord}, #{menu.checked}, #{menu.open}, #{menu.modifyTime}
+			)
+		</foreach>
+	</insert>
 </mapper>

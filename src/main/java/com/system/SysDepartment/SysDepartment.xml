@@ -16,30 +16,53 @@
 		<id column="parentId" jdbcType="BIGINT" property="parentId" />
 		<id column="parentName" jdbcType="VARCHAR" property="parentName" />
 	</resultMap>
+	
+	<select id="listTreeSelect" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select id, parentId pId,name title,cast(id as char) value,ord from SysDepartment where state=0
+		order by parentId,ord 
+	</select>
 	<select id="getList" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
 		select
 		a.id,
-		a.createDate,
 		a.name,
 		a.state,
 		a.ord,
-		a.memo,
-		a.createTime,
-		a.modifyTime,
-		a.createUserId,
-		a.modifyUserId,
+		a.type,
 		a.parentId,
-		a.parentName
-		from
-		SysDepartment a where 1=1
-
-		<if test="name != null and name != ''">
+		ifNull(b.name,'') parentName
+		from SysDepartment a LEFT JOIN SysDepartment b on a.parentId=b.id
+		where 1=1
+		<if test="name !=null and name != ''">
 			and a.name like CONCAT('%',#{name},'%')
 		</if>
-		<if test="userId != null and userId != ''">
-			and a.createUserId=#{userId}
+		<if test="parentId != null and parentId != ''">
+			and a.parentId=#{parentId}
 		</if>
+		<if test="state != null and state != ''">
+			and a.state=#{state}
+		</if>
+	</select>
+	<select id="listTreeDepartment" parameterType="java.util.Map"
+		resultType="java.util.HashMap">
+		select
+		a.id,
+		a.id `key`,
+		a.`name` title,
+		a.`ord`,
+		a.type,
+		a.parentId pId ,
+		ifNull(b.name,'') parentName
+		from SysDepartment a LEFT JOIN SysDepartment b on a.parentId=b.id
+		where 1=1
+		<if test="name !=null and name != ''">
+			and a.name like CONCAT('%',#{name},'%')
+		</if>
+		<if test="state != null and state != ''">
+			and a.state=#{state}
+		</if>
+		order by a.parentId,a.`ord`
 	</select>
 
 	<select id="getModel" parameterType="java.util.Map"

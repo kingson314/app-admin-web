@@ -54,6 +54,13 @@
 		resultType="java.util.HashMap">
 		select c.* from SysRole a,SysUserRole b,SysUser c where
 		a.id=#{roleId} and a.id=b.roleId and b.userId=c.id
+		
+		<if test="name !=null and name != ''">
+			and a.name like CONCAT('%',#{name},'%')
+		</if>
+		<if test="state !=null and state != ''">
+			and a.state=#{state}
+		</if>
 	</select>
 	<select id="getList" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
@@ -104,6 +111,10 @@
 		
 		<if test="code !=null and code != ''">
 			and a.code=#{code}
+		</if>
+		<if test="departmentId !=null and departmentId != ''">
+			FIND_IN_SET(a.departmentId,getDeptId(#{departmentId}))
+			<!-- and a.departmentId in(#{departmentId}) -->
 		</if>
 		<if test="type !=null and type != ''">
 			and a.type=#{type}
@@ -188,11 +199,15 @@
 	</select>	
 	<select id="listRoleUser" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
-		select a.*,c.userId as _id ,b.name departmentName from
-		SysUser a left join SysUserRole c on a.id=c.userId and a.type=1 and
-		c.roleId=#{roleId} left join SysDepartment b on a.departmentId=b.id
-		where a.state=0 order by _id desc,a.departmentId, CAST(a.code as
-		SIGNED)
+		select a.*,c.userId as _id ,b.name departmentName 
+		from
+		SysUser a left join SysUserRole c on a.id=c.userId and c.roleId=#{roleId} 
+		left join SysDepartment b on a.departmentId=b.id
+		where a.type=1 and a.state=0 
+		<if test="name !=null and name != ''">
+			and a.name like CONCAT('%',#{name},'%')
+		</if>
+		order by _id desc,a.departmentId,a.id
 	</select>
 	<select id="listDepartmentUser" parameterType="java.util.Map"
 		resultType="java.util.HashMap">

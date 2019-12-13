@@ -17,4 +17,11 @@
 		    </otherwise>
 		</choose>
 	</select>
+	
+	<delete id="delByRoleId" parameterType="java.util.HashMap">
+       DELETE FROM SysUserRole WHERE  roleId=#{roleId}
+    </delete>
+    <delete id="delByUserId" parameterType="java.util.HashMap">
+       DELETE FROM SysUserRole WHERE  userId=#{userId}
+    </delete>
 </mapper>
