@@ -74,6 +74,12 @@
 		select menuId from SysRoleMenu where roleId in (select
 		roleId from SysUserRole where userId=#{userId})
 	</select>
+	
+	<select id="listUserMenu" parameterType="String"
+		resultType="java.util.HashMap">
+		select a.menuId from SysRoleMenu a where a.roleId in (select
+		roleId from SysUserRole where userId=#{userId})
+	</select>
 
 	<select id="listTree" parameterType="java.util.Map"
 		resultType="java.util.HashMap">

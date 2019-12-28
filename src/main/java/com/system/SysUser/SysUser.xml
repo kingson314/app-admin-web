@@ -113,7 +113,7 @@
 			and a.code=#{code}
 		</if>
 		<if test="departmentId !=null and departmentId != ''">
-			FIND_IN_SET(a.departmentId,getDeptId(#{departmentId}))
+			and FIND_IN_SET(a.departmentId,getDeptId(#{departmentId}))
 			<!-- and a.departmentId in(#{departmentId}) -->
 		</if>
 		<if test="type !=null and type != ''">

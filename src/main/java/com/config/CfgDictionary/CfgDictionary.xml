@@ -44,15 +44,17 @@
 		from CfgDictionary a where 1=1 
 		
 		<if test="app != null and app != ''">
-			and a.app like CONCAT('%',#{app},'%')
+			and a.app=#{app}
 		</if> 
 		<if test="type != null and type != ''">
 			and a.type like CONCAT('%',#{type},'%')
 		</if> 
+		<if test="subType != null and subType != ''">
+			and a.subType like CONCAT('%',#{subType},'%')
+		</if> 
 		<if test="userId != null and userId != ''">
 			and a.createUserId=#{userId}
 		</if> 
-		order by a.type,a.subType,a.ord
 	</select>
 	
 		<select id="getModel" parameterType="java.util.Map" resultType="java.util.HashMap">

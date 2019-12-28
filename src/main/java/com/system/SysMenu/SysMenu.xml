@@ -25,9 +25,11 @@
 		a.state,
 		a.ord,
 		a.type,
+		a.menuId,
 		a.parentId,
 		ifNull(b.name,'') parentName
-		from SysMenu a LEFT JOIN SysMenu b on a.parentId=b.id
+		from SysMenu a LEFT JOIN SysMenu b on
+		a.parentId=b.id
 		where 1=1
 		<if test="type != null and type != ''">
 			and a.type=#{type}
@@ -42,6 +44,16 @@
 			and a.state=#{state}
 		</if>
 	</select>
+
+	<select id="getCountByMenuId" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select
+		count(1)
+		from SysMenu where menuId=#{menuId}
+		<if test="id != null and id != ''">
+			and id!=#{id}
+		</if>
+	</select>
 	<select id="listTreeMenu" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
 		select
@@ -52,7 +64,8 @@
 		a.type,
 		a.parentId pId ,
 		ifNull(b.name,'') parentName
-		from SysMenu a LEFT JOIN SysMenu b on a.parentId=b.id
+		from SysMenu a LEFT JOIN SysMenu b on
+		a.parentId=b.id
 		where a.type in('1','2')
 		<if test="type != null and type != ''">
 			and a.type=#{type}
@@ -68,8 +81,8 @@
 		</if>
 		order by a.parentId,a.`ord`
 	</select>
-	
-	
+
+
 	<select id="getModel" parameterType="java.util.Map"
 		resultType="java.util.HashMap">
 		select
@@ -109,7 +122,8 @@
 			#{menu.parentId}, #{menu.id}, #{menu.menuId},
 			#{menu.type},
 			#{menu.name},
-			#{menu.ord}, #{menu.checked}, #{menu.open}, #{menu.modifyTime}
+			#{menu.ord}, #{menu.checked}, #{menu.open},
+			#{menu.modifyTime}
 			)
 		</foreach>
 	</insert>
